@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hr/core/router/app_router.dart';
 import 'package:hr/core/theme/app_theme.dart';
 
 class InfinityHrApp extends StatelessWidget {
@@ -13,8 +14,8 @@ class InfinityHrApp extends StatelessWidget {
           (_, __) => MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: AppTheme.darkTheme,
+            routes: AppRouter.routes,
           ),
-      child: Container(),
     );
   }
 }
