@@ -13,7 +13,9 @@ class InfinityHrApp extends StatelessWidget {
       builder:
           (_, __) => MaterialApp(
             debugShowCheckedModeBanner: false,
-            theme: AppTheme.darkTheme,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: ThemeMode.dark,
             routes: AppRouter.routes,
           ),
     );
