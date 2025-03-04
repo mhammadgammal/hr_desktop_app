@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/theme/app_theme.dart';
 
-class OutlinedButtonWithBorder extends StatelessWidget {
-  const OutlinedButtonWithBorder({
+class CustomOutlinedButtonWithBorder extends StatelessWidget {
+  const CustomOutlinedButtonWithBorder({
     super.key,
     required this.onPressed,
     required this.title,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OutlinedButton extends StatelessWidget {
-  const OutlinedButton({
+class CustomOutlinedButton extends StatelessWidget {
+  const CustomOutlinedButton({
     super.key,
     required this.onPressed,
     required this.title,
