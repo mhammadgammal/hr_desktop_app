@@ -5,6 +5,7 @@ import 'package:hr/core/theme/app_colors.dart';
 
 abstract class AppTheme {
   static double appRadius = 10.0.r;
+  static double textFieldRadius = 8.0.r;
 
   static ThemeData lightTheme = ThemeData(
     primaryColor: AppColors.primaryColor,
