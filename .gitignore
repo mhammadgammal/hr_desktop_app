@@ -51,3 +51,4 @@ windows/flutter/generated_plugin_registrant.h
 .vscode/settings.json
 /android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
 /android/local.properties
+/test/widget_test.dart
