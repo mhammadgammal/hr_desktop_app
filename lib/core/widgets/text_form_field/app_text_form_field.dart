@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:hr/core/theme/app_colors.dart';
+import 'package:hr/core/theme/app_theme.dart';
 
 class AppTextFormField extends StatefulWidget {
   const AppTextFormField({
     super.key,
     required this.controller,
     required this.inputType,
-    required this.fieldLabel,
-    required this.icon,
+    this.fieldLabel,
+    this.hintLabel,
     required this.validate,
+    this.icon,
     this.isEnabled = true,
     this.obSecure = false,
     this.inputAction,
@@ -17,6 +19,7 @@ class AppTextFormField extends StatefulWidget {
     this.maxLines,
     this.minLines,
     this.labelColor = Colors.white,
+    this.hintColor,
     this.iconColor = Colors.white,
     this.textFieldTextColor = Colors.white,
     this.onChanged,
@@ -31,6 +34,7 @@ class AppTextFormField extends StatefulWidget {
   final TextInputAction? inputAction;
   final FocusNode? focusNode;
   final String? fieldLabel;
+  final String? hintLabel;
   final Icon? icon;
   final String? Function(String?)? validate;
   final Function(String)? onChanged;
@@ -41,6 +45,7 @@ class AppTextFormField extends StatefulWidget {
   final bool isEnabled;
   final String? initialValue;
   final Color labelColor;
+  final Color? hintColor;
   final Color iconColor;
   final Color textFieldTextColor;
   final Color? cursorColor;
@@ -66,25 +71,27 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         keyboardType: widget.inputType,
         style: TextStyle(color: widget.textFieldTextColor),
         decoration: InputDecoration(
-          labelText: widget.fieldLabel,
+          // labelText: widget.fieldLabel,
           labelStyle: TextStyle(color: widget.labelColor),
+          hintText: widget.hintLabel,
+          hintStyle: TextStyle(color: widget.hintColor ?? AppColors.gray),
           prefixIcon: widget.icon,
           suffixIcon: widget.suffixIcon,
           prefixIconColor: widget.iconColor,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
             borderSide: const BorderSide(color: Colors.grey, width: 1.5),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
             borderSide: const BorderSide(color: Colors.grey, width: 1.5),
           ),
           disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
             borderSide: const BorderSide(color: Colors.grey, width: 1.5),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
+            borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
             borderSide: BorderSide(
               color: AppColors.gray,
               style: BorderStyle.solid,
@@ -96,7 +103,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         focusNode: widget.focusNode,
         minLines: widget.minLines ?? 1,
         maxLines: widget.obSecure ? 1 : widget.maxLines,
-        cursorColor: widget.cursorColor,
+        cursorColor: widget.cursorColor ?? AppColors.gray,
         initialValue: widget.initialValue,
         enabled: widget.isEnabled,
         maxLength: widget.maxLength,
