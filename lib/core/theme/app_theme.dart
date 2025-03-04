@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 
 abstract class AppTheme {
@@ -42,4 +43,10 @@ abstract class AppTheme {
       toolbarHeight: 96.h,
     ),
   );
+
+  static isDarkMode(BuildContext context) {
+    'Check if the theme is dark mode or not: ${Theme.of(context).brightness == Brightness.dark}'
+        .logg();
+    return Theme.of(context).brightness == Brightness.light;
+  }
 }
