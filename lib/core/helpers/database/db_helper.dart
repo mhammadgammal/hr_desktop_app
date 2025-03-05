@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:hr/core/di/di.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/helpers/database/table_name.dart';
@@ -11,9 +13,19 @@ class DbHelper {
 
   static Future<Database> initWinDB() async {
     sqfliteFfiInit();
+    String? userProfile = Platform.environment['USERPROFILE'];
+    late String documentsPath;
+    if (userProfile != null) {
+      documentsPath = '$userProfile\\Documents';
+      print('Documents Directory: $documentsPath');
+    } else {
+      documentsPath = '';
+      print('Could not determine Documents directory.');
+    }
+    String dbPath = '$documentsPath\\hr.db';
     final databaseFactory = databaseFactoryFfi;
     return await databaseFactory.openDatabase(
-      inMemoryDatabasePath,
+      dbPath,
       options: OpenDatabaseOptions(onCreate: _onCreate, version: 1),
     );
   }
@@ -34,25 +46,20 @@ class DbHelper {
 
   static Future<void> insertUser(UserModel user) async {
     final db = sl<Database>();
-    int result = await db.insert(
-      TableName.userTable,
-      user.toJson(),
-      conflictAlgorithm: ConflictAlgorithm.replace,
+    int result = await db.rawInsert(
+      'INSERT OR REPLACE INTO ${TableName.userTable} (id, name, email, password, profile_picture_path) VALUES (?, ?, ?, ?, ?)',
+      [user.id, user.name, user.email, user.password, user.profilePicturePath],
     );
-    await closeDb(db);
 
     'User inserted: $result'.logg();
   }
 
   static Future<UserModel?> getUser(String email) async {
     final db = sl<Database>();
-    final List<Map<String, dynamic>> maps = await db.query(
-      TableName.userTable,
-      columns: null,
-      where: 'email = ?',
-      whereArgs: [email],
+    final List<Map<String, dynamic>> maps = await db.rawQuery(
+      'SELECT * FROM ${TableName.userTable} WHERE email = ?',
+      [email],
     );
-    await closeDb(db);
     return maps.isEmpty ? null : UserModel.fromJson(maps.first);
   }
 
@@ -63,7 +70,6 @@ class DbHelper {
       where: 'email = ?',
       whereArgs: [email],
     );
-    await closeDb(db);
 
     return result > 0;
   }
