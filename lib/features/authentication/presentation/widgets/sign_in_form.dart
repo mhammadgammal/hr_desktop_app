@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hr/core/assets/app_images.dart';
+import 'package:hr/core/theme/app_theme.dart';
 import 'package:hr/core/widgets/buttons/custom_filled_button.dart';
 import 'package:hr/core/widgets/text_form_field/email_text_form_field.dart';
 import 'package:hr/core/widgets/text_form_field/password_text_form_field.dart';
@@ -22,13 +23,17 @@ class SignInForm extends StatelessWidget {
         return SizedBox(
           width: 550.w,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: Form(
               key: GlobalKey<FormState>(),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  SvgPicture.asset(AppImages.loginBackground),
+                  SvgPicture.asset(
+                    AppTheme.isDarkMode(context)
+                        ? AppImages.loginBackgroundDark
+                        : AppImages.loginBackground,
+                  ),
                   EmailTextFormField(
                     controller: cubit.emailController,
                     label: 'Email',
