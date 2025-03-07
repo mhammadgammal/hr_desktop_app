@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/text_form_field/app_text_form_field.dart';
 
 class ColumnedTextFormField extends StatelessWidget {
@@ -14,11 +15,13 @@ class ColumnedTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.maxLines = 1,
     this.textFieldTextColor = Colors.white,
+    this.hintColor
   });
 
   final String title;
   final Color titleColor;
   final String? hint;
+  final Color? hintColor;
   final bool enabled;
   final TextEditingController controller;
   final TextInputType inputType;
@@ -41,6 +44,7 @@ class ColumnedTextFormField extends StatelessWidget {
           validate: validate,
           suffixIcon: suffixIcon,
           maxLines: maxLines,
+          hintColor: hintColor ?? AppColors.gray,
           textFieldTextColor: textFieldTextColor,
         ),
       ],

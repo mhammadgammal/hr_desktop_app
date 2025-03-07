@@ -11,6 +11,7 @@ class DatePicker extends StatelessWidget {
     required this.datePickerController,
     required this.datePickerLabel,
     required this.validation,
+    this.datePickerHint,
     this.labelColor = Colors.black,
     this.iconColor = Colors.black,
     this.dateColor = Colors.white,
@@ -19,6 +20,7 @@ class DatePicker extends StatelessWidget {
   TextEditingController datePickerController;
   final String datePickerLabel;
   final String? validation;
+  final String? datePickerHint;
   final Color labelColor;
   final Color iconColor;
   final Color dateColor;
@@ -43,6 +45,8 @@ class DatePicker extends StatelessWidget {
         inputType: TextInputType.datetime,
         title: datePickerLabel,
         titleColor: labelColor,
+        hint: datePickerHint,
+        hintColor: dateColor,
         enabled: false,
         maxLines: 1,
         textFieldTextColor: dateColor,
