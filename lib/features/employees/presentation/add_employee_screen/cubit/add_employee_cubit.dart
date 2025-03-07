@@ -68,14 +68,23 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   Future<void> addEmployeeWithContract() async {
-    log(
-      'AddEmployeeCubit: addEmployeeWithContract(): start insert transaction',
-    );
-    late final int empId;
-    empId = await _addEmployeeToDB();
-    log('AddEmployeeCubit: addEmployeeWithContract(): empId: $empId');
-    await _addContractToDB(empId);
-    log('AddEmployeeCubit: addEmployeeWithContract(): end insert transaction');
+    try {
+      log(
+        'AddEmployeeCubit: addEmployeeWithContract(): start insert transaction',
+      );
+      late final int empId;
+      empId = await _addEmployeeToDB();
+      log('AddEmployeeCubit: addEmployeeWithContract(): empId: $empId');
+      await _addContractToDB(empId);
+      log(
+        'AddEmployeeCubit: addEmployeeWithContract(): end insert transaction',
+      );
+      clearData();
+      emit(AddEmployeeSuccessState());
+    } catch (e) {
+      log('AddEmployeeCubit: addEmployeeWithContract(): error: $e');
+      emit(AddEmployeeFailureState(e.toString()));
+    }
   }
 
   Future<int> _addEmployeeToDB() async {
@@ -115,5 +124,23 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       contract.toJson(),
     );
     return contractId;
+  }
+
+  void clearData() {
+    firstNameController.text = '';
+    lastNameController.text = '';
+    emailController.text = '';
+    jobDescriptionController.text = '';
+    birthdateController.text = '';
+    phoneController.text = '';
+    workingHoursController.text = '';
+    workingDaysController.text = '';
+    salaryController.text = '';
+    salaryDateController.text = '';
+    overtimeHoursYearlyController.text = '';
+    overtimeHoursMonthlyController.text = '';
+    overtimePrice.text = '';
+    contractStartDateController.text = '';
+    contractEndDateController.text = '';
   }
 }

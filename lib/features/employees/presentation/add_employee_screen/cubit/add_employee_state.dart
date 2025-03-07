@@ -9,6 +9,14 @@ sealed class AddEmployeeState extends Equatable {
 
 final class AddEmployeeInitial extends AddEmployeeState {}
 
+final class AddEmployeeSuccessState extends AddEmployeeState {}
+
+final class AddEmployeeFailureState extends AddEmployeeState {
+  final String message;
+
+  const AddEmployeeFailureState(this.message);
+}
+
 final class AddEmployeeTabChanged extends AddEmployeeState {
   final int index;
 

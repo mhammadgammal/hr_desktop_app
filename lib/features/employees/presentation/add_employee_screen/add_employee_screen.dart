@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
+import 'package:hr/core/widgets/dialog_helper/dialog_helper.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/contract_details_tab/contract_details_tab.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/personal_information_tab/personal_information_tab.dart';
@@ -25,7 +26,14 @@ class AddEmployeeScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AddEmployeeCubit(),
       child: BlocConsumer<AddEmployeeCubit, AddEmployeeState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is AddEmployeeSuccessState) {
+            DialogHelper.showSuccessDialog(
+              context,
+              'Employee added successfully',
+            );
+          }
+        },
         builder: (context, state) {
           final cubit = AddEmployeeCubit.get(context);
           return Column(
