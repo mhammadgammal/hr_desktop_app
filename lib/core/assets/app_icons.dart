@@ -1,8 +1,9 @@
 abstract class AppIcons {
-  static String homeIc = 'assets/icons/home.svg';
-  static String bellIc = 'assets/icons/bell.svg';
-  static String addDocumentIc = 'assets/icons/add_document.svg';
-  static String settingsIc = 'assets/icons/tooth.svg';
-  static String logoutIc = 'assets/icons/logout.svg';
-  static String calenderIc = 'assets/icons/calendar_days.svg';
+  static const String homeIc = 'assets/icons/home.svg';
+  static const String bellIc = 'assets/icons/bell.svg';
+  static const String addDocumentIc = 'assets/icons/add_document.svg';
+  static const String settingsIc = 'assets/icons/tooth.svg';
+  static const String logoutIc = 'assets/icons/logout.svg';
+  static const String calenderIc = 'assets/icons/calendar_days.svg';
+  static const String downloadIc = 'assets/icons/printer.svg';
 }
