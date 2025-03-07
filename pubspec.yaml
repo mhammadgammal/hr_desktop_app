@@ -46,7 +46,7 @@ dependencies:
   sqflite_common_ffi: ^2.3.5
   get_it: ^8.0.3
   flutter_svg: ^2.0.17
-
+  file_picker: ^9.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
