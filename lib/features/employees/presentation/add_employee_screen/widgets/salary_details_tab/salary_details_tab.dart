@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_filled_button.dart';
+import 'package:hr/core/widgets/date_picker.dart';
 import 'package:hr/core/widgets/text_form_field/columned_text_form_field.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
 
@@ -27,11 +29,13 @@ class SalaryDetailsTab extends StatelessWidget {
             ),
             SizedBox(width: 10),
             Expanded(
-              child: ColumnedTextFormField(
-                title: 'Salary Date',
-                hint: 'Write the day of salary coming down',
-                controller: cubit.salaryDateController,
-                inputType: TextInputType.number,
+              child: DatePicker(
+                datePickerController: cubit.birthdateController,
+                datePickerLabel: 'Salary Date',
+                iconColor: AppColors.gray,
+                dateColor: AppColors.white,
+                labelColor: AppColors.white,
+                validation: 'Please enter your birthdate',
               ),
             ),
           ],
