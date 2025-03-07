@@ -9,7 +9,7 @@ class EmployeeModel {
   final String birthDate;
   final double salary;
   final String salaryDate;
-  final String workHours;
+  final int workHours;
   final String workingDays;
 
   const EmployeeModel({
@@ -28,17 +28,17 @@ class EmployeeModel {
   });
 
   factory EmployeeModel.fromJson(Map<String, dynamic> json) => EmployeeModel(
-    empId: json['emp_id'],
+    empId: json['id'],
     firstName: json['first_name'],
     lastName: json['last_name'],
     imagePath: json['image_path'],
     email: json['email'],
     job: json['job'],
     phone: json['phone'],
-    birthDate: json['birth_date'],
-    salary: json['salary'],
+    birthDate: json['birthdate'],
+    salary: json['salary'].toDouble(),
     salaryDate: json['salary_date'],
-    workHours: json['work_hours'],
+    workHours: json['working_hours'],
     workingDays: json['working_days'],
   );
 

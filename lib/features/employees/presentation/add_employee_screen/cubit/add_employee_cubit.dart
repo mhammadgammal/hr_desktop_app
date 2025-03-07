@@ -90,7 +90,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       birthDate: birthdateController.text,
       salary: double.parse(salaryController.text),
       salaryDate: salaryDateController.text,
-      workHours: workingHoursController.text,
+      workHours: int.parse(workingHoursController.text),
       workingDays: workingDaysController.text,
     );
     final empId = await DbHelper.insertData(
