@@ -12,7 +12,7 @@ class DatePicker extends StatelessWidget {
     required this.datePickerLabel,
     required this.validation,
     this.datePickerHint,
-    this.labelColor = Colors.black,
+    this.labelColor = Colors.white,
     this.iconColor = Colors.black,
     this.dateColor = Colors.white,
   });

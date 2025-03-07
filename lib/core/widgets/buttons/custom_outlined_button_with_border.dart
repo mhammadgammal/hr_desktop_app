@@ -7,14 +7,22 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.title,
+    this.titleColor = Colors.white,
+    this.borderColor,
+    this.borderWidth = 2.0,
+    this.icon,
   });
 
   final void Function() onPressed;
   final String title;
+  final Color titleColor;
+  final Color? borderColor;
+  final double borderWidth;
+  final Widget? icon;
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return OutlinedButton.icon(
       onPressed: onPressed,
       style: ButtonStyle(
         backgroundColor: WidgetStatePropertyAll(Colors.transparent),
@@ -24,10 +32,14 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
           ),
         ),
         side: WidgetStatePropertyAll(
-          BorderSide(color: AppColors.secondaryColor, width: 2),
+          BorderSide(
+            color: borderColor ?? AppColors.secondaryColor,
+            width: borderWidth,
+          ),
         ),
       ),
-      child: Text(title, style: TextStyle(color: Colors.black)),
+      label: Text(title, style: TextStyle(color: titleColor)),
+      icon: icon,
     );
   }
 }
