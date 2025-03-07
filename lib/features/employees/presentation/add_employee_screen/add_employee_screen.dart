@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
+import 'package:hr/features/employees/presentation/add_employee_screen/widgets/contract_details_tab/contract_details_tab.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/personal_information_tab/personal_information_tab.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/salary_details_tab/salary_details_tab.dart';
 
@@ -44,17 +45,16 @@ class AddEmployeeScreen extends StatelessWidget {
                       padding: EdgeInsetsDirectional.only(start: 10.0.w),
                       itemCount: tabsNames.length,
                       itemBuilder:
-                          (context, index) =>
-                          ListTile(
+                          (context, index) => ListTile(
                             onTap: () => cubit.changeTab(index),
                             selected: cubit.selectedTabIndex == index,
                             title: Text(
                               tabsNames[index],
                               style: GoogleFonts.cairo(
                                 color:
-                                cubit.selectedTabIndex == index
-                                    ? AppColors.secondaryColor
-                                    : AppColors.white,
+                                    cubit.selectedTabIndex == index
+                                        ? AppColors.secondaryColor
+                                        : AppColors.white,
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -78,9 +78,7 @@ class AddEmployeeScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         AttachProfilePicture(),
-                        SizedBox(
-                          height: 20.0.h,
-                        ),
+                        SizedBox(height: 20.0.h),
                         _switchTabItem(context, cubit.selectedTabIndex),
                       ],
                     ),
@@ -116,7 +114,7 @@ class AddEmployeeScreen extends StatelessWidget {
       case 1:
         return SalaryDetailsTab();
       case 2:
-        return Center(child: Text('Contract Details'));
+        return ContractDetailsTab();
     }
   }
 }
