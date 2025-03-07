@@ -37,7 +37,7 @@ class SignInCubit extends Cubit<SignInState> {
     final user = UserModel(
       id: -1,
       name: 'Mohamed Gamal',
-      email: 'mohamed2@gmail.com',
+      email: 'mohamed@gmail.com',
       password: '123456789',
       profilePicturePath: '',
     );

@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:hr/core/di/di.dart';
+import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/helpers/database/table_name.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -47,7 +48,7 @@ class DbHelper {
   static void _createUserTable(Database db) async {
     await db.execute("""
     CREATE TABLE IF NOT EXISTS ${TableName.userTable} (
-    id INT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
@@ -59,10 +60,10 @@ class DbHelper {
   static void _createEmployeeTable(Database db) async {
     await db.execute("""
     CREATE TABLE IF NOT EXISTS ${TableName.employeeTable} (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    emp_id INT NOT NULL,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
+    image_path VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     birthdate VARCHAR(255) NOT NULL,
     job VARCHAR(255) NOT NULL,
@@ -78,7 +79,7 @@ class DbHelper {
   static void _createContractTable(Database db) async {
     await db.execute("""
     CREATE TABLE IF NOT EXISTS ${TableName.contractTable} (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     emp_id INT UNIQUE,
     start_date VARCHAR(255) NOT NULL,
     end_date VARCHAR(255) NOT NULL,
@@ -133,20 +134,18 @@ class DbHelper {
     return result > 0;
   }
 
-  static Future<bool> insertData(
-    String table,
-    Map<String, dynamic> data,
-  ) async {
+  static Future<int> insertData(String table, Map<String, dynamic> data) async {
     try {
-      await sl<Database>().insert(
+      'Inserting data into $table: $data'.logg();
+      int insertedId = await sl<Database>().insert(
         table,
         data,
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
-      return true;
+      return insertedId;
     } catch (e) {
       log('Error inserting data: $e');
-      return false;
+      return -1;
     }
   }
 

@@ -38,8 +38,10 @@ class ContractDetailsTab extends StatelessWidget {
             ),
           ],
         ),
-        Text('Contract Details', style: GoogleFonts.cairo(
-            fontSize: 18.0.sp, color: AppColors.white)),
+        Text(
+          'Contract Details',
+          style: GoogleFonts.cairo(fontSize: 18.0.sp, color: AppColors.white),
+        ),
         CustomOutlinedButtonWithBorder(
           onPressed: () {},
           title: 'Download Contract',
@@ -47,7 +49,10 @@ class ContractDetailsTab extends StatelessWidget {
           icon: SvgPicture.asset(AppIcons.downloadIc),
         ),
 
-        CustomFilledButton(onPressed: () {}, title: 'Save Changes'),
+        CustomFilledButton(
+          onPressed: () => cubit.addEmployeeWithContract(),
+          title: 'Save Changes',
+        ),
       ],
     );
   }

@@ -10,9 +10,7 @@ abstract class AppRouter {
   static Map<String, Widget Function(BuildContext)> routes = {
     RouterKeys.home:
         (context) => BlocProvider(
-          create: (context) =>
-          SignInCubit(),
-          // ..createUser()
+          create: (context) => SignInCubit()..createUser(),
           child: SignInScreen(),
         ),
     RouterKeys.mainScreen:

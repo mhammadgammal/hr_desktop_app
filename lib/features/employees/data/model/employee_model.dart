@@ -1,16 +1,18 @@
 class EmployeeModel {
-  late final String empId;
-  late final String firstName;
-  late final String lastName;
-  late final String imagePath;
-  late final String email;
-  late final String job;
-  late final String phone;
-  late final String birthDate;
-  late final String workHours;
-  late final String workingDays;
+  final int empId;
+  final String firstName;
+  final String lastName;
+  final String imagePath;
+  final String email;
+  final String job;
+  final String phone;
+  final String birthDate;
+  final double salary;
+  final String salaryDate;
+  final String workHours;
+  final String workingDays;
 
-  EmployeeModel({
+  const EmployeeModel({
     required this.empId,
     required this.firstName,
     required this.lastName,
@@ -19,6 +21,8 @@ class EmployeeModel {
     required this.job,
     required this.phone,
     required this.birthDate,
+    required this.salary,
+    required this.salaryDate,
     required this.workHours,
     required this.workingDays,
   });
@@ -32,20 +36,23 @@ class EmployeeModel {
     job: json['job'],
     phone: json['phone'],
     birthDate: json['birth_date'],
+    salary: json['salary'],
+    salaryDate: json['salary_date'],
     workHours: json['work_hours'],
     workingDays: json['working_days'],
   );
 
   Map<String, dynamic> toJson() => {
-    'emp_id': empId,
     'first_name': firstName,
     'last_name': lastName,
     'image_path': imagePath,
     'email': email,
     'job': job,
     'phone': phone,
-    'birth_date': birthDate,
-    'work_hours': workHours,
+    'birthdate': birthDate,
+    'salary': salary,
+    'salary_date': salaryDate,
+    'working_hours': workHours,
     'working_days': workingDays,
   };
 }
