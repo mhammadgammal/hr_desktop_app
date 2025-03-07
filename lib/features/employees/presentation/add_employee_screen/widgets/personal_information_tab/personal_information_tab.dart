@@ -13,38 +13,42 @@ class PersonalInformationTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = AddEmployeeCubit.get(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      spacing: 30.0.h,
-      children: [
-        FirstLastNameFields(
-          firstNameController: cubit.firstNameController,
-          lastNameController: cubit.lastNameController,
-        ),
-        EmailAndJobDescriptionFields(),
-        BirthdateAndPhoneFields(),
-        WorkingHoursAndDaysFields(),
-        TextButton.icon(
-          onPressed: () {
-            cubit.nextTab();
-          },
-          label: Text(
-            'Next',
-            style: TextStyle(
+    return Flexible(
+      fit: FlexFit.loose,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        spacing: 30.0.h,
+        children: [
+          FirstLastNameFields(
+            firstNameController: cubit.firstNameController,
+            lastNameController: cubit.lastNameController,
+          ),
+          EmailAndJobDescriptionFields(),
+          BirthdateAndPhoneFields(),
+          WorkingHoursAndDaysFields(),
+          Spacer(),
+          TextButton.icon(
+            onPressed: () {
+              cubit.nextTab();
+            },
+            label: Text(
+              'Next',
+              style: TextStyle(
+                color: AppColors.secondaryColor,
+                fontSize: 20.0.sp,
+              ),
+            ),
+            iconAlignment: IconAlignment.end,
+            icon: Icon(
+              Icons.arrow_forward_rounded,
+              size: 33.0,
               color: AppColors.secondaryColor,
-              fontSize: 20.0.sp,
             ),
           ),
-          iconAlignment: IconAlignment.end,
-          icon: Icon(
-            Icons.arrow_forward_rounded,
-            size: 33.0,
-            color: AppColors.secondaryColor,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
