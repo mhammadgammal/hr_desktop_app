@@ -4,4 +4,5 @@ abstract class AppIcons {
   static String addDocumentIc = 'assets/icons/add_document.svg';
   static String settingsIc = 'assets/icons/tooth.svg';
   static String logoutIc = 'assets/icons/logout.svg';
+  static String calenderIc = 'assets/icons/calendar_days.svg';
 }

@@ -1,42 +1,96 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
+import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
+import 'package:hr/features/employees/presentation/add_employee_screen/widgets/personal_information_tab/personal_information_tab.dart';
+import 'package:hr/features/employees/presentation/add_employee_screen/widgets/salary_details_tab/salary_details_tab.dart';
+
+import 'widgets/personal_information_tab/attach_profile_picture.dart';
 
 class AddEmployeeScreen extends StatelessWidget {
   const AddEmployeeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final style = GoogleFonts.cairo(
-      color: AppColors.white,
-      fontSize: 20.sp,
-      fontWeight: FontWeight.w500,
-    );
-    return Column(
-      children: [
-        _screenHeader(context),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 231.w,
-              height: 224.h,
-              color: AppColors.gray2,
-              child: ListView(
+    final tabsNames = <String>[
+      'Personal Information',
+      'Salary Details',
+      'Contract Details',
+    ];
+
+    return BlocProvider(
+      create: (context) => AddEmployeeCubit(),
+      child: BlocConsumer<AddEmployeeCubit, AddEmployeeState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          final cubit = AddEmployeeCubit.get(context);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _screenHeader(context),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Personal Information', style: style),
-                  Text('Salary Details', style: style),
-                  Text('Contract Details', style: style),
-                  Text('Day off request\'s', style: style),
+                  Container(
+                    width: 231.w,
+                    height: 200.h,
+                    color: AppColors.gray2,
+                    margin: EdgeInsetsDirectional.only(top: 20.0.w),
+                    child: ListView.builder(
+                      padding: EdgeInsetsDirectional.only(start: 10.0.w),
+                      itemCount: tabsNames.length,
+                      itemBuilder:
+                          (context, index) =>
+                          ListTile(
+                            onTap: () => cubit.changeTab(index),
+                            selected: cubit.selectedTabIndex == index,
+                            title: Text(
+                              tabsNames[index],
+                              style: GoogleFonts.cairo(
+                                color:
+                                cubit.selectedTabIndex == index
+                                    ? AppColors.secondaryColor
+                                    : AppColors.white,
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.zero,
+                          ),
+                    ),
+                  ),
+                  Container(
+                    width: 828.w,
+                    height: 764.h,
+                    color: AppColors.gray2,
+                    padding: EdgeInsetsDirectional.only(
+                      start: 20.0.w,
+                      top: 20.0.w,
+                    ),
+                    margin: EdgeInsetsDirectional.only(
+                      start: 20.0.w,
+                      top: 20.0.w,
+                    ),
+                    child: Column(
+                      children: [
+                        AttachProfilePicture(),
+                        SizedBox(
+                          height: 20.0.h,
+                        ),
+                        _switchTabItem(context, cubit.selectedTabIndex),
+                      ],
+                    ),
+                  ),
                 ],
               ),
-            ),
-            Card(),
-          ],
-        ),
-      ],
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -54,4 +108,15 @@ class AddEmployeeScreen extends StatelessWidget {
       CustomOutlinedButtonWithBorder(onPressed: () {}, title: 'Delete file'),
     ],
   );
+
+  _switchTabItem(BuildContext context, int selectedTabIndex) {
+    switch (selectedTabIndex) {
+      case 0:
+        return PersonalInformationTab();
+      case 1:
+        return SalaryDetailsTab();
+      case 2:
+        return Center(child: Text('Contract Details'));
+    }
+  }
 }
