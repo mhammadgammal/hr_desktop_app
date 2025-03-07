@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr/core/di/di.dart';
+import 'package:hr/core/helpers/cache/cache_keys.dart';
+import 'package:hr/core/helpers/cache/shared_preferences/cache_helper.dart';
 import 'package:hr/core/helpers/database/db_helper.dart';
 import 'package:hr/core/helpers/database/table_name.dart';
 import 'package:hr/features/authentication/data/model/user_model.dart';
@@ -24,6 +27,7 @@ class SignInCubit extends Cubit<SignInState> {
     final UserModel? user = UserModel.fromJson(userResponse);
     if (user != null) {
       if (user.password == passwordController.text) {
+        sl<CacheHelper>().putBool(CacheKeys.isLogged, true);
         emit(SignInSuccessState());
       } else {
         emit(SignInFailureState('Password is incorrect'));
