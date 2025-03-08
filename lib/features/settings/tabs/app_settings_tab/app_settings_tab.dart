@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/extensions/extensions.dart';
-import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/utils/localization/localize_constants.dart';
 
 class AppSettingsTab extends StatelessWidget {
@@ -22,11 +20,7 @@ class AppSettingsTab extends StatelessWidget {
               children: [
                 Text(
                   'Dark Mode'.tr(context),
-                  style: GoogleFonts.cairo(
-                    color: AppColors.white,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(width: 10.0.w),
                 Switch(value: cubit.isDarkMode, onChanged: cubit.changeTheme),
@@ -36,11 +30,7 @@ class AppSettingsTab extends StatelessWidget {
               children: [
                 Text(
                   'Language'.tr(context),
-                  style: GoogleFonts.cairo(
-                    color: AppColors.white,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 SizedBox(width: 10.0.w),
                 DropdownButton(
@@ -53,11 +43,7 @@ class AppSettingsTab extends StatelessWidget {
                               value: e,
                               child: Text(
                                 e.languageCode,
-                                style: GoogleFonts.cairo(
-                                  color: AppColors.white,
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                             ),
                           )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/text_form_field/app_text_form_field.dart';
 
@@ -9,17 +10,17 @@ class ColumnedTextFormField extends StatelessWidget {
     required this.controller,
     required this.inputType,
     this.enabled = true,
-    this.titleColor = Colors.white,
+    this.titleColor,
     this.validate,
     this.hint,
     this.suffixIcon,
     this.maxLines = 1,
     this.textFieldTextColor = Colors.white,
-    this.hintColor
+    this.hintColor,
   });
 
   final String title;
-  final Color titleColor;
+  final Color? titleColor;
   final String? hint;
   final Color? hintColor;
   final bool enabled;
@@ -35,7 +36,17 @@ class ColumnedTextFormField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: TextStyle(color: titleColor)),
+        Text(
+          title,
+          style: TextStyle(
+              color:
+              titleColor ?? (AppCubit
+                  .get(context)
+                  .isDarkMode
+                  ? AppColors.white
+                  : AppColors.black)
+          ),
+        ),
         AppTextFormField(
           controller: controller,
           hintLabel: hint,

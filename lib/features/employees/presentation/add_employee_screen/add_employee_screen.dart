@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
@@ -48,7 +49,10 @@ class AddEmployeeScreen extends StatelessWidget {
                   Container(
                     width: 231.w,
                     height: 200.h,
-                    color: AppColors.gray2,
+                    color:
+                        AppCubit.get(context).isDarkMode
+                            ? AppColors.gray2
+                            : AppColors.white,
                     margin: EdgeInsetsDirectional.only(top: 20.0.w),
                     child: ListView.builder(
                       padding: EdgeInsetsDirectional.only(start: 10.0.w),
@@ -63,7 +67,9 @@ class AddEmployeeScreen extends StatelessWidget {
                                 color:
                                     cubit.selectedTabIndex == index
                                         ? AppColors.secondaryColor
-                                        : AppColors.white,
+                                        : (AppCubit.get(context).isDarkMode
+                                            ? AppColors.white
+                                            : AppColors.black),
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -75,7 +81,10 @@ class AddEmployeeScreen extends StatelessWidget {
                   Container(
                     width: 828.w,
                     height: 764.h,
-                    color: AppColors.gray2,
+                    color:
+                        AppCubit.get(context).isDarkMode
+                            ? AppColors.gray2
+                            : AppColors.white,
                     padding: EdgeInsetsDirectional.only(
                       start: 20.0.w,
                       top: 20.0.w,

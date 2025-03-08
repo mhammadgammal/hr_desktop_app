@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hr/core/di/di.dart';
 import 'package:hr/core/helpers/cache/cache_keys.dart';
 import 'package:hr/core/utils/localization/localize_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,9 +22,10 @@ class AppLocalizations {
   Map<String, String>? _localizedStrings;
 
   Future<void> load() async {
+    log('AppLocalizations: load(): languageCode: ${locale.languageCode}');
     String jsonString =
     await rootBundle.loadString(
-        'assets/localization/${locale.languageCode}.json');
+        'assets/localization/${sl<AppLanguage>().appLocal.languageCode}.json');
 
     Map<String, dynamic> jsonMap = json.decode(jsonString);
     _localizedStrings =
@@ -38,7 +41,7 @@ class _AppLocalizationsDelegate
 
   @override
   bool isSupported(Locale locale) =>
-      LocalizeConstants.defaultLanguage.contains(locale.languageCode);
+      LocalizeConstants.supportedLocales.contains(Locale(locale.languageCode));
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
@@ -60,16 +63,22 @@ class AppLanguage extends ChangeNotifier{
   Future<void> fetchLocale() async {
     var prefs = await SharedPreferences.getInstance();
 
-    if (prefs.getString('language_code') == null) {
+    if (prefs.getString(CacheKeys.languageCode) == null) {
       _appLocale = Locale(LocalizeConstants.defaultLanguage);
-      await prefs.setString('language_code', LocalizeConstants.defaultLanguage);
+      await prefs.setString(
+          CacheKeys.languageCode, LocalizeConstants.defaultLanguage);
     } else {
-      _appLocale = Locale(prefs.getString('language_code')!);
+      _appLocale = Locale(prefs.getString(CacheKeys.languageCode)!);
     }
+
+    log('AppLanguage: fetchLocale(): languageCode: ${_appLocale.languageCode}');
   }
 
   void changeLanguage(Locale type) async {
     var prefs = await SharedPreferences.getInstance();
+    log('AppLanguage: changeLanguage(): languageCode: ${type.languageCode}');
+    log('AppLanguage: changeLanguage(): _appLocale == type: ${_appLocale ==
+        type}');
     if (_appLocale == type) {
       return;
     } else {

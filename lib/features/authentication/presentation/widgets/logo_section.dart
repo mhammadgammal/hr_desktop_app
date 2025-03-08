@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/assets/app_images.dart';
 import 'package:hr/core/theme/app_colors.dart';
-import 'package:hr/core/theme/app_theme.dart';
 
 class LogoSection extends StatelessWidget {
   const LogoSection({super.key});
@@ -30,7 +30,7 @@ class LogoSection extends StatelessWidget {
                 text: ' infinity',
                 style: GoogleFonts.kantumruyPro(
                   color:
-                      AppTheme.isDarkMode(context)
+                      AppCubit.get(context).isDarkMode
                           ? AppColors.white
                           : AppColors.black,
                   fontSize: 48.sp,

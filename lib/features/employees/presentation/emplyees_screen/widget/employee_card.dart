@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hr/core/extensions/extensions.dart';
-import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/profile_picture.dart';
 import 'package:hr/features/employees/data/model/employee_model.dart';
 
@@ -17,7 +15,6 @@ class EmployeeCard extends StatelessWidget {
       padding: const EdgeInsets.only(top: 15.0),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-        color: AppColors.gray2,
         child: Column(
           spacing: 10.0,
           children: [
@@ -28,36 +25,28 @@ class EmployeeCard extends StatelessWidget {
             ),
             Text(
               '${emp.firstName} ${emp.lastName}',
-              style: GoogleFonts.cairo(
-                fontSize: 20.0.sp,
-                color: AppColors.white,
-                fontWeight: FontWeight.w500,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontSize: 20.sp),
             ),
             Text(
               emp.job,
-              style: GoogleFonts.cairo(
-                fontSize: 20.0.sp,
-                color: AppColors.gray,
-                fontWeight: FontWeight.w500,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium!.copyWith(fontSize: 20.sp),
             ),
             RichText(
               text: TextSpan(
                 text: '${'Working hours'.tr(context)}: ',
-                style: GoogleFonts.cairo(
-                  fontSize: 13.0.sp,
-                  color: AppColors.gray,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(fontSize: 13.sp),
                 children: [
                   TextSpan(
                     text: '${emp.workHours}',
-                    style: GoogleFonts.cairo(
-                      fontSize: 13.0.sp,
-                      color: AppColors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium!.copyWith(fontSize: 13.sp),
                   ),
                 ],
               ),
@@ -65,19 +54,15 @@ class EmployeeCard extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text: '${'Working days'.tr(context)}: ',
-                style: GoogleFonts.cairo(
-                  fontSize: 13.0.sp,
-                  color: AppColors.gray,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium!.copyWith(fontSize: 13.sp),
                 children: [
                   TextSpan(
                     text: emp.workingDays,
-                    style: GoogleFonts.cairo(
-                      fontSize: 13.0.sp,
-                      color: AppColors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium!.copyWith(fontSize: 13.sp),
                   ),
                 ],
               ),

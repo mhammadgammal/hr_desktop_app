@@ -1,4 +1,6 @@
 // import 'package:hr/core/helpers/cache/cache_keys.dart';
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CacheHelper {
@@ -17,7 +19,11 @@ class CacheHelper {
   List<String>? getStringList({required String key}) =>
       _sharedPreferences.getStringList(key);
 
-  String? getString({required String key}) => _sharedPreferences.getString(key);
+  String? getString({required String key}) {
+    final x = _sharedPreferences.getString(key);
+    log('CacheHelper: getString:$x');
+    return x;
+  }
 
   Future<bool>? putBool(String key, bool value) async =>
       _sharedPreferences.setBool(key, value);

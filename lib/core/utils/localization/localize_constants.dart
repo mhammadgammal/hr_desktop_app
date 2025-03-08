@@ -9,13 +9,14 @@ import 'app_localization.dart';
 abstract class LocalizeConstants {
   static const List<String> _locale = ['en', 'ar'];
 
-  static final _defaultLanguage = sl<CacheHelper>().getString(
-    key: CacheKeys.languageCode,) ?? 'en';
+  static final _cachedLanguage = sl<CacheHelper>().getString(
+    key: CacheKeys.languageCode,
+  );
+  static final _defaultLanguage = _cachedLanguage?.trim() ?? 'en';
 
-  static const _supportedLocales = [
-    Locale('en'),
-    Locale('ar'),
-  ];
+  //';
+
+  static const _supportedLocales = [Locale('en'), Locale('ar')];
 
   static const List<LocalizationsDelegate> _delegates = [
     AppLocalizations.delegate,
@@ -33,5 +34,5 @@ abstract class LocalizeConstants {
 
   static List<LocalizationsDelegate> get delegates => _delegates;
 
-//#endregion
+  //#endregion
 }
