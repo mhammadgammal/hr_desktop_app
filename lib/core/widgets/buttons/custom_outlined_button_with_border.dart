@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/theme/app_theme.dart';
 
@@ -7,7 +8,7 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.title,
-    this.titleColor = Colors.white,
+    this.titleColor,
     this.borderColor,
     this.borderWidth = 2.0,
     this.icon,
@@ -15,7 +16,7 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
 
   final void Function() onPressed;
   final String title;
-  final Color titleColor;
+  final Color? titleColor;
   final Color? borderColor;
   final double borderWidth;
   final Widget? icon;
@@ -38,7 +39,12 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
           ),
         ),
       ),
-      label: Text(title, style: TextStyle(color: titleColor)),
+      label: Text(
+        title,
+        style: Theme.of(
+          context,
+        ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
+      ),
       icon: icon,
     );
   }

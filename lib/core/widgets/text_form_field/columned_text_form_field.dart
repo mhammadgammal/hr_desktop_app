@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hr/core/env.dart';
+import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/text_form_field/app_text_form_field.dart';
 
@@ -40,7 +40,11 @@ class ColumnedTextFormField extends StatelessWidget {
         Text(
           title,
           style: TextStyle(
-            color: titleColor ?? (isDark ? AppColors.white : AppColors.black),
+            color:
+                titleColor ??
+                (AppCubit.get(context).isDarkMode
+                    ? AppColors.white
+                    : AppColors.black),
           ),
         ),
         AppTextFormField(
@@ -52,7 +56,7 @@ class ColumnedTextFormField extends StatelessWidget {
           suffixIcon: suffixIcon,
           maxLines: maxLines,
           obSecure: isPassword,
-          hintColor: hintColor ?? (isDark ? AppColors.white : AppColors.gray),
+          hintColor: hintColor ?? AppColors.gray,
         ),
       ],
     );

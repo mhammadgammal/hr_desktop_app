@@ -21,8 +21,6 @@ class BirthdateAndPhoneFields extends StatelessWidget {
             datePickerController: cubit.birthdateController,
             datePickerLabel: 'birthday date'.tr(context),
             iconColor: AppColors.gray,
-            dateColor: AppColors.white,
-            labelColor: AppColors.white,
             validation: 'Please enter your birthdate'.tr(context),
           ),
         ),

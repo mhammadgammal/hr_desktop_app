@@ -114,8 +114,7 @@ class AddEmployeeScreen extends StatelessWidget {
     children: [
       Text(
         'Personal Information'.tr(context),
-        style: GoogleFonts.cairo(
-          color: AppColors.white,
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
           fontSize: 32.sp,
           fontWeight: FontWeight.w500,
         ),
