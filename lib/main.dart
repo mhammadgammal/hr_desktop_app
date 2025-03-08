@@ -14,7 +14,12 @@ void main() async {
 
   var isLogged = sl<CacheHelper>().getBool(key: CacheKeys.isLogged);
   if (Platform.isWindows) {
-    setWindowMinSize(const Size(1200, 800)); // Minimum width and height
+    setWindowMinSize(const Size(1200, 1000)); // Minimum width and height
   }
-  runApp(InfinityHrApp(isLogged));
+
+  try {
+    runApp(InfinityHrApp(isLogged));
+  } catch (e, s) {
+    File('error_log.txt').writeAsStringSync('$e\n$s');
+  }
 }

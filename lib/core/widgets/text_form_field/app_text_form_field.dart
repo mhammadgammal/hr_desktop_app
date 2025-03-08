@@ -18,10 +18,8 @@ class AppTextFormField extends StatefulWidget {
     this.initialValue,
     this.maxLines,
     this.minLines,
-    this.labelColor = Colors.white,
     this.hintColor,
-    this.iconColor = Colors.white,
-    this.textFieldTextColor = Colors.white,
+    this.iconColor,
     this.onChanged,
     this.cursorColor,
     this.focusNode,
@@ -44,10 +42,8 @@ class AppTextFormField extends StatefulWidget {
   final int? minLines;
   final bool isEnabled;
   final String? initialValue;
-  final Color labelColor;
   final Color? hintColor;
-  final Color iconColor;
-  final Color textFieldTextColor;
+  final Color? iconColor;
   final Color? cursorColor;
   final int? maxLength;
   final void Function(String?)? onSubmit;
@@ -69,35 +65,13 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
       child: TextFormField(
         controller: widget.controller,
         keyboardType: widget.inputType,
-        style: TextStyle(color: widget.textFieldTextColor),
-        decoration: InputDecoration(
-          // labelText: widget.fieldLabel,
-          labelStyle: TextStyle(color: widget.labelColor),
-          hintText: widget.hintLabel,
-          hintStyle: TextStyle(color: widget.hintColor ?? AppColors.gray),
-          prefixIcon: widget.icon,
+        style: AppTheme.getTextFormFieldTextStyle(),
+        decoration: AppTheme.getTextFieldDecoration(
+          hintLabel: widget.hintLabel,
+          hintColor: widget.hintColor,
+          icon: widget.icon,
+          iconColor: widget.iconColor,
           suffixIcon: widget.suffixIcon,
-          prefixIconColor: widget.iconColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
-            borderSide: const BorderSide(color: Colors.grey, width: 1.5),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
-            borderSide: const BorderSide(color: Colors.grey, width: 1.5),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
-            borderSide: const BorderSide(color: Colors.grey, width: 1.5),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
-            borderSide: BorderSide(
-              color: AppColors.gray,
-              style: BorderStyle.solid,
-              width: 3.0,
-            ),
-          ),
         ),
         textInputAction: widget.inputAction,
         focusNode: widget.focusNode,

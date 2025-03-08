@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hr/core/env.dart';
 import 'package:hr/core/theme/app_colors.dart';
 
 abstract class AppTheme {
@@ -24,7 +25,7 @@ abstract class AppTheme {
       elevation: 0.0,
       toolbarHeight: 96.h,
     ),
-    cardColor: AppColors.white,
+
     textTheme: TextTheme(
       bodyMedium: GoogleFonts.cairo(
         fontSize: 13.0.sp,
@@ -32,6 +33,10 @@ abstract class AppTheme {
         fontWeight: FontWeight.w500,
       ),
     ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      color: AppColors.secondaryColor,
+    ),
+    cardTheme: CardThemeData(color: AppColors.white),
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -57,6 +62,59 @@ abstract class AppTheme {
         fontSize: 13.0.sp,
         color: AppColors.white,
         fontWeight: FontWeight.w500,
+      ),
+    ),
+  );
+
+  static TextStyle getTextFormFieldTextStyle({Color? textFieldTextColor}) =>
+      TextStyle(
+        color:
+            textFieldTextColor ?? (isDark ? AppColors.white : AppColors.black),
+      );
+
+  static InputDecoration getTextFieldDecoration({
+    String? hintLabel,
+    Icon? icon,
+    IconButton? suffixIcon,
+    Color? hintColor,
+    Color? iconColor,
+  }) => InputDecoration(
+    // labelText: widget.fieldLabel,
+    labelStyle: getTextFormFieldTextStyle(),
+    hintText: hintLabel,
+    hintStyle: TextStyle(
+      color: hintColor ?? (isDark ? AppColors.gray : AppColors.black),
+    ),
+    prefixIcon: icon,
+    suffixIcon: suffixIcon,
+    prefixIconColor: iconColor,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
+      borderSide: BorderSide(
+        color: isDark ? AppColors.gray : AppColors.black,
+        width: 1.5,
+      ),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
+      borderSide: BorderSide(
+        color: isDark ? AppColors.gray : AppColors.black,
+        width: 1.5,
+      ),
+    ),
+    disabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
+      borderSide: BorderSide(
+        color: isDark ? AppColors.gray : AppColors.black,
+        width: 1.5,
+      ),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(AppTheme.textFieldRadius),
+      borderSide: BorderSide(
+        color: AppColors.gray,
+        style: BorderStyle.solid,
+        width: 3.0,
       ),
     ),
   );

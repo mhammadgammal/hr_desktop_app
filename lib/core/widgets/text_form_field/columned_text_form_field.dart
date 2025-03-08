@@ -1,5 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:hr/core/app/cubit/app_cubit.dart';
+import 'package:hr/core/env.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/text_form_field/app_text_form_field.dart';
 
@@ -33,18 +35,14 @@ class ColumnedTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log('ColumnedTextFormField: build(): isDark: $isDark');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
           style: TextStyle(
-              color:
-              titleColor ?? (AppCubit
-                  .get(context)
-                  .isDarkMode
-                  ? AppColors.white
-                  : AppColors.black)
+            color: titleColor ?? (isDark ? AppColors.black : AppColors.white),
           ),
         ),
         AppTextFormField(
@@ -56,7 +54,6 @@ class ColumnedTextFormField extends StatelessWidget {
           suffixIcon: suffixIcon,
           maxLines: maxLines,
           hintColor: hintColor ?? AppColors.gray,
-          textFieldTextColor: textFieldTextColor,
         ),
       ],
     );

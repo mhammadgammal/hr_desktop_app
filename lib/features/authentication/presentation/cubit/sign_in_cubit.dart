@@ -40,8 +40,8 @@ class SignInCubit extends Cubit<SignInState> {
   Future<void> createUser() async {
     final user = UserModel(
       id: -1,
-      name: 'Mohamed Gamal',
-      email: 'mohamed@gmail.com',
+      name: 'hr',
+      email: 'hr@admin.com',
       password: '123456789',
       profilePicturePath: '',
     );
