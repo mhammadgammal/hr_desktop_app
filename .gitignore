@@ -52,3 +52,6 @@ windows/flutter/generated_plugin_registrant.h
 /android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
 /android/local.properties
 /test/widget_test.dart
+/installers/mysetup.exe
+/script.iss
+/installers/setupscript.iss
