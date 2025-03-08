@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
 import 'package:hr/core/widgets/dialog_helper/dialog_helper.dart';
@@ -57,7 +58,7 @@ class AddEmployeeScreen extends StatelessWidget {
                             onTap: () => cubit.changeTab(index),
                             selected: cubit.selectedTabIndex == index,
                             title: Text(
-                              tabsNames[index],
+                              tabsNames[index].tr(context),
                               style: GoogleFonts.cairo(
                                 color:
                                     cubit.selectedTabIndex == index
@@ -103,7 +104,7 @@ class AddEmployeeScreen extends StatelessWidget {
   _screenHeader(BuildContext context) => Row(
     children: [
       Text(
-        'Personal Information',
+        'Personal Information'.tr(context),
         style: GoogleFonts.cairo(
           color: AppColors.white,
           fontSize: 32.sp,
@@ -111,7 +112,10 @@ class AddEmployeeScreen extends StatelessWidget {
         ),
       ),
       Spacer(),
-      CustomOutlinedButtonWithBorder(onPressed: () {}, title: 'Delete file'),
+      CustomOutlinedButtonWithBorder(
+        onPressed: () {},
+        title: 'Delete file'.tr(context),
+      ),
     ],
   );
 

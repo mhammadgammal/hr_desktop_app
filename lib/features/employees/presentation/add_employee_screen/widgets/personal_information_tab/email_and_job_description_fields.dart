@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/widgets/text_form_field/columned_text_form_field.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
 
@@ -15,7 +16,7 @@ class EmailAndJobDescriptionFields extends StatelessWidget {
         // email text field
         Expanded(
           child: ColumnedTextFormField(
-            title: 'Email',
+            title: 'Email'.tr(context),
             controller: cubit.emailController,
             hint: 'example@gmail.com',
             inputType: TextInputType.emailAddress,
@@ -25,9 +26,9 @@ class EmailAndJobDescriptionFields extends StatelessWidget {
         // job description text field
         Expanded(
           child: ColumnedTextFormField(
-            title: 'Job Description',
+            title: 'Job Description'.tr(context),
             controller: cubit.jobDescriptionController,
-            hint: 'job title',
+            hint: 'job title'.tr(context),
             inputType: TextInputType.text,
           ),
         ),

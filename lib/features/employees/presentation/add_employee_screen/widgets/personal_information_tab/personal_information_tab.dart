@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/personal_information_tab/birthdate_and_phone_fields.dart';
@@ -34,7 +35,7 @@ class PersonalInformationTab extends StatelessWidget {
               cubit.nextTab();
             },
             label: Text(
-              'Next',
+              'Next'.tr(context),
               style: TextStyle(
                 color: AppColors.secondaryColor,
                 fontSize: 20.0.sp,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/date_picker.dart';
 import 'package:hr/core/widgets/text_form_field/columned_text_form_field.dart';
@@ -18,18 +19,18 @@ class BirthdateAndPhoneFields extends StatelessWidget {
         Expanded(
           child: DatePicker(
             datePickerController: cubit.birthdateController,
-            datePickerLabel: 'birthday date',
+            datePickerLabel: 'birthday date'.tr(context),
             iconColor: AppColors.gray,
             dateColor: AppColors.white,
             labelColor: AppColors.white,
-            validation: 'Please enter your birthdate',
+            validation: 'Please enter your birthdate'.tr(context),
           ),
         ),
 
         // phone text field
         Expanded(
           child: ColumnedTextFormField(
-            title: 'Phone',
+            title: 'Phone'.tr(context),
             controller: cubit.phoneController,
             inputType: TextInputType.phone,
           ),

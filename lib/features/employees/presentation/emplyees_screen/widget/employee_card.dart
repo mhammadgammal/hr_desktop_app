@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/profile_picture.dart';
 import 'package:hr/features/employees/data/model/employee_model.dart';
@@ -43,7 +44,7 @@ class EmployeeCard extends StatelessWidget {
             ),
             RichText(
               text: TextSpan(
-                text: 'Working hours: ',
+                text: '${'Working hours'.tr(context)}: ',
                 style: GoogleFonts.cairo(
                   fontSize: 13.0.sp,
                   color: AppColors.gray,
@@ -63,7 +64,7 @@ class EmployeeCard extends StatelessWidget {
             ),
             RichText(
               text: TextSpan(
-                text: 'Working days: ',
+                text: '${'Working days'.tr(context)}: ',
                 style: GoogleFonts.cairo(
                   fontSize: 13.0.sp,
                   color: AppColors.gray,
