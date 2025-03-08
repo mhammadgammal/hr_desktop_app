@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hr/core/assets/app_images.dart';
 import 'package:hr/core/theme/app_colors.dart';
+import 'package:hr/core/widgets/profile_picture.dart';
 import 'package:hr/features/employees/data/model/employee_model.dart';
 
 class EmployeeCard extends StatelessWidget {
@@ -24,7 +23,7 @@ class EmployeeCard extends StatelessWidget {
             SizedBox(
               width: 200.0.w,
               height: 200.h,
-              child: SvgPicture.asset(AppImages.profile),
+              child: ProfilePicture(imagePath: emp.imagePath),
             ),
             Text(
               '${emp.firstName} ${emp.lastName}',

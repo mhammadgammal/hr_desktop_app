@@ -25,3 +25,5 @@ final class AddEmployeeTabChanged extends AddEmployeeState {
   @override
   List<Object> get props => [index];
 }
+
+final class AddEmployeeProfilePicPicked extends AddEmployeeState {}

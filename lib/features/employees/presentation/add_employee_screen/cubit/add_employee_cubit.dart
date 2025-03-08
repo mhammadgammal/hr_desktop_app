@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr/core/helpers/database/db_helper.dart';
@@ -15,7 +16,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
   static AddEmployeeCubit get(context) => BlocProvider.of(context);
   int selectedTabIndex = 0;
-
+  String profilePicPath = '';
   // personal information tab controllers
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -92,7 +93,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       empId: -1,
       firstName: firstNameController.text,
       lastName: lastNameController.text,
-      imagePath: '',
+      imagePath: profilePicPath,
       email: emailController.text,
       job: jobDescriptionController.text,
       phone: phoneController.text,
@@ -142,5 +143,17 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     overtimePrice.text = '';
     contractStartDateController.text = '';
     contractEndDateController.text = '';
+  }
+
+  Future<FilePickerResult?> _openPicker() async =>
+      await FilePicker.platform.pickFiles();
+
+  Future<void> pickProfilePic() async {
+    final result = await _openPicker();
+    if (result != null) {
+      profilePicPath = result.files.single.path!;
+      log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
+      emit(AddEmployeeProfilePicPicked());
+    }
   }
 }
