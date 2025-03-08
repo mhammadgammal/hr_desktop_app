@@ -5,6 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hr/core/assets/app_icons.dart';
 import 'package:hr/core/assets/app_images.dart';
+import 'package:hr/core/di/di.dart';
+import 'package:hr/core/extensions/extensions.dart';
+import 'package:hr/core/helpers/cache/cache_keys.dart';
+import 'package:hr/core/helpers/cache/shared_preferences/cache_helper.dart';
+import 'package:hr/core/router/router_keys.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/drawer/cubit/navigation_drawer_cubit.dart';
 import 'package:hr/core/widgets/drawer/entity/navigation_drawer_entity_item.dart';
@@ -35,7 +40,7 @@ class NavigationDrawer extends StatelessWidget {
                     itemBuilder:
                         (context, index) => NavigationBarItem(
                           item: NavigationDrawerEntityItem(
-                            title: cubit.screens[index].title,
+                            title: cubit.screens[index].title.tr(context),
                             iconPath: cubit.screens[index].iconPath,
                             onTap: () {
                               cubit.onItemTapped(index);
@@ -49,9 +54,16 @@ class NavigationDrawer extends StatelessWidget {
                 Divider(color: AppColors.gray, thickness: 0.5),
                 NavigationBarItem(
                   item: NavigationDrawerEntityItem(
-                    title: 'Sign out',
+                    title: 'Sign out'.tr(context),
                     iconPath: AppIcons.logoutIc,
-                    onTap: () {},
+                    onTap: () {
+                      sl<CacheHelper>().putBool(CacheKeys.isLogged, false);
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        RouterKeys.home,
+                        (route) => false,
+                      );
+                    },
                   ),
                   isSelected: false,
                 ),

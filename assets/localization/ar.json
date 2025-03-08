@@ -37,5 +37,12 @@
   "Contract start date is required": "الرجاء إدخال تاريخ بداية العقد",
   "Contract end date": "تاريخ نهاية العقد",
   "Contract end date is required": "الرجاء إدخال تاريخ نهاية العقد",
-  "Download Contract": "تحميل العقد"
+  "Download Contract": "تحميل العقد",
+  "Sign out": "تسجيل الخروج",
+  "Home": "الرئيسية",
+  "Alarms": "التنبيهات",
+  "Add Employee": "إضافة موظف",
+  "Settings": "الإعدادات",
+  "My Account": "حسابي",
+  "App Settings": "إعدادات التطبيق"
 }
