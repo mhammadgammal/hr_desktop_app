@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hr/core/env.dart';
 import 'package:hr/core/theme/app_colors.dart';
@@ -19,6 +17,7 @@ class ColumnedTextFormField extends StatelessWidget {
     this.maxLines = 1,
     this.textFieldTextColor = Colors.white,
     this.hintColor,
+    this.isPassword = false,
   });
 
   final String title;
@@ -32,17 +31,16 @@ class ColumnedTextFormField extends StatelessWidget {
   final IconButton? suffixIcon;
   final int maxLines;
   final Color textFieldTextColor;
-
+  final bool isPassword;
   @override
   Widget build(BuildContext context) {
-    log('ColumnedTextFormField: build(): isDark: $isDark');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
           style: TextStyle(
-            color: titleColor ?? (isDark ? AppColors.black : AppColors.white),
+            color: titleColor ?? (isDark ? AppColors.white : AppColors.black),
           ),
         ),
         AppTextFormField(
@@ -53,7 +51,8 @@ class ColumnedTextFormField extends StatelessWidget {
           validate: validate,
           suffixIcon: suffixIcon,
           maxLines: maxLines,
-          hintColor: hintColor ?? AppColors.gray,
+          obSecure: isPassword,
+          hintColor: hintColor ?? (isDark ? AppColors.white : AppColors.gray),
         ),
       ],
     );

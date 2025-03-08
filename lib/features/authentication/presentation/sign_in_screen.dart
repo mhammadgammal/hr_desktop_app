@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/router/app_navigator.dart';
 import 'package:hr/core/router/router_keys.dart';
+import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/dialog_helper/dialog_helper.dart';
 import 'package:hr/features/authentication/presentation/cubit/sign_in_cubit.dart';
 import 'package:hr/features/authentication/presentation/widgets/logo_section.dart';
@@ -33,7 +34,7 @@ class SignInScreen extends StatelessWidget {
                 children: [
                   Expanded(child: LogoSection()),
                   VerticalDivider(
-                    color: Colors.white,
+                    color: AppColors.gray,
                     indent: 10.0,
                     endIndent: 10.0,
                     thickness: 1.0,
