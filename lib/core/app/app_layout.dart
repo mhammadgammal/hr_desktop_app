@@ -6,6 +6,8 @@ import 'package:hr/core/widgets/drawer/navigation_drawer.dart' as drawer;
 import 'package:hr/features/employees/presentation/add_employee_screen/add_employee_screen.dart';
 import 'package:hr/features/employees/presentation/emplyees_screen/employee_screen.dart';
 
+import '../../features/settings/settings_screen.dart' show SettingsScreen;
+
 class AppLayout extends StatelessWidget {
   const AppLayout({super.key});
 
@@ -39,9 +41,9 @@ class AppLayout extends StatelessWidget {
       case 2:
         return AddEmployeeScreen();
       case 3:
-        return Container();
+        return SettingsScreen();
       default:
-        return Container();
+        return Center(child: Text('Wrong dest'));
     }
   }
 }

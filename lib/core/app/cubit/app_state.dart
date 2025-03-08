@@ -17,3 +17,12 @@ final class AppLanguageChanged extends AppState {
   @override
   List<Object?> get props => [locale];
 }
+
+final class AppThemeChanged extends AppState {
+  final bool isDarkMode;
+
+  const AppThemeChanged(this.isDarkMode);
+
+  @override
+  List<Object?> get props => [isDarkMode];
+}
