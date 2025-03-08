@@ -6,4 +6,6 @@ abstract class AppIcons {
   static const String logoutIc = 'assets/icons/logout.svg';
   static const String calenderIc = 'assets/icons/calendar_days.svg';
   static const String downloadIc = 'assets/icons/printer.svg';
+  static const String hidePasswordIc = 'assets/icons/eye_hide.svg';
+  static const String showPasswordIc = 'assets/icons/eye.svg';
 }
