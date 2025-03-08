@@ -1,12 +1,29 @@
+import 'dart:ui';
+
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hr/core/di/di.dart';
+import 'package:hr/core/utils/localization/app_localization.dart';
 
 part 'app_state.dart';
 
 class AppCubit extends Cubit<AppState> {
   AppCubit() : super(AppInitial());
+  late AppLanguage _appLanguage;
 
-  changeLanguage() {}
+  Locale get locale => sl.get<AppLanguage>().appLocal;
+
+  void getCurrentLocale() async {
+    _appLanguage = sl.get<AppLanguage>();
+    await _appLanguage.fetchLocale();
+  }
+
+  changeLanguage(Locale locale) {
+    _appLanguage = sl.get<AppLanguage>();
+    _appLanguage.changeLanguage(locale);
+    _appLanguage.fetchLocale();
+    emit(AppLanguageChanged(locale));
+  }
 
   changeTheme() {}
 }

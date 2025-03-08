@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:hr/core/di/di.dart';
+import 'package:hr/core/helpers/cache/cache_keys.dart';
+import 'package:hr/core/helpers/cache/shared_preferences/cache_helper.dart';
 
 import 'app_localization.dart';
 
 abstract class LocalizeConstants {
   static const List<String> _locale = ['en', 'ar'];
 
-  static const _defaultLanguage = 'en';
+  static final _defaultLanguage = sl<CacheHelper>().getString(
+    key: CacheKeys.languageCode,) ?? 'en';
 
   static const _supportedLocales = [
     Locale('en'),
@@ -29,5 +33,5 @@ abstract class LocalizeConstants {
 
   static List<LocalizationsDelegate> get delegates => _delegates;
 
-  //#endregion
+//#endregion
 }

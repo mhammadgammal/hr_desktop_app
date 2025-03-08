@@ -1,8 +1,9 @@
 import 'dart:convert';
 
-import 'package:hr/core/utils/localization/localize_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hr/core/helpers/cache/cache_keys.dart';
+import 'package:hr/core/utils/localization/localize_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppLocalizations {
@@ -72,7 +73,7 @@ class AppLanguage extends ChangeNotifier{
       return;
     } else {
       _appLocale = type;
-      await prefs.setString('language_code', type.languageCode);
+      await prefs.setString(CacheKeys.languageCode, type.languageCode);
       await prefs.setString('countryCode', '');
     }
     notifyListeners();
