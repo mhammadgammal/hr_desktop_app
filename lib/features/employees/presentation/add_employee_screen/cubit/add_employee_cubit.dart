@@ -21,6 +21,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   late EmployeeModel employee;
   int selectedTabIndex = 0;
   String profilePicPath = '';
+  String identityPicPath = '';
+  String contractPath = '';
   bool firstPagePersonalTab = true;
 
   // personal information tab controllers
@@ -140,6 +142,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       salaryDate: salaryDateController.text,
       workHours: int.parse(workingHoursController.text),
       workingDays: workingDaysController.text,
+      identityType: residenceController.text,
+      identityNumber: identityNumberController.text,
+      identityTypePicPath: '',
     );
     final empId = await DbHelper.insertData(
       TableName.employeeTable,

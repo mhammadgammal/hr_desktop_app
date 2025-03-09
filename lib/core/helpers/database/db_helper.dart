@@ -32,7 +32,7 @@ class DbHelper {
           await db.execute("PRAGMA foreign_keys = ON");
         },
         onCreate: _onCreate,
-        version: 1,
+        version: 2,
       ),
     );
   }
@@ -71,7 +71,10 @@ class DbHelper {
     salary_date VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
     working_hours INT NOT NULL,
-    working_days VARCHAR(255) NOT NULL
+    working_days VARCHAR(255) NOT NULL,
+    identity_type VARCHAR(255) NOT NULL,
+    identity_number VARCHAR(255) NOT NULL,
+    identity_type_pic_path VARCHAR(255) NOT NULL,
     );
     """);
   }

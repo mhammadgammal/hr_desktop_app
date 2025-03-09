@@ -11,6 +11,9 @@ class EmployeeModel {
   final String salaryDate;
   final int workHours;
   final String workingDays;
+  final String identityType;
+  final String identityNumber;
+  final String identityTypePicPath;
 
   const EmployeeModel({
     required this.empId,
@@ -25,6 +28,9 @@ class EmployeeModel {
     required this.salaryDate,
     required this.workHours,
     required this.workingDays,
+    required this.identityType,
+    required this.identityNumber,
+    required this.identityTypePicPath,
   });
 
   factory EmployeeModel.fromJson(Map<String, dynamic> json) => EmployeeModel(
@@ -40,6 +46,9 @@ class EmployeeModel {
     salaryDate: json['salary_date'],
     workHours: json['working_hours'],
     workingDays: json['working_days'],
+    identityType: json['identity_type'],
+    identityNumber: json['identity_number'],
+    identityTypePicPath: json['identity_type_pic_path'],
   );
 
   Map<String, dynamic> toJson() => {
@@ -54,5 +63,8 @@ class EmployeeModel {
     'salary_date': salaryDate,
     'working_hours': workHours,
     'working_days': workingDays,
+    "identity_type": identityType,
+    "identity_number": identityNumber,
+    "identity_type_pic_path": identityTypePicPath,
   };
 }
