@@ -46,46 +46,69 @@ abstract class DialogHelper {
     );
   }
 
-  static void deleteDialog(context,
-      void Function() onYes,
-      void Function() onCancel,) {
+  static void deleteDialog(
+    context,
+    void Function() onYes,
+    void Function() onCancel,
+  ) {
     showDialog(
       context: context,
       builder:
-          (context) =>
-          Container(
-            decoration: BoxDecoration(
-              color:
-              AppCubit
-                  .get(context)
-                  .isDarkMode
-                  ? AppColors.gray2
-                  : AppColors.white,
-              borderRadius: BorderRadius.circular(AppTheme.appRadius),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 43.w,
-                  height: 43.w,
-                  child: SvgPicture.asset(AppIcons.failureIc),
-                ),
-                Text('Are you sure you want to delete employee'.tr(context)),
-                Text(
+          (context) => Dialog(
+            child: Container(
+              width: 600.0.w,
+              height: 200.0.h,
+              padding: EdgeInsets.all(20.0.w),
+              decoration: BoxDecoration(
+                color:
+                    AppCubit.get(context).isDarkMode
+                        ? AppColors.gray2
+                        : AppColors.white,
+                borderRadius: BorderRadius.circular(AppTheme.appRadius),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 43.w,
+                    height: 43.w,
+                    child: SvgPicture.asset(AppIcons.failureIc),
+                  ),
+                  Text(
+                    'Are you sure you want to delete employee'.tr(context),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium!.copyWith(fontSize: 24.sp),
+                  ),
+                  Text(
                     'If you delete you won\'t restore data, and you will add data manually'
-                        .tr(context)),
-                Row(
-                  children: [
-                    Expanded(child: CustomFilledButton(
-                        title: 'Delete'.tr(context),
-                        fillColor: AppColors.failure,
-                        onPressed: onYes)),
-                    Expanded(child: CustomOutlinedButtonWithBorder(
-                        title: 'Cancel'.tr(context), onPressed: onCancel)),
-                  ],
-                )
-              ],
+                        .tr(context),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium!.copyWith(fontSize: 18.sp),
+                  ),
+                  Row(
+                    spacing: 10.0.w,
+                    children: [
+                      Expanded(
+                        child: CustomFilledButton(
+                          title: 'Delete'.tr(context),
+                          fillColor: AppColors.failure,
+                          onPressed: onYes,
+                        ),
+                      ),
+
+                      Expanded(
+                        child: CustomOutlinedButtonWithBorder(
+                          title: 'Cancel'.tr(context),
+                          onPressed: onCancel,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
     );

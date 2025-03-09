@@ -12,4 +12,6 @@ abstract class AppIcons {
   static const String successIc = 'assets/icons/success.svg';
 
   static const String failureIc = 'assets/icons/failure.svg';
+
+  static const String deleteIc = 'assets/icons/delete.svg';
 }

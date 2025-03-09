@@ -8,6 +8,8 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.title,
+    this.width,
+    this.height,
     this.titleColor,
     this.borderColor,
     this.borderWidth = 2.0,
@@ -15,6 +17,8 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
   });
 
   final void Function() onPressed;
+  final double? width;
+  final double? height;
   final String title;
   final Color? titleColor;
   final Color? borderColor;
@@ -23,29 +27,33 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton.icon(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(Colors.transparent),
-        shape: WidgetStatePropertyAll(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppTheme.appRadius),
+    return SizedBox(
+      width: width ?? double.infinity,
+      height: height ?? 50.h,
+      child: OutlinedButton.icon(
+        onPressed: onPressed,
+        style: ButtonStyle(
+          backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+          shape: WidgetStatePropertyAll(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppTheme.appRadius),
+            ),
+          ),
+          side: WidgetStatePropertyAll(
+            BorderSide(
+              color: borderColor ?? AppColors.secondaryColor,
+              width: borderWidth,
+            ),
           ),
         ),
-        side: WidgetStatePropertyAll(
-          BorderSide(
-            color: borderColor ?? AppColors.secondaryColor,
-            width: borderWidth,
-          ),
+        label: Text(
+          title,
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp, color: titleColor),
         ),
+        icon: icon,
       ),
-      label: Text(
-        title,
-        style: Theme.of(
-          context,
-        ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp),
-      ),
-      icon: icon,
     );
   }
 }

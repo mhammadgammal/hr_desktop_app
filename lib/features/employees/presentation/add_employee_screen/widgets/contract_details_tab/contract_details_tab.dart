@@ -44,6 +44,8 @@ class ContractDetailsTab extends StatelessWidget {
           style: GoogleFonts.cairo(fontSize: 18.0.sp, color: AppColors.white),
         ),
         CustomOutlinedButtonWithBorder(
+          width: 300.0.w,
+          height: 60.0.h,
           onPressed: () {},
           title: 'Download Contract'.tr(context),
           titleColor: AppColors.secondaryColor,

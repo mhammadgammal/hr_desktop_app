@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hr/core/app/cubit/app_cubit.dart';
+import 'package:hr/core/assets/app_icons.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
@@ -58,80 +60,83 @@ class AddEmployeeScreen extends StatelessWidget {
         },
         builder: (context, state) {
           final cubit = AddEmployeeCubit.get(context);
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _screenHeader(context),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 231.w,
-                    height: 200.h,
-                    color:
-                    AppCubit
-                        .get(context)
-                        .isDarkMode
-                        ? AppColors.gray2
-                        : AppColors.white,
-                    margin: EdgeInsetsDirectional.only(top: 20.0.w),
-                    child: ListView.builder(
-                      padding: EdgeInsetsDirectional.only(start: 10.0.w),
-                      itemCount: emp == null ? tabsNames.length : (tabsNames
-                          .length - 1),
-                      itemBuilder:
-                          (context, index) =>
-                          ListTile(
-                            onTap: () => cubit.changeTab(index),
-                            selected: cubit.selectedTabIndex == index,
-                            title: Text(
-                              tabsNames[index].tr(context),
-                              style: GoogleFonts.cairo(
-                                color:
-                                cubit.selectedTabIndex == index
-                                    ? AppColors.secondaryColor
-                                    : (AppCubit
-                                    .get(context)
-                                    .isDarkMode
-                                    ? AppColors.white
-                                    : AppColors.black),
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w500,
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _screenHeader(context),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 231.w,
+                      height: 200.h,
+                      color:
+                      AppCubit
+                          .get(context)
+                          .isDarkMode
+                          ? AppColors.gray2
+                          : AppColors.white,
+                      margin: EdgeInsetsDirectional.only(top: 20.0.w),
+                      child: ListView.builder(
+                        padding: EdgeInsetsDirectional.only(start: 10.0.w),
+                        itemCount: emp == null ? tabsNames.length : (tabsNames
+                            .length - 1),
+                        itemBuilder:
+                            (context, index) =>
+                            ListTile(
+                              onTap: () => cubit.changeTab(index),
+                              selected: cubit.selectedTabIndex == index,
+                              title: Text(
+                                tabsNames[index].tr(context),
+                                style: GoogleFonts.cairo(
+                                  color:
+                                  cubit.selectedTabIndex == index
+                                      ? AppColors.secondaryColor
+                                      : (AppCubit
+                                      .get(context)
+                                      .isDarkMode
+                                      ? AppColors.white
+                                      : AppColors.black),
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
+                              contentPadding: EdgeInsets.zero,
                             ),
-                            contentPadding: EdgeInsets.zero,
-                          ),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 828.w,
-                    height: 764.h,
-                    color:
-                    AppCubit
-                        .get(context)
-                        .isDarkMode
-                        ? AppColors.gray2
-                        : AppColors.white,
-                    padding: EdgeInsetsDirectional.only(
-                      start: 20.0.w,
-                      top: 20.0.w,
+                    Container(
+                      width: 828.w,
+                      height: 764.h,
+                      color:
+                      AppCubit
+                          .get(context)
+                          .isDarkMode
+                          ? AppColors.gray2
+                          : AppColors.white,
+                      padding: EdgeInsetsDirectional.only(
+                        start: 20.0.w,
+                        top: 20.0.w,
+                      ),
+                      margin: EdgeInsetsDirectional.only(
+                        start: 20.0.w,
+                        top: 20.0.w,
+                      ),
+                      child: Column(
+                        children: [
+                          AttachProfilePicture(),
+                          SizedBox(height: 20.0.h),
+                          _switchTabItem(context, cubit.selectedTabIndex),
+                        ],
+                      ),
                     ),
-                    margin: EdgeInsetsDirectional.only(
-                      start: 20.0.w,
-                      top: 20.0.w,
-                    ),
-                    child: Column(
-                      children: [
-                        AttachProfilePicture(),
-                        SizedBox(height: 20.0.h),
-                        _switchTabItem(context, cubit.selectedTabIndex),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           );
         },
       ),
@@ -158,6 +163,7 @@ class AddEmployeeScreen extends StatelessWidget {
                 .get(context)
                 .isEditMode,
             child: CustomOutlinedButtonWithBorder(
+              width: 150.0.w,
               onPressed: () {
                 DialogHelper.deleteDialog(context, () {
                   AddEmployeeCubit
@@ -167,6 +173,9 @@ class AddEmployeeScreen extends StatelessWidget {
                 });
               },
               title: 'Delete file'.tr(context),
+              titleColor: AppColors.failure,
+              borderColor: AppColors.failure,
+              icon: SvgPicture.asset(AppIcons.deleteIc),
             ),
           ),
         ],
