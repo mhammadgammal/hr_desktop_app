@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/widgets/buttons/custom_filled_button.dart';
 import 'package:hr/core/widgets/text_form_field/columned_text_form_field.dart';
@@ -14,7 +15,9 @@ class MyAccountTab extends StatelessWidget {
     return BlocBuilder<SettingsCubit, SettingsState>(
       builder: (context, state) {
         var cubit = SettingsCubit.get(context);
-        return Column(
+        return cubit.user == null
+            ? CircularProgressIndicator()
+            : Column(
           children: [
             ProfilePictureWithPicker(),
             ColumnedTextFormField(
@@ -32,9 +35,19 @@ class MyAccountTab extends StatelessWidget {
               controller: cubit.confirmPasswordController,
               inputType: TextInputType.visiblePassword,
             ),
+            SizedBox(
+              height: 10.0.h,
+            ),
             CustomFilledButton(
               title: 'Confirm changes'.tr(context),
-              onPressed: () {},
+              onPressed: () {
+                if (cubit.currentPasswordController.text.isNotEmpty) {
+                  cubit.updatePassword();
+                } else
+                if (cubit.profilePicPath != cubit.user?.profilePicturePath) {
+                  cubit.updateProfilePic();
+                }
+              },
             ),
           ],
         );

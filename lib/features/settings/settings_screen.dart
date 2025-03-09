@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
+import 'package:hr/core/widgets/dialog_helper/dialog_helper.dart';
 import 'package:hr/features/settings/cubit/settings_cubit.dart';
 import 'package:hr/features/settings/tabs/my_account_tab/my_account_tab.dart';
 
@@ -17,15 +18,23 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final tabsNames = <String>['My Account', 'App Settings'];
     return BlocProvider(
-      create: (context) => SettingsCubit(),
+      create: (context) => SettingsCubit()..getUserData(),
       child: BlocConsumer<SettingsCubit, SettingsState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is UserPasswordUpdateSuccess ||
+              state is UserProfilePicSuccess) {
+            DialogHelper.showSuccessDialog(context, '');
+          }
+        },
         builder: (context, state) {
           final cubit = SettingsCubit.get(context);
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               _screenHeader(context),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     width: 231.w,
@@ -89,7 +98,10 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  _screenHeader(context) => Text('App Settings'.tr(context));
+  _screenHeader(context) => Text(
+    'App Settings'.tr(context),
+    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 20.0.sp),
+  );
 
   _switchTabItem(BuildContext context, int selectedTabIndex) {
     switch (selectedTabIndex) {
