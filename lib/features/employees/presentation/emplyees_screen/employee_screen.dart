@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/features/employees/presentation/emplyees_screen/cubit/employees_cubit.dart';
 import 'package:hr/features/employees/presentation/emplyees_screen/widget/employee_card.dart'
@@ -19,6 +20,15 @@ class EmployeeScreen extends StatelessWidget {
               ? Center(
                 child: CircularProgressIndicator(
                   color: AppColors.secondaryColor,
+                ),
+              )
+              : state is GetAllEmployeesSuccessState && cubit.employees!.isEmpty
+              ? Center(
+                child: Text(
+                  'There\'s no employees yet',
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium!.copyWith(fontSize: 20.0.sp),
                 ),
               )
               : GridView.builder(
