@@ -48,6 +48,13 @@ class AddEmployeeScreen extends StatelessWidget {
               'Employee updated successfully'.tr(context),
             );
           }
+
+          if (state is EmployeeDeletedSuccessfully) {
+            DialogHelper.showSuccessDialog(
+              context,
+              'Employee deleted successfully'.tr(context),
+            );
+          }
         },
         builder: (context, state) {
           final cubit = AddEmployeeCubit.get(context);
@@ -63,27 +70,32 @@ class AddEmployeeScreen extends StatelessWidget {
                     width: 231.w,
                     height: 200.h,
                     color:
-                        AppCubit.get(context).isDarkMode
-                            ? AppColors.gray2
-                            : AppColors.white,
+                    AppCubit
+                        .get(context)
+                        .isDarkMode
+                        ? AppColors.gray2
+                        : AppColors.white,
                     margin: EdgeInsetsDirectional.only(top: 20.0.w),
                     child: ListView.builder(
                       padding: EdgeInsetsDirectional.only(start: 10.0.w),
                       itemCount: emp == null ? tabsNames.length : (tabsNames
                           .length - 1),
                       itemBuilder:
-                          (context, index) => ListTile(
+                          (context, index) =>
+                          ListTile(
                             onTap: () => cubit.changeTab(index),
                             selected: cubit.selectedTabIndex == index,
                             title: Text(
                               tabsNames[index].tr(context),
                               style: GoogleFonts.cairo(
                                 color:
-                                    cubit.selectedTabIndex == index
-                                        ? AppColors.secondaryColor
-                                        : (AppCubit.get(context).isDarkMode
-                                            ? AppColors.white
-                                            : AppColors.black),
+                                cubit.selectedTabIndex == index
+                                    ? AppColors.secondaryColor
+                                    : (AppCubit
+                                    .get(context)
+                                    .isDarkMode
+                                    ? AppColors.white
+                                    : AppColors.black),
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -96,9 +108,11 @@ class AddEmployeeScreen extends StatelessWidget {
                     width: 828.w,
                     height: 764.h,
                     color:
-                        AppCubit.get(context).isDarkMode
-                            ? AppColors.gray2
-                            : AppColors.white,
+                    AppCubit
+                        .get(context)
+                        .isDarkMode
+                        ? AppColors.gray2
+                        : AppColors.white,
                     padding: EdgeInsetsDirectional.only(
                       start: 20.0.w,
                       top: 20.0.w,
@@ -124,25 +138,39 @@ class AddEmployeeScreen extends StatelessWidget {
     );
   }
 
-  _screenHeader(BuildContext context) => Row(
-    children: [
-      Text(
-        'Personal Information'.tr(context),
-        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-          fontSize: 32.sp,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      Spacer(),
-      Visibility(
-        visible: AddEmployeeCubit.get(context).isEditMode,
-        child: CustomOutlinedButtonWithBorder(
-          onPressed: () {},
-          title: 'Delete file'.tr(context),
-        ),
-      ),
-    ],
-  );
+  _screenHeader(BuildContext context) =>
+      Row(
+        children: [
+          Text(
+            'Personal Information'.tr(context),
+            style: Theme
+                .of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(
+              fontSize: 32.sp,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Spacer(),
+          Visibility(
+            visible: AddEmployeeCubit
+                .get(context)
+                .isEditMode,
+            child: CustomOutlinedButtonWithBorder(
+              onPressed: () {
+                DialogHelper.deleteDialog(context, () {
+                  AddEmployeeCubit
+                      .get(context).deleteEmp();
+                }, () {
+                  Navigator.of(context).pop();
+                });
+              },
+              title: 'Delete file'.tr(context),
+            ),
+          ),
+        ],
+      );
 
   _switchTabItem(BuildContext context, int selectedTabIndex) {
     switch (selectedTabIndex) {

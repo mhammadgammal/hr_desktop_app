@@ -12,6 +12,7 @@ class CustomFilledButton extends StatelessWidget {
     required this.title,
     required this.onPressed,
     this.disabled = false,
+    this.fillColor,
   });
 
   final double? width;
@@ -19,6 +20,7 @@ class CustomFilledButton extends StatelessWidget {
   final String title;
   final void Function() onPressed;
   final bool disabled;
+  final Color? fillColor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class CustomFilledButton extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
           backgroundColor: WidgetStatePropertyAll(
-            disabled ? AppColors.gray : AppColors.secondaryColor,
+            disabled ? AppColors.gray : fillColor ?? AppColors.secondaryColor,
           ),
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(

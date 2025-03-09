@@ -31,6 +31,8 @@
   "Save changes": "حفظ التعديلات",
   "Personal Information": "المعلومات الشخصية",
   "Delete file": "حذف الملف",
+  "Delete": "مسح",
+  "Cancel": "إلغاء",
   "Contract Details": "تفاصيل العقد",
   "Salary Details": "تفاصيل الراتب",
   "Contract start date": "تاريخ بداية العقد",
@@ -46,5 +48,9 @@
   "My Account": "حسابي",
   "App Settings": "إعدادات التطبيق",
   "Employee updated successfully": "تم تعديل بيانات الموظف بنجاح",
-  "Employee added successfully": "تم إضافة الموظف بنجاح"
+  "Employee added successfully": "تم إضافة الموظف بنجاح",
+  "Are you sure you want to delete employee": "هل أنت متأكد من مسح ملف الموظف",
+  "If you delete you won't restore data, and you will add data manually": "في حالة تم المسح لن تتمكن من استرجاع البيانات مره أخري و سنعيد ادخال بيانات الموظف يدويا",
+  "Employee deleted successfully": "تم مح الموظف بنجاح"
+
 }

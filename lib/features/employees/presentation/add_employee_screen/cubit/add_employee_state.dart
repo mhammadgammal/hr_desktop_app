@@ -40,3 +40,5 @@ final class AddEmployeeTabChanged extends AddEmployeeState {
 }
 
 final class AddEmployeeProfilePicPicked extends AddEmployeeState {}
+
+final class EmployeeDeletedSuccessfully extends AddEmployeeState {}

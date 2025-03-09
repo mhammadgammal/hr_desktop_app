@@ -142,9 +142,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     );
     final result = await DbHelper.updateData(
       TableName.employeeTable,
-        tmpEmp.toJson(),
-        'id',
-        [tmpEmp.empId]
+      tmpEmp.toJson(),
+      'id',
+      [tmpEmp.empId],
     );
 
     log(
@@ -235,5 +235,13 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       tableName: TableName.contractTable,
     );
     return ContractModel.fromJson(contract);
+  }
+
+  void deleteEmp() async {
+    emp.empId;
+
+    await DbHelper.deleteData(TableName.employeeTable, 'id', [emp.empId]);
+
+    emit(EmployeeDeletedSuccessfully());
   }
 }

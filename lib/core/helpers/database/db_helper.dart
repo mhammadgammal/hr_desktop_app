@@ -158,7 +158,8 @@ class DbHelper {
     List<dynamic> whereArgs,
   ) async {
     try {
-      await sl<Database>().delete(table, where: where, whereArgs: whereArgs);
+      await sl<Database>().delete(
+          table, where: '$where = ?', whereArgs: whereArgs);
       return true;
     } catch (e) {
       log('Error deleting data: $e');
