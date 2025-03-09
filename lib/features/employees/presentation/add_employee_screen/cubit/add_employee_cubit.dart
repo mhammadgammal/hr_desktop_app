@@ -16,7 +16,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
   static AddEmployeeCubit get(context) => BlocProvider.of(context);
 
-  bool editMode = false;
+  bool isEditMode = false;
   late ContractModel contract;
   late EmployeeModel employee;
   int selectedTabIndex = 0;
@@ -50,6 +50,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   void loadEmployeeContract(EmployeeModel? emp) async {
     log('AddEmployeeCubit: loadEmployeeContract');
     if (emp != null) {
+      isEditMode = true;
       employee = emp;
       contract = await _getEmployeeContract(emp.empId);
       firstNameController.text = emp.firstName;

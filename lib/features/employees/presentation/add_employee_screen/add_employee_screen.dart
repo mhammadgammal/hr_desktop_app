@@ -120,9 +120,12 @@ class AddEmployeeScreen extends StatelessWidget {
         ),
       ),
       Spacer(),
-      CustomOutlinedButtonWithBorder(
-        onPressed: () {},
-        title: 'Delete file'.tr(context),
+      Visibility(
+        visible: AddEmployeeCubit.get(context).isEditMode,
+        child: CustomOutlinedButtonWithBorder(
+          onPressed: () {},
+          title: 'Delete file'.tr(context),
+        ),
       ),
     ],
   );
