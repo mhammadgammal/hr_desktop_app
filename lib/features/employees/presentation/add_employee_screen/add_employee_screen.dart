@@ -7,6 +7,7 @@ import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
 import 'package:hr/core/widgets/dialog_helper/dialog_helper.dart';
+import 'package:hr/features/employees/data/model/employee_model.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/contract_details_tab/contract_details_tab.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/personal_information_tab/personal_information_tab.dart';
@@ -15,7 +16,9 @@ import 'package:hr/features/employees/presentation/add_employee_screen/widgets/s
 import 'widgets/personal_information_tab/attach_profile_picture.dart';
 
 class AddEmployeeScreen extends StatelessWidget {
-  const AddEmployeeScreen({super.key});
+  const AddEmployeeScreen({super.key, this.emp});
+
+  final EmployeeModel? emp;
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +26,13 @@ class AddEmployeeScreen extends StatelessWidget {
       'Personal Information',
       'Salary Details',
       'Contract Details',
+      'Day off request\'s'
     ];
 
     return BlocProvider(
-      create: (context) => AddEmployeeCubit(),
+      create: (context) =>
+      AddEmployeeCubit()
+        ..loadEmployeeContract(emp),
       child: BlocConsumer<AddEmployeeCubit, AddEmployeeState>(
         listener: (context, state) {
           if (state is AddEmployeeSuccessState) {
@@ -56,7 +62,8 @@ class AddEmployeeScreen extends StatelessWidget {
                     margin: EdgeInsetsDirectional.only(top: 20.0.w),
                     child: ListView.builder(
                       padding: EdgeInsetsDirectional.only(start: 10.0.w),
-                      itemCount: tabsNames.length,
+                      itemCount: emp == null ? tabsNames.length : (tabsNames
+                          .length - 1),
                       itemBuilder:
                           (context, index) => ListTile(
                             onTap: () => cubit.changeTab(index),

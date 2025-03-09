@@ -5,7 +5,7 @@ class ContractModel {
   final String endDate;
   final int overtimeYearly;
   final int overtimeMonthly;
-  final double overtimePrice;
+  final int overtimePrice;
 
   const ContractModel({
     required this.id,

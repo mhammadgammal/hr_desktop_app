@@ -18,7 +18,25 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
   bool isEditMode = false;
   late ContractModel contract;
-  late EmployeeModel employee;
+  late EmployeeModel emp;
+
+  // EmployeeModel get employee => EmployeeModel(
+  //   empId: -1,
+  //   firstName: firstNameController.text,
+  //   lastName: lastNameController.text,
+  //   imagePath: profilePicPath,
+  //   email: emailController.text,
+  //   job: jobDescriptionController.text,
+  //   phone: phoneController.text,
+  //   birthDate: birthdateController.text,
+  //   salary: double.parse(salaryController.text),
+  //   salaryDate: salaryDateController.text,
+  //   workHours: int.parse(workingHoursController.text),
+  //   workingDays: workingDaysController.text,
+  //   identityType: residenceController.text,
+  //   identityNumber: identityNumberController.text,
+  //   identityTypePicPath: '',
+  // );
   int selectedTabIndex = 0;
   String profilePicPath = '';
   String identityPicPath = '';
@@ -49,10 +67,12 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
   void loadEmployeeContract(EmployeeModel? emp) async {
     log('AddEmployeeCubit: loadEmployeeContract');
+    log('AddEmployeeCubit: loadEmployeeContract emp != null: ${emp != null}');
     if (emp != null) {
       isEditMode = true;
-      employee = emp;
+      this.emp = emp;
       contract = await _getEmployeeContract(emp.empId);
+      log('AddEmployeeCubit: contract: ${contract.id}');
       firstNameController.text = emp.firstName;
       lastNameController.text = emp.lastName;
       emailController.text = emp.email;
@@ -69,6 +89,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       overtimePrice.text = contract.overtimePrice.toString();
       contractStartDateController.text = contract.startDate;
       contractEndDateController.text = contract.endDate;
+      emit(EmployeeDetailsDataLoaded());
     }
   }
 
@@ -109,7 +130,34 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     emit(AddEmployeePersonalTabToggled(firstPagePersonalTab));
   }
 
-  Future<void> addEmployeeWithContract() async {
+  Future<void> submitData() async {
+    if (isEditMode) {
+      await _updateEmployeeWithContract();
+    } else {
+      await _addEmployeeWithContract();
+    }
+  }
+
+  Future<void> _updateEmployeeWithContract() async {
+    log('AddEmployeeCubit: _updateEmployeeWithContract: empId: ${emp.empId}');
+    final result = await DbHelper.updateData(
+      TableName.employeeTable,
+      emp.toJson(),
+      'email',
+      [emp.email],
+    );
+
+    log(
+        'AddEmployeeCubit: _updateEmployeeWithContract: update result: $result');
+
+    // await DbHelper.updateRawData(
+    //   TableName.employeeTable,
+    //   emp.toUpdateStatement(),
+    //   emp.getParams(),
+    // );
+  }
+
+  Future<void> _addEmployeeWithContract() async {
     try {
       log(
         'AddEmployeeCubit: addEmployeeWithContract(): start insert transaction',
@@ -130,26 +178,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   Future<int> _addEmployeeToDB() async {
-    EmployeeModel employee = EmployeeModel(
-      empId: -1,
-      firstName: firstNameController.text,
-      lastName: lastNameController.text,
-      imagePath: profilePicPath,
-      email: emailController.text,
-      job: jobDescriptionController.text,
-      phone: phoneController.text,
-      birthDate: birthdateController.text,
-      salary: double.parse(salaryController.text),
-      salaryDate: salaryDateController.text,
-      workHours: int.parse(workingHoursController.text),
-      workingDays: workingDaysController.text,
-      identityType: residenceController.text,
-      identityNumber: identityNumberController.text,
-      identityTypePicPath: '',
-    );
     final empId = await DbHelper.insertData(
       TableName.employeeTable,
-      employee.toJson(),
+      emp.toJson(),
     );
     return empId;
   }
@@ -162,7 +193,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       endDate: contractEndDateController.text,
       overtimeYearly: int.parse(overtimeHoursYearlyController.text),
       overtimeMonthly: int.parse(overtimeHoursMonthlyController.text),
-      overtimePrice: double.parse(overtimePrice.text),
+      overtimePrice: int.parse(overtimePrice.text),
     );
     final contractId = await DbHelper.insertData(
       TableName.contractTable,

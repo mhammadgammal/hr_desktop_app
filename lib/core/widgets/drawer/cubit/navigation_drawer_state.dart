@@ -11,6 +11,12 @@ sealed class NavigationDrawerState extends Equatable {
 
 final class NavigationDrawerInitial extends NavigationDrawerState {}
 
+final class ShowEmployeeDetailsState extends NavigationDrawerState {
+  final EmployeeModel emp;
+
+  const ShowEmployeeDetailsState(this.emp);
+}
+
 final class NavigationDrawerItemTapped extends NavigationDrawerState {
   const NavigationDrawerItemTapped({super.index});
 

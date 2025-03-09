@@ -33,38 +33,77 @@ class EmployeeModel {
     required this.identityTypePicPath,
   });
 
-  factory EmployeeModel.fromJson(Map<String, dynamic> json) => EmployeeModel(
-    empId: json['id'],
-    firstName: json['first_name'],
-    lastName: json['last_name'],
-    imagePath: json['image_path'],
-    email: json['email'],
-    job: json['job'],
-    phone: json['phone'],
-    birthDate: json['birthdate'],
-    salary: json['salary'].toDouble(),
-    salaryDate: json['salary_date'],
-    workHours: json['working_hours'],
-    workingDays: json['working_days'],
-    identityType: json['identity_type'] ?? '',
-    identityNumber: json['identity_number'] ?? '',
-    identityTypePicPath: json['identity_type_pic_path'] ?? '',
-  );
+  factory EmployeeModel.fromJson(Map<String, dynamic> json) =>
+      EmployeeModel(
+        empId: json['id'],
+        firstName: json['first_name'],
+        lastName: json['last_name'],
+        imagePath: json['image_path'],
+        email: json['email'],
+        job: json['job'],
+        phone: json['phone'],
+        birthDate: json['birthdate'],
+        salary: json['salary'].toDouble(),
+        salaryDate: json['salary_date'],
+        workHours: json['working_hours'],
+        workingDays: json['working_days'],
+        identityType: json['identity_type'] ?? '',
+        identityNumber: json['identity_number'] ?? '',
+        identityTypePicPath: json['identity_type_pic_path'] ?? '',
+      );
 
-  Map<String, dynamic> toJson() => {
-    'first_name': firstName,
-    'last_name': lastName,
-    'image_path': imagePath,
-    'email': email,
-    'job': job,
-    'phone': phone,
-    'birthdate': birthDate,
-    'salary': salary,
-    'salary_date': salaryDate,
-    'working_hours': workHours,
-    'working_days': workingDays,
-    "identity_type": identityType,
-    "identity_number": identityNumber,
-    "identity_type_pic_path": identityTypePicPath,
-  };
+  Map<String, dynamic> toJson() =>
+      {
+        'first_name': firstName,
+        'last_name': lastName,
+        'image_path': imagePath,
+        'email': email,
+        'job': job,
+        'phone': phone,
+        'birthdate': birthDate,
+        'salary': salary,
+        'salary_date': salaryDate,
+        'working_hours': workHours,
+        'working_days': workingDays,
+        "identity_type": identityType,
+        "identity_number": identityNumber,
+        "identity_type_pic_path": identityTypePicPath,
+      };
+
+  List<String> toUpdateStatement() =>
+      [
+        'first_name = ?',
+        'last_name = ?',
+        'image_path = ?',
+        'email = ?',
+        'job = ?',
+        'phone = ?',
+        'birthdate = ?',
+        'salary = ?',
+        'salary_date = ?',
+        'working_hours = ?',
+        'working_days = ?',
+        'identity_type = ?',
+        'identity_number = ?',
+        'identity_type_pic_path = ?',
+      ];
+
+  List<dynamic> getParams() =>
+      [
+        firstName,
+        lastName,
+        imagePath,
+        email,
+        job,
+        phone,
+        birthDate,
+        salary,
+        salaryDate,
+        workHours,
+        workingDays,
+        identityType,
+        identityNumber,
+        identityTypePicPath,
+        empId // WHERE clause parameter
+      ];
 }

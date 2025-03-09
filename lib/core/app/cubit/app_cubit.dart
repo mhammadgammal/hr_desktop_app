@@ -46,10 +46,10 @@ class AppCubit extends Cubit<AppState> {
   static AppCubit get(BuildContext context) =>
       BlocProvider.of<AppCubit>(context);
 
-  void _cacheLanguage(String languageCode) {
-    sl<CacheHelper>().putString(
-      key: CacheKeys.languageCode,
-      value: languageCode,
-    );
-  }
+  // void _cacheLanguage(String languageCode) {
+  //   sl<CacheHelper>().putString(
+  //     key: CacheKeys.languageCode,
+  //     value: languageCode,
+  //   );
+  // }
 }

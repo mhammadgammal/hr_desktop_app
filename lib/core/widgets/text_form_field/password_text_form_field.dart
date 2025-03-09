@@ -5,7 +5,7 @@ import 'package:hr/core/utils/validators/validators.dart';
 import 'package:hr/core/widgets/text_form_field/columned_text_form_field.dart';
 
 class PasswordTextFormField extends StatefulWidget {
-  PasswordTextFormField({
+  const PasswordTextFormField({
     super.key,
     required this.controller,
     required this.label,

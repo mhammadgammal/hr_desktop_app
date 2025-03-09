@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/extensions/extensions.dart';
-import 'package:hr/core/router/router_keys.dart';
+import 'package:hr/core/widgets/drawer/cubit/navigation_drawer_cubit.dart';
 import 'package:hr/core/widgets/profile_picture.dart';
 import 'package:hr/features/employees/data/model/employee_model.dart';
 
 class EmployeeCard extends StatelessWidget {
   const EmployeeCard({super.key, required this.emp});
 
-  final EmployeeModel emp;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(
-          context,
-        ).pushNamed(RouterKeys.employeeDetailsScreen, arguments: emp);
+        // Navigator.of(
+        //   context,
+        // ).pushNamed(RouterKeys.employeeDetailsScreen, arguments: {'emp': emp});
+        NavigationDrawerCubit.get(context).showEmployeeDetails(emp);
       },
       child: Padding(
         padding: const EdgeInsets.only(top: 15.0),
@@ -80,4 +79,6 @@ class EmployeeCard extends StatelessWidget {
       ),
     );
   }
+
+  final EmployeeModel emp;
 }

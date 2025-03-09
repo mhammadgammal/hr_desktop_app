@@ -25,6 +25,5 @@ class ProfilePictureWithPicker extends StatelessWidget {
         ),
       ],
     );
-    ;
   }
 }

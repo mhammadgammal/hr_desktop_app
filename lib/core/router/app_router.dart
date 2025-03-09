@@ -5,7 +5,7 @@ import 'package:hr/core/router/router_keys.dart';
 import 'package:hr/core/widgets/drawer/cubit/navigation_drawer_cubit.dart';
 import 'package:hr/features/authentication/presentation/cubit/sign_in_cubit.dart';
 import 'package:hr/features/authentication/presentation/sign_in_screen.dart';
-import 'package:hr/features/employees/presentation/add_employee_screen/add_employee_screen.dart';
+import 'package:hr/features/employees/presentation/add_edit_employee/employee_details/employee_details_screen.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
 
 abstract class AppRouter {
@@ -21,9 +21,15 @@ abstract class AppRouter {
           child: AppLayout(),
         ),
     RouterKeys.employeeDetailsScreen:
-        (_) => BlocProvider(
+        (context) {
+      var args = ModalRoute.settingsOf(context)!.arguments as Map<
+          String,
+          dynamic>;
+
+      return BlocProvider(
           create: (context) => AddEmployeeCubit(),
-          child: AddEmployeeScreen(),
-        ),
+        child: EmployeeDetailsScreen(emp: args['emp'],),
+      );
+    },
   };
 }

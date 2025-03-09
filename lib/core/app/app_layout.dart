@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/widgets/drawer/cubit/navigation_drawer_cubit.dart';
 import 'package:hr/core/widgets/drawer/navigation_drawer.dart' as drawer;
+import 'package:hr/features/employees/presentation/add_edit_employee/employee_details/employee_details_screen.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/add_employee_screen.dart';
 import 'package:hr/features/employees/presentation/emplyees_screen/employee_screen.dart';
 
@@ -22,6 +23,8 @@ class AppLayout extends StatelessWidget {
               SizedBox(width: 30.0.w),
               Expanded(
                 child: _switchScreen(
+                  context,
+                  state,
                   NavigationDrawerCubit.get(context).selectedIndex,
                 ),
               ),
@@ -32,10 +35,12 @@ class AppLayout extends StatelessWidget {
     );
   }
 
-  _switchScreen(int selectedIndex) {
+  _switchScreen(context, state, int selectedIndex) {
     switch (selectedIndex) {
       case 0:
-        return EmployeeScreen();
+        return state is ShowEmployeeDetailsState
+            ? EmployeeDetailsScreen(emp: state.emp)
+            : EmployeeScreen();
       case 1:
         return Container();
       case 2:

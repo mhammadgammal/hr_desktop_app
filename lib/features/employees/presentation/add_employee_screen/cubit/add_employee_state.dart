@@ -11,6 +11,8 @@ final class AddEmployeeInitial extends AddEmployeeState {}
 
 final class AddEmployeeSuccessState extends AddEmployeeState {}
 
+final class EmployeeDetailsDataLoaded extends AddEmployeeState {}
+
 final class AddEmployeePersonalTabToggled extends AddEmployeeState {
   final bool firstPagePersonalTab;
 

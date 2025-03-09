@@ -21,18 +21,15 @@ class EmployeeScreen extends StatelessWidget {
                   color: AppColors.secondaryColor,
                 ),
               )
-              : Flexible(
-                fit: FlexFit.tight,
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: 0.6,
-                  ),
-                  itemCount: cubit.employees!.length,
-                  itemBuilder:
-                      (context, index) =>
-                          EmployeeCard(emp: cubit.employees![index]),
+              : GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  childAspectRatio: 0.6,
                 ),
+                itemCount: cubit.employees!.length,
+                itemBuilder:
+                    (context, index) =>
+                        EmployeeCard(emp: cubit.employees![index]),
               );
         },
       ),

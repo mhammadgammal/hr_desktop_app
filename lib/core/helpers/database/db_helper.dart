@@ -17,10 +17,10 @@ class DbHelper {
     late String documentsPath;
     if (userProfile != null) {
       documentsPath = '$userProfile\\Documents';
-      print('Documents Directory: $documentsPath');
+      log('Documents Directory: $documentsPath');
     } else {
       documentsPath = '';
-      print('Could not determine Documents directory.');
+      log('Could not determine Documents directory.');
     }
     String dbPath = '$documentsPath\\hr.db';
     final databaseFactory = databaseFactoryFfi;
@@ -32,7 +32,7 @@ class DbHelper {
           await db.execute("PRAGMA foreign_keys = ON");
         },
         onCreate: _onCreate,
-        version: 2,
+        version: 3,
       ),
     );
   }
@@ -152,7 +152,7 @@ class DbHelper {
     }
   }
 
-  Future<bool> deleteData(
+  static Future<bool> deleteData(
     String table,
     String where,
     List<dynamic> whereArgs,
@@ -166,19 +166,20 @@ class DbHelper {
     }
   }
 
-  Future<bool> updateData(
+  static Future<bool> updateData(
     String table,
     Map<String, dynamic> data,
     String where,
     List<dynamic> whereArgs,
   ) async {
     try {
-      await sl<Database>().update(
+      final updateResult = await sl<Database>().update(
         table,
         data,
-        where: where,
+        where: '$where = ?',
         whereArgs: whereArgs,
       );
+      log('DbHelper: updateData: updateResult = $updateResult');
       return true;
     } catch (e) {
       log('Error updating data: $e');
@@ -186,7 +187,18 @@ class DbHelper {
     }
   }
 
-  Future<List<T>> getData<T>(
+  static Future updateRawData(
+    String tableName,
+    List<String> values,
+    List<dynamic> parameters,
+  ) async {
+    await sl<Database>().rawUpdate(
+      "update $tableName SET $values WHERE id = ?",
+      parameters,
+    );
+  }
+
+  static Future<List<T>> getData<T>(
     String tableName,
     T Function(Map<String, dynamic>) fromJson,
   ) async {

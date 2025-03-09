@@ -1,8 +1,8 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr/core/helpers/database/db_helper.dart';
 import 'package:hr/core/helpers/database/table_name.dart';
 import 'package:hr/features/employees/data/model/employee_model.dart';
-import 'package:meta/meta.dart';
 
 part 'employees_state.dart';
 
