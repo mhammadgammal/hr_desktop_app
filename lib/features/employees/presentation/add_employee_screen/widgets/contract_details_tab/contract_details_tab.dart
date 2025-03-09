@@ -51,8 +51,10 @@ class ContractDetailsTab extends StatelessWidget {
         ),
 
         CustomFilledButton(
-          onPressed: () => cubit.addEmployeeWithContract(),
-          title: 'Save Changes'.tr(context),
+          width: 300.0.w,
+          height: 60.0.h,
+          title: 'Save changes'.tr(context),
+          onPressed: () => cubit.nextTab(),
         ),
       ],
     );

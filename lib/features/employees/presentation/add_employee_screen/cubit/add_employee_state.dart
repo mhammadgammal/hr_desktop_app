@@ -11,6 +11,15 @@ final class AddEmployeeInitial extends AddEmployeeState {}
 
 final class AddEmployeeSuccessState extends AddEmployeeState {}
 
+final class AddEmployeePersonalTabToggled extends AddEmployeeState {
+  final bool firstPagePersonalTab;
+
+  const AddEmployeePersonalTabToggled(this.firstPagePersonalTab);
+
+  @override
+  List<Object> get props => [firstPagePersonalTab];
+}
+
 final class AddEmployeeFailureState extends AddEmployeeState {
   final String message;
 

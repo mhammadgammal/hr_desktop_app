@@ -21,6 +21,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   late EmployeeModel employee;
   int selectedTabIndex = 0;
   String profilePicPath = '';
+  bool firstPagePersonalTab = true;
 
   // personal information tab controllers
   final firstNameController = TextEditingController();
@@ -40,6 +41,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   final overtimePrice = TextEditingController();
   final contractStartDateController = TextEditingController();
   final contractEndDateController = TextEditingController();
+
+  final residenceController = TextEditingController();
+  final identityNumberController = TextEditingController();
 
   void loadEmployeeContract(EmployeeModel? emp) async {
     log('AddEmployeeCubit: loadEmployeeContract');
@@ -95,6 +99,11 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       selectedTabIndex++;
       emit(AddEmployeeTabChanged(selectedTabIndex));
     }
+  }
+
+  void togglePersonalModeTabs() {
+    firstPagePersonalTab = !firstPagePersonalTab;
+    emit(AddEmployeePersonalTabToggled(firstPagePersonalTab));
   }
 
   Future<void> addEmployeeWithContract() async {
