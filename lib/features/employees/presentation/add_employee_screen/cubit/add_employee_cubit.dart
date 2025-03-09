@@ -15,8 +15,13 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   AddEmployeeCubit() : super(AddEmployeeInitial());
 
   static AddEmployeeCubit get(context) => BlocProvider.of(context);
+
+  bool editMode = false;
+  late ContractModel contract;
+  late EmployeeModel employee;
   int selectedTabIndex = 0;
   String profilePicPath = '';
+
   // personal information tab controllers
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
@@ -35,6 +40,30 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   final overtimePrice = TextEditingController();
   final contractStartDateController = TextEditingController();
   final contractEndDateController = TextEditingController();
+
+  void loadEmployeeContract(EmployeeModel? emp) async {
+    log('AddEmployeeCubit: loadEmployeeContract');
+    if (emp != null) {
+      employee = emp;
+      contract = await _getEmployeeContract(emp.empId);
+      firstNameController.text = emp.firstName;
+      lastNameController.text = emp.lastName;
+      emailController.text = emp.email;
+      profilePicPath = emp.imagePath;
+      jobDescriptionController.text = emp.job;
+      birthdateController.text = emp.birthDate;
+      phoneController.text = emp.phone;
+      workingHoursController.text = emp.workHours.toString();
+      workingDaysController.text = emp.workingDays;
+      salaryController.text = emp.salary.toString();
+      salaryDateController.text = emp.salaryDate;
+      overtimeHoursYearlyController.text = contract.overtimeYearly.toString();
+      overtimeHoursMonthlyController.text = contract.overtimeMonthly.toString();
+      overtimePrice.text = contract.overtimePrice.toString();
+      contractStartDateController.text = contract.startDate;
+      contractEndDateController.text = contract.endDate;
+    }
+  }
 
   void changeTab(int index) {
     selectedTabIndex = index;
@@ -155,5 +184,13 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
       emit(AddEmployeeProfilePicPicked());
     }
+  }
+
+  _getEmployeeContract(int empId) async {
+    final contract = await DbHelper.getRecordById(
+      empId,
+      tableName: TableName.contractTable,
+    );
+    return ContractModel.fromJson(contract);
   }
 }
