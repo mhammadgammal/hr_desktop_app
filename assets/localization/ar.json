@@ -44,5 +44,7 @@
   "Add Employee": "إضافة موظف",
   "Settings": "الإعدادات",
   "My Account": "حسابي",
-  "App Settings": "إعدادات التطبيق"
+  "App Settings": "إعدادات التطبيق",
+  "Employee updated successfully": "تم تعديل بيانات الموظف بنجاح",
+  "Employee added successfully": "تم إضافة الموظف بنجاح"
 }

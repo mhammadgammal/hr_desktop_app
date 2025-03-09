@@ -20,23 +20,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   late ContractModel contract;
   late EmployeeModel emp;
 
-  // EmployeeModel get employee => EmployeeModel(
-  //   empId: -1,
-  //   firstName: firstNameController.text,
-  //   lastName: lastNameController.text,
-  //   imagePath: profilePicPath,
-  //   email: emailController.text,
-  //   job: jobDescriptionController.text,
-  //   phone: phoneController.text,
-  //   birthDate: birthdateController.text,
-  //   salary: double.parse(salaryController.text),
-  //   salaryDate: salaryDateController.text,
-  //   workHours: int.parse(workingHoursController.text),
-  //   workingDays: workingDaysController.text,
-  //   identityType: residenceController.text,
-  //   identityNumber: identityNumberController.text,
-  //   identityTypePicPath: '',
-  // );
   int selectedTabIndex = 0;
   String profilePicPath = '';
   String identityPicPath = '';
@@ -140,21 +123,35 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
   Future<void> _updateEmployeeWithContract() async {
     log('AddEmployeeCubit: _updateEmployeeWithContract: empId: ${emp.empId}');
+    final tmpEmp = EmployeeModel(
+      empId: emp.empId,
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      imagePath: profilePicPath,
+      email: emailController.text,
+      job: jobDescriptionController.text,
+      phone: phoneController.text,
+      birthDate: birthdateController.text,
+      salary: double.parse(salaryController.text),
+      salaryDate: salaryDateController.text,
+      workHours: int.parse(workingHoursController.text),
+      workingDays: workingDaysController.text,
+      identityType: residenceController.text,
+      identityNumber: identityNumberController.text,
+      identityTypePicPath: identityPicPath,
+    );
     final result = await DbHelper.updateData(
       TableName.employeeTable,
-      emp.toJson(),
-      'email',
-      [emp.email],
+        tmpEmp.toJson(),
+        'id',
+        [tmpEmp.empId]
     );
 
     log(
-        'AddEmployeeCubit: _updateEmployeeWithContract: update result: $result');
+      'AddEmployeeCubit: _updateEmployeeWithContract: update result: $result',
+    );
 
-    // await DbHelper.updateRawData(
-    //   TableName.employeeTable,
-    //   emp.toUpdateStatement(),
-    //   emp.getParams(),
-    // );
+    emit(UpdateEmployeeSuccessState());
   }
 
   Future<void> _addEmployeeWithContract() async {

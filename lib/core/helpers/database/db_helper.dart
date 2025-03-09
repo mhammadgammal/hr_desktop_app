@@ -178,6 +178,7 @@ class DbHelper {
         data,
         where: '$where = ?',
         whereArgs: whereArgs,
+        conflictAlgorithm: ConflictAlgorithm.replace,
       );
       log('DbHelper: updateData: updateResult = $updateResult');
       return true;
@@ -192,10 +193,14 @@ class DbHelper {
     List<String> values,
     List<dynamic> parameters,
   ) async {
-    await sl<Database>().rawUpdate(
-      "update $tableName SET $values WHERE id = ?",
+    sl<Database>().execute(
+      'update $tableName set $values where id = ?${parameters.last}',
       parameters,
     );
+    // await sl<Database>().rawUpdate(
+    //   "update $tableName SET $values WHERE id = ?",
+    //   parameters,
+    // );
   }
 
   static Future<List<T>> getData<T>(

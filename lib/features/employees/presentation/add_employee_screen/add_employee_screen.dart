@@ -38,7 +38,14 @@ class AddEmployeeScreen extends StatelessWidget {
           if (state is AddEmployeeSuccessState) {
             DialogHelper.showSuccessDialog(
               context,
-              'Employee added successfully',
+              'Employee added successfully'.tr(context),
+            );
+          }
+
+          if (state is UpdateEmployeeSuccessState) {
+            DialogHelper.showSuccessDialog(
+              context,
+              'Employee updated successfully'.tr(context),
             );
           }
         },
