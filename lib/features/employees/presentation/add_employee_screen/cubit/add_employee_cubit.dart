@@ -262,9 +262,17 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       job: jobDescriptionController.text,
       phone: phoneController.text,
       birthDate: birthdateController.text,
-      salary: double.parse(salaryController.text),
+      salary:
+          salaryController.text.isNotEmpty
+              ? salaryController.text.contains('.')
+                  ? double.parse(salaryController.text)
+                  : int.parse(salaryController.text).toDouble()
+              : 0.0,
       salaryDate: salaryDateController.text,
-      workHours: int.parse(workingHoursController.text),
+      workHours:
+          workingHoursController.text.isNotEmpty
+              ? int.parse(workingHoursController.text)
+              : 0,
       workingDays: workingDaysController.text,
       identityType: residenceController.text,
       identityNumber: identityNumberController.text,

@@ -33,9 +33,22 @@ abstract class DialogHelper {
       context: context,
       builder:
           (context) => AlertDialog(
+            backgroundColor: AppColors.white,
             icon: SvgPicture.asset(AppIcons.successIc),
-            title: const Text('Success'),
-            content: Text(message),
+            title: Text(
+              'Success',
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: AppColors.black,
+                fontSize: 20.0.sp,
+              ),
+            ),
+            content: Text(
+              message,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: AppColors.black,
+                fontSize: 15.0.sp,
+              ),
+            ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(),
