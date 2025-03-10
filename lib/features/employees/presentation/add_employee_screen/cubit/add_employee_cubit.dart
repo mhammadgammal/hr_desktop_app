@@ -48,6 +48,11 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   final residenceController = TextEditingController();
   final identityNumberController = TextEditingController();
 
+  final dayOffStartDateController = TextEditingController();
+  final dayOffEndDateController = TextEditingController();
+
+  final remainingVacationDays = TextEditingController();
+
   void loadEmployeeContract(EmployeeModel? emp) async {
     log('AddEmployeeCubit: loadEmployeeContract');
     log('AddEmployeeCubit: loadEmployeeContract emp != null: ${emp != null}');
@@ -268,7 +273,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     try {
       newEmpId = await DbHelper.insertData(
         TableName.employeeTable,
-        emp.toJson(),
+        tmpEmp.toJson(),
       );
       emit(AddEmployeeSuccessState());
     } catch (e) {
@@ -279,7 +284,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   Future<void> continueSaveEmployeeData() async {
     emit(EmployeeCreateLoadingState());
     final tmpEmp = EmployeeModel(
-      empId: newEmpId! ?? -1,
+      empId: newEmpId!,
       firstName: firstNameController.text,
       lastName: lastNameController.text,
       imagePath: profilePicPath,
@@ -297,12 +302,19 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     );
 
     try {
-      await DbHelper.updateData(TableName.employeeTable, emp.toJson(), 'id', [
-        newEmpId!,
+      await DbHelper.updateData(
+        TableName.employeeTable,
+        tmpEmp.toJson(),
+        'id',
+        [newEmpId!,
       ]);
       emit(AddEmployeeSuccessState());
     } catch (e) {
       emit(EmployeeCreateFailureState(e.toString()));
     }
+  }
+
+  void requestVacation() {
+    // TODO implement off day insertion query
   }
 }
