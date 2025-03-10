@@ -60,6 +60,8 @@
   "Choose from your options": "اختر من الخيارات المتاحه لديك",
   "Identity number": "رقم الهويه",
   "Identity photo": "صورة الهويه",
-  "Download Identity": "إرفع الهويه"
-
+  "Download Identity": "إرفع الهويه",
+  "Saved Successfully": "تم الحفظ بنجاح",
+  "Changed Successfully": "تم التغيير بنجاح",
+  "Employee Deleted Success": "تم حذف الموظف بنجاح"
 }

@@ -23,7 +23,8 @@ class SettingsScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is UserPasswordUpdateSuccess ||
               state is UserProfilePicSuccess) {
-            DialogHelper.showSuccessDialog(context, '');
+            DialogHelper.showSuccessDialog(
+                context: context, header: 'Changed Successfully');
           }
         },
         builder: (context, state) {
