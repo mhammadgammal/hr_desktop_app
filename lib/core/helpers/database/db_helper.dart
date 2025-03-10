@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
@@ -32,7 +33,8 @@ class DbHelper {
           await db.execute("PRAGMA foreign_keys = ON");
         },
         onCreate: _onCreate,
-        version: 3,
+        onUpgrade: _onUpgrade,
+        version: 4,
       ),
     );
   }
@@ -43,6 +45,7 @@ class DbHelper {
     _createUserTable(db);
     _createEmployeeTable(db);
     _createContractTable(db);
+    _createVacationTable(db);
   }
 
   static void _createUserTable(Database db) async {
@@ -75,6 +78,7 @@ class DbHelper {
     identity_type VARCHAR(255) NOT NULL,
     identity_number VARCHAR(255) NOT NULL,
     identity_type_pic_path VARCHAR(255) NOT NULL,
+    vacation_count INTEGER NOT NULL
     );
     """);
   }
@@ -91,6 +95,19 @@ class DbHelper {
     overtime_price DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (emp_id) REFERENCES ${TableName.employeeTable}(id) ON DELETE CASCADE ON UPDATE CASCADE
     );
+    """);
+  }
+
+  static void _createVacationTable(Database db) async {
+    db.execute("""
+  CREATE TABLE ${TableName.employeeTable} (
+	id	INTEGER NOT NULL,
+	emp_id	INTEGER NOT NULL UNIQUE,
+	start_date	INTEGER NOT NULL,
+	end_date	INTEGER NOT NULL,
+	PRIMARY KEY(id AUTOINCREMENT),
+	FOREIGN KEY(emp_id) REFERENCES ${TableName.employeeTable}(id) ON DELETE CASCADE ON UPDATE CASCADE
+  );
     """);
   }
 
@@ -159,7 +176,10 @@ class DbHelper {
   ) async {
     try {
       await sl<Database>().delete(
-          table, where: '$where = ?', whereArgs: whereArgs);
+        table,
+        where: '$where = ?',
+        whereArgs: whereArgs,
+      );
       return true;
     } catch (e) {
       log('Error deleting data: $e');
@@ -223,5 +243,16 @@ class DbHelper {
 
   static Future<void> closeDb(Database db) async {
     await db.close();
+  }
+
+  static FutureOr<void> _onUpgrade(
+    Database db,
+    int oldVersion,
+    int newVersion,
+  ) async {
+    await db.execute('''
+        ALTER TABLE ${TableName.employeeTable} 
+        ADD COLUMN vacation_count INTEGER DEFAULT 21
+      ''');
   }
 }
