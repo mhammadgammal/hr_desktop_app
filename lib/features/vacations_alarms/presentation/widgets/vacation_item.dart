@@ -1,14 +1,16 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hr/core/assets/app_icons.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/theme/app_theme.dart';
+import 'package:hr/core/widgets/profile_picture.dart';
+import 'package:hr/features/vacations_alarms/data/vacation_model.dart';
 
 class VacationItem extends StatelessWidget {
-  const VacationItem({super.key});
+  const VacationItem({super.key, required this.vacation});
+
+  final VacationModel vacation;
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +45,18 @@ class VacationItem extends StatelessWidget {
                       child: SvgPicture.asset(AppIcons.xIc),
                     ),
                     SizedBox(
-                      width: 32.w,
-                      height: 32.h,
+                      width: 40.w,
+                      height: 40.h,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(200.r),
-                        child: Image.file(
-                          File('D:\\WallPaper\\blue skyline.jpg'),
-                        ),
+                        child: ProfilePicture(imagePath: vacation.empPicPath),
                       ),
                     ),
                     Text(
                       'Reminder message!',
                       style: TextStyle(
                         color: AppColors.secondaryColor,
-                        fontSize: 18.0.sp,
+                        fontSize: 25.0.sp,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -64,13 +64,18 @@ class VacationItem extends StatelessWidget {
                 ),
               ),
               Text(
-                'The employee Ahmed Hassan will end his vacation today, please him as reminder',
+                'The employee ${vacation.empFirstName} ${vacation.empLastName} will end his vacation today, please him as reminder',
+                style: TextStyle(
+                  color: AppColors.black,
+                  fontSize: 18.0.sp,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ],
           ),
           Spacer(),
           Text(
-            '24/6/2025 at 5:30',
+            vacation.endDate.replaceAll('-', '/'),
             style: TextStyle(
               color: AppColors.gray,
               fontSize: 13.sp,

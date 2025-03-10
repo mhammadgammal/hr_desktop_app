@@ -100,9 +100,9 @@ class DbHelper {
 
   static void _createVacationTable(Database db) async {
     db.execute("""
-  CREATE TABLE ${TableName.employeeTable} (
+  CREATE TABLE ${TableName.vacationTable} (
 	id	INTEGER NOT NULL,
-	emp_id	INTEGER NOT NULL UNIQUE,
+	emp_id	INTEGER NOT NULL,
 	start_date	INTEGER NOT NULL,
 	end_date	INTEGER NOT NULL,
 	PRIMARY KEY(id AUTOINCREMENT),
@@ -231,6 +231,27 @@ class DbHelper {
     try {
       final List<Map<String, dynamic>> maps = await sl<Database>().query(
         tableName,
+      );
+      final List<T> dataList = maps.map((map) => fromJson(map)).toList();
+      return dataList;
+    } catch (e) {
+      log('Error retrieving data: $e');
+      // return FailureDataResponse('Error retrieving data: $e');
+      return [];
+    }
+  }
+
+  static Future<List<T>> getDataWhere<T>(
+    String tableName,
+    T Function(Map<String, dynamic>) fromJson, {
+    String? where,
+    List<dynamic>? whereArgs,
+  }) async {
+    try {
+      final List<Map<String, dynamic>> maps = await sl<Database>().query(
+        tableName,
+        where: where,
+        whereArgs: whereArgs,
       );
       final List<T> dataList = maps.map((map) => fromJson(map)).toList();
       return dataList;

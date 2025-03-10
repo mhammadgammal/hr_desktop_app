@@ -8,6 +8,7 @@ import 'package:hr/core/helpers/database/db_helper.dart';
 import 'package:hr/core/helpers/database/table_name.dart';
 import 'package:hr/features/employees/data/model/contract_model.dart';
 import 'package:hr/features/employees/data/model/employee_model.dart';
+import 'package:hr/features/vacations_alarms/data/vacation_model.dart';
 
 part 'add_employee_state.dart';
 
@@ -306,15 +307,24 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
         TableName.employeeTable,
         tmpEmp.toJson(),
         'id',
-        [newEmpId!,
-      ]);
+        [newEmpId!],
+      );
       emit(AddEmployeeSuccessState());
     } catch (e) {
       emit(EmployeeCreateFailureState(e.toString()));
     }
   }
 
-  void requestVacation() {
-    // TODO implement off day insertion query
+  void requestVacation() async {
+    var vacation = VacationModel(
+      empId: emp.empId,
+      id: -1,
+      empFirstName: emp.firstName,
+      empLastName: emp.lastName,
+      startDate: dayOffStartDateController.text,
+      empPicPath: emp.imagePath,
+      endDate: dayOffEndDateController.text,
+    );
+    await DbHelper.insertData(TableName.vacationTable, vacation.toJson());
   }
 }
