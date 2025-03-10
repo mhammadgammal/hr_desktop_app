@@ -15,6 +15,7 @@
   "First employee name": "الاسم الأول للموظف",
   "Last employee name": "الاسم الأخير للموظف",
   "Next": "التالي",
+  "Previous": "السايق",
   "Working hours": "ساعات العمل",
   "Number of working hours": "عدد ساعات العمل",
   "Working days": "أيام العمل",
@@ -54,5 +55,11 @@
   "Employee deleted successfully": "تم مح الموظف بنجاح",
   "Reminder message!": "رسالة تذكير",
   "The employee": "الموظف",
-  "will end his vacation today, please him as reminder": "ستنتهي إجازته اليوم يرجى التواصل معه للتذكير"
+  "will end his vacation today, please him as reminder": "ستنتهي إجازته اليوم يرجى التواصل معه للتذكير",
+  "Identity or residence": "الهويه أو الإقامه",
+  "Choose from your options": "اختر من الخيارات المتاحه لديك",
+  "Identity number": "رقم الهويه",
+  "Identity photo": "صورة الهويه",
+  "Download Identity": "إرفع الهويه"
+
 }
