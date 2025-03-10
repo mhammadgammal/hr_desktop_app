@@ -12,7 +12,7 @@ abstract class LocalizeConstants {
   static final _cachedLanguage = sl<CacheHelper>().getString(
     key: CacheKeys.languageCode,
   );
-  static final _defaultLanguage = _cachedLanguage?.trim() ?? 'en';
+  static final _defaultLanguage = _cachedLanguage?.trim() ?? 'ar';
 
   //';
 
