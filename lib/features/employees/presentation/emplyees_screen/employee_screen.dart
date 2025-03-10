@@ -34,7 +34,9 @@ class EmployeeScreen extends StatelessWidget {
               : GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
-                  childAspectRatio: 0.6,
+                  childAspectRatio:
+                      (ScreenUtil().screenWidth / 4) /
+                      (ScreenUtil().screenHeight / 2),
                 ),
                 itemCount: cubit.employees!.length,
                 itemBuilder:

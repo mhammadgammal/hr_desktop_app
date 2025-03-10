@@ -51,6 +51,8 @@
   "Employee added successfully": "تم إضافة الموظف بنجاح",
   "Are you sure you want to delete employee": "هل أنت متأكد من مسح ملف الموظف",
   "If you delete you won't restore data, and you will add data manually": "في حالة تم المسح لن تتمكن من استرجاع البيانات مره أخري و سنعيد ادخال بيانات الموظف يدويا",
-  "Employee deleted successfully": "تم مح الموظف بنجاح"
-
+  "Employee deleted successfully": "تم مح الموظف بنجاح",
+  "Reminder message!": "رسالة تذكير",
+  "The employee": "الموظف",
+  "will end his vacation today, please him as reminder": "ستنتهي إجازته اليوم يرجى التواصل معه للتذكير"
 }

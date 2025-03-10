@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/assets/app_icons.dart';
+import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/theme/app_theme.dart';
 import 'package:hr/core/widgets/profile_picture.dart';
@@ -17,7 +19,8 @@ class VacationItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0.w, vertical: 10.0.h),
       decoration: BoxDecoration(
-        color: AppColors.white,
+        color:
+            AppCubit.get(context).isDarkMode ? AppColors.gray : AppColors.white,
         border: Border.all(color: AppColors.black, width: 0.5),
         borderRadius: BorderRadius.circular(AppTheme.appRadius),
       ),
@@ -53,7 +56,7 @@ class VacationItem extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Reminder message!',
+                      'Reminder message!'.tr(context),
                       style: TextStyle(
                         color: AppColors.secondaryColor,
                         fontSize: 25.0.sp,
@@ -64,7 +67,7 @@ class VacationItem extends StatelessWidget {
                 ),
               ),
               Text(
-                'The employee ${vacation.empFirstName} ${vacation.empLastName} will end his vacation today, please him as reminder',
+                '${'The employee'.tr(context)} ${vacation.empFirstName} ${vacation.empLastName} ${"will end his vacation today, please him as reminder".tr(context)}',
                 style: TextStyle(
                   color: AppColors.black,
                   fontSize: 18.0.sp,
@@ -77,7 +80,7 @@ class VacationItem extends StatelessWidget {
           Text(
             vacation.endDate.replaceAll('-', '/'),
             style: TextStyle(
-              color: AppColors.gray,
+              color: AppColors.gray2,
               fontSize: 13.sp,
               fontWeight: FontWeight.w400,
             ),
