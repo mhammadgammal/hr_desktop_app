@@ -26,7 +26,7 @@ class SignInForm extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: Form(
-              key: GlobalKey<FormState>(),
+              key: cubit.formKey,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -47,7 +47,11 @@ class SignInForm extends StatelessWidget {
                   SizedBox(height: 20.0.h),
                   CustomFilledButton(
                     width: double.infinity,
-                    onPressed: cubit.signIn,
+                    onPressed: () {
+                      if (cubit.formKey.currentState!.validate()) {
+                        cubit.signIn();
+                      }
+                    },
                     title: 'Sign In'.tr(context),
                   ),
                 ],

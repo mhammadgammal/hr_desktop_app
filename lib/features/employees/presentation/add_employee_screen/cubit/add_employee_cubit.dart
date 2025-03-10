@@ -19,7 +19,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   bool isEditMode = false;
   late ContractModel contract;
   late EmployeeModel emp;
-
+  int? newEmpId;
   int selectedTabIndex = 0;
   String profilePicPath = '';
   String identityPicPath = '';
@@ -243,5 +243,66 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     await DbHelper.deleteData(TableName.employeeTable, 'id', [emp.empId]);
 
     emit(EmployeeDeletedSuccessfully());
+  }
+
+  Future<void> createEmployee() async {
+    emit(EmployeeCreateLoadingState());
+    final tmpEmp = EmployeeModel(
+      empId: -1,
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      imagePath: profilePicPath,
+      email: emailController.text,
+      job: jobDescriptionController.text,
+      phone: phoneController.text,
+      birthDate: birthdateController.text,
+      salary: double.parse(salaryController.text),
+      salaryDate: salaryDateController.text,
+      workHours: int.parse(workingHoursController.text),
+      workingDays: workingDaysController.text,
+      identityType: residenceController.text,
+      identityNumber: identityNumberController.text,
+      identityTypePicPath: identityPicPath,
+    );
+
+    try {
+      newEmpId = await DbHelper.insertData(
+        TableName.employeeTable,
+        emp.toJson(),
+      );
+      emit(AddEmployeeSuccessState());
+    } catch (e) {
+      emit(EmployeeCreateFailureState(e.toString()));
+    }
+  }
+
+  Future<void> continueSaveEmployeeData() async {
+    emit(EmployeeCreateLoadingState());
+    final tmpEmp = EmployeeModel(
+      empId: newEmpId! ?? -1,
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      imagePath: profilePicPath,
+      email: emailController.text,
+      job: jobDescriptionController.text,
+      phone: phoneController.text,
+      birthDate: birthdateController.text,
+      salary: double.parse(salaryController.text),
+      salaryDate: salaryDateController.text,
+      workHours: int.parse(workingHoursController.text),
+      workingDays: workingDaysController.text,
+      identityType: residenceController.text,
+      identityNumber: identityNumberController.text,
+      identityTypePicPath: identityPicPath,
+    );
+
+    try {
+      await DbHelper.updateData(TableName.employeeTable, emp.toJson(), 'id', [
+        newEmpId!,
+      ]);
+      emit(AddEmployeeSuccessState());
+    } catch (e) {
+      emit(EmployeeCreateFailureState(e.toString()));
+    }
   }
 }

@@ -57,7 +57,9 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
           ),
           SizedBox(height: 2.0.h),
           CustomOutlinedButtonWithBorder(
-            onPressed: () {},
+            onPressed: () {
+              cubit.createEmployee();
+            },
             title: 'Download Identity'.tr(context),
             titleColor: AppColors.secondaryColor,
             icon: SvgPicture.asset(AppIcons.downloadIc),

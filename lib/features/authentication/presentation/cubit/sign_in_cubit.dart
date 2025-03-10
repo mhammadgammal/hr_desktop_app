@@ -18,6 +18,8 @@ class SignInCubit extends Cubit<SignInState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final formKey = GlobalKey<FormState>();
+
   Future<void> signIn() async {
     emit(SignInLoadingState());
     var userResponse = await DbHelper.getRecordByEmail(
