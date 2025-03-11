@@ -32,8 +32,8 @@ class DatePicker extends StatelessWidget {
           () => showDatePicker(
             context: context,
             initialDate: DateTime.now(),
-            firstDate: DateTime.now(),
-            lastDate: DateTime.parse('2025-12-31'),
+            firstDate: DateTime.parse('1950-01-01'),
+            lastDate: DateTime.parse('2030-12-31'),
           ).then(
             (value) => //DateFormat.yMMMMd().format(value!)
                 datePickerController.text = DateFormat(
