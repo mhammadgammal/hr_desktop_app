@@ -8,4 +8,14 @@ abstract class AppNavigator {
   }) {
     Navigator.of(context).pushNamed(route, arguments: arguments);
   }
+
+  static navigateAndFinishAll(
+    BuildContext context,
+    String route, {
+    Map<String, dynamic>? arguments,
+  }) async {
+    Navigator.of(
+      context,
+    ).pushNamedAndRemoveUntil(route, (route) => false, arguments: arguments);
+  }
 }

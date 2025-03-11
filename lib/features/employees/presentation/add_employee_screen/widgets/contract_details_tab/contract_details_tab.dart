@@ -71,7 +71,7 @@ class ContractDetailsTab extends StatelessWidget {
           height: 60.0.h,
           title: 'Save changes'.tr(context),
           onPressed: () {
-            cubit.continueSaveEmployeeData();
+            cubit.submitData();
 
             NavigationDrawerCubit.get(context).onItemTapped(0);
           },

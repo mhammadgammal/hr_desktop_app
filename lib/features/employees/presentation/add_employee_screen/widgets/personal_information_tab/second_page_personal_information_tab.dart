@@ -58,7 +58,7 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
           SizedBox(height: 2.0.h),
           CustomOutlinedButtonWithBorder(
             onPressed: () {
-              cubit.createEmployee();
+              cubit.constructEmployee();
             },
             title: 'Download Identity'.tr(context),
             titleColor: AppColors.secondaryColor,
@@ -70,7 +70,7 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
             width: 300.0.w,
             height: 60.0.h,
             title: 'Save changes'.tr(context),
-            onPressed: () => cubit.createEmployee(),
+            onPressed: () => cubit.constructEmployee(),
           ),
         ],
       ),

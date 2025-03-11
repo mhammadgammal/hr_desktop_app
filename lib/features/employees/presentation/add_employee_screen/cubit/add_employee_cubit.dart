@@ -145,6 +145,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       identityType: residenceController.text,
       identityNumber: identityNumberController.text,
       identityTypePicPath: identityPicPath,
+      vacationCount: 21,
     );
     final result = await DbHelper.updateData(
       TableName.employeeTable,
@@ -251,10 +252,11 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     emit(EmployeeDeletedSuccessfully());
   }
 
-  Future<void> createEmployee() async {
+  Future<void> constructEmployee() async {
     emit(EmployeeCreateLoadingState());
-    final tmpEmp = EmployeeModel(
-      empId: -1,
+    newEmpId = isEditMode ? emp.empId : newEmpId;
+    emp = EmployeeModel(
+      empId: newEmpId ?? -1,
       firstName: firstNameController.text,
       lastName: lastNameController.text,
       imagePath: profilePicPath,
@@ -277,49 +279,13 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       identityType: residenceController.text,
       identityNumber: identityNumberController.text,
       identityTypePicPath: identityPicPath,
+      vacationCount: 21,
     );
 
-    try {
-      newEmpId = await DbHelper.insertData(
-        TableName.employeeTable,
-        tmpEmp.toJson(),
-      );
-      emit(AddEmployeeSuccessState());
-    } catch (e) {
-      emit(EmployeeCreateFailureState(e.toString()));
-    }
-  }
-
-  Future<void> continueSaveEmployeeData() async {
-    emit(EmployeeCreateLoadingState());
-    final tmpEmp = EmployeeModel(
-      empId: newEmpId!,
-      firstName: firstNameController.text,
-      lastName: lastNameController.text,
-      imagePath: profilePicPath,
-      email: emailController.text,
-      job: jobDescriptionController.text,
-      phone: phoneController.text,
-      birthDate: birthdateController.text,
-      salary: double.parse(salaryController.text),
-      salaryDate: salaryDateController.text,
-      workHours: int.parse(workingHoursController.text),
-      workingDays: workingDaysController.text,
-      identityType: residenceController.text,
-      identityNumber: identityNumberController.text,
-      identityTypePicPath: identityPicPath,
-    );
-
-    try {
-      await DbHelper.updateData(
-        TableName.employeeTable,
-        tmpEmp.toJson(),
-        'id',
-        [newEmpId!],
-      );
-      emit(AddEmployeeSuccessState());
-    } catch (e) {
-      emit(EmployeeCreateFailureState(e.toString()));
+    if (isEditMode) {
+      _updateEmployeeWithContract();
+    } else {
+      emit(EmployeeCreateSuccessState());
     }
   }
 

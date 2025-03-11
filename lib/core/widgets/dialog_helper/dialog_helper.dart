@@ -75,7 +75,7 @@ abstract class DialogHelper {
           (context) => Dialog(
             child: Container(
               width: 600.0.w,
-              height: 200.0.h,
+              height: 250.0.h,
               padding: EdgeInsets.all(20.0.w),
               decoration: BoxDecoration(
                 color:

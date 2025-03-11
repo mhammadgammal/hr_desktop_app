@@ -36,7 +36,7 @@ class EmployeeScreen extends StatelessWidget {
                   crossAxisCount: 4,
                   childAspectRatio:
                       (ScreenUtil().screenWidth / 4) /
-                      (ScreenUtil().screenHeight / 2),
+                      (ScreenUtil().screenHeight / 1.8),
                 ),
                 itemCount: cubit.employees!.length,
                 itemBuilder:

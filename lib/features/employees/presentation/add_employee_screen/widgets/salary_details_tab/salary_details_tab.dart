@@ -78,7 +78,7 @@ class SalaryDetailsTab extends StatelessWidget {
           width: 300.0.w,
           height: 60.0.h,
           title: 'Save changes'.tr(context),
-          onPressed: () => cubit.continueSaveEmployeeData(),
+          onPressed: () => cubit.constructEmployee(),
         ),
       ],
     );

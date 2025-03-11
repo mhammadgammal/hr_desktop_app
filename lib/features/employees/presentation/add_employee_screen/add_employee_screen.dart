@@ -9,6 +9,7 @@ import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
 import 'package:hr/core/widgets/dialog_helper/dialog_helper.dart';
+import 'package:hr/core/widgets/drawer/cubit/navigation_drawer_cubit.dart';
 import 'package:hr/features/employees/data/model/employee_model.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/contract_details_tab/contract_details_tab.dart';
@@ -42,22 +43,33 @@ class AddEmployeeScreen extends StatelessWidget {
               header: 'Saved Successfully',
               message: 'Employee added successfully'.tr(context),
             );
+            NavigationDrawerCubit.get(context).onItemTapped(0);
           }
 
+          if (state is EmployeeCreateSuccessState) {
+            DialogHelper.showSuccessDialog(
+              context: context,
+              header: 'Saved Successfully',
+              message: 'Employee added successfully'.tr(context),
+            );
+          }
           if (state is UpdateEmployeeSuccessState) {
             DialogHelper.showSuccessDialog(
               context: context,
               header: 'Changed Successfully',
               message: 'Employee updated successfully'.tr(context),
             );
+            NavigationDrawerCubit.get(context).onItemTapped(0);
           }
 
           if (state is EmployeeDeletedSuccessfully) {
+            // Navigator.pop(context);
             DialogHelper.showSuccessDialog(
               context: context,
               header: "Employee Deleted Success",
               message: 'Employee deleted successfully'.tr(context),
             );
+            NavigationDrawerCubit.get(context).onItemTapped(0);
           }
         },
         builder: (context, state) {
