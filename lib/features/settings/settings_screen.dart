@@ -84,11 +84,7 @@ class SettingsScreen extends StatelessWidget {
                       start: 20.0.w,
                       top: 20.0.w,
                     ),
-                    child: Column(
-                      children: [
-                        _switchTabItem(context, cubit.selectedTabIndex),
-                      ],
-                    ),
+                    child: _switchTabItem(context, cubit.selectedTabIndex),
                   ),
                 ],
               ),

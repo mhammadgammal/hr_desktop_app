@@ -60,7 +60,9 @@ class ContractDetailsTab extends StatelessWidget {
         CustomOutlinedButtonWithBorder(
           width: 300.0.w,
           height: 60.0.h,
-          onPressed: () {},
+          onPressed: () {
+            cubit.pickContract();
+          },
           title: 'Download Contract'.tr(context),
           titleColor: AppColors.secondaryColor,
           icon: SvgPicture.asset(AppIcons.downloadIc),

@@ -34,7 +34,7 @@ class DbHelper {
         },
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
-        version: 4,
+        version: 5,
       ),
     );
   }
@@ -88,6 +88,7 @@ class DbHelper {
     CREATE TABLE IF NOT EXISTS ${TableName.contractTable} (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     emp_id INT UNIQUE,
+    contract_pic_path VARCHAR(255) NOT NULL,
     start_date VARCHAR(255) NOT NULL,
     end_date VARCHAR(255) NOT NULL,
     overtime_yearly Int NOT NULL,
@@ -272,8 +273,8 @@ class DbHelper {
     int newVersion,
   ) async {
     await db.execute('''
-        ALTER TABLE ${TableName.employeeTable} 
-        ADD COLUMN vacation_count INTEGER DEFAULT 21
+        ALTER TABLE ${TableName.contractTable} 
+        ADD COLUMN contract_pic_path VARCHAR(255) DEFAULT ''
       ''');
   }
 }

@@ -199,6 +199,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       employeeId: empId,
       startDate: contractStartDateController.text,
       endDate: contractEndDateController.text,
+      contractPicturePath: contractPath,
       overtimeYearly: int.parse(overtimeHoursYearlyController.text),
       overtimeMonthly: int.parse(overtimeHoursMonthlyController.text),
       overtimePrice: int.parse(overtimePrice.text),
@@ -235,6 +236,24 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     final result = await _openPicker();
     if (result != null) {
       profilePicPath = result.files.single.path!;
+      log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
+      emit(AddEmployeeProfilePicPicked());
+    }
+  }
+
+  void pickIdentity() async {
+    final result = await _openPicker();
+    if (result != null) {
+      identityPicPath = result.files.single.path!;
+      log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
+      emit(AddEmployeeProfilePicPicked());
+    }
+  }
+
+  void pickContract() async {
+    final result = await _openPicker();
+    if (result != null) {
+      contractPath = result.files.single.path!;
       log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
       emit(AddEmployeeProfilePicPicked());
     }
