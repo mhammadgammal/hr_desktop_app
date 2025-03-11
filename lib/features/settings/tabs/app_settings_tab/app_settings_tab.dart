@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/extensions/extensions.dart';
+import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/utils/localization/localize_constants.dart';
 
 class AppSettingsTab extends StatelessWidget {
@@ -34,6 +35,10 @@ class AppSettingsTab extends StatelessWidget {
                 ),
                 SizedBox(width: 10.0.w),
                 DropdownButton(
+                  dropdownColor:
+                      AppCubit.get(context).isDarkMode
+                          ? AppColors.gray2
+                          : AppColors.white,
                   value: cubit.locale,
                   onChanged: cubit.changeLanguage,
                   items:

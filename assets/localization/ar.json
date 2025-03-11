@@ -15,7 +15,7 @@
   "First employee name": "الاسم الأول للموظف",
   "Last employee name": "الاسم الأخير للموظف",
   "Next": "التالي",
-  "Previous": "السايق",
+  "Previous": "السابق",
   "Working hours": "ساعات العمل",
   "Number of working hours": "عدد ساعات العمل",
   "Working days": "أيام العمل",
@@ -63,5 +63,11 @@
   "Download Identity": "إرفع الهويه",
   "Saved Successfully": "تم الحفظ بنجاح",
   "Changed Successfully": "تم التغيير بنجاح",
-  "Employee Deleted Success": "تم حذف الموظف بنجاح"
+  "Employee Deleted Success": "تم حذف الموظف بنجاح",
+  "Language": "اللغه",
+  "Dark Mode": "الوضع الليلي",
+  "Current password": "كلمة المرور الحاليه",
+  "New password": "كلمة المرور الجديده",
+  "Confirm password": "تأكيد كلمة المرور الحاليه",
+  "Confirm changes": "تأكيد البيانات"
 }

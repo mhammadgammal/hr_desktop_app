@@ -81,6 +81,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       residenceController.text = emp.identityType;
       identityNumberController.text = emp.identityNumber;
       identityPicPath = emp.identityTypePicPath;
+      remainingVacationDays.text = emp.vacationCount.toString();
       emit(EmployeeDetailsDataLoaded());
     }
   }
@@ -148,7 +149,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       identityType: residenceController.text,
       identityNumber: identityNumberController.text,
       identityTypePicPath: identityPicPath,
-      vacationCount: 21,
+      vacationCount: int.tryParse(remainingVacationDays.text) ?? 21,
     );
     final result = await DbHelper.updateData(
       TableName.employeeTable,
@@ -302,6 +303,17 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       empPicPath: emp.imagePath,
       endDate: dayOffEndDateController.text,
     );
+    remainingVacationDays.text = _getRemainingVacDays(
+      dayOffStartDateController.text,
+      dayOffEndDateController.text,
+    );
     await DbHelper.insertData(TableName.vacationTable, vacation.toJson());
+  }
+
+  String _getRemainingVacDays(String text, String text2) {
+    DateTime parsedDate1 = DateTime.parse(text);
+    DateTime parsedDate2 = DateTime.parse(text2);
+    final days = parsedDate2.difference(parsedDate1).inDays;
+    return (emp.vacationCount - days).toString();
   }
 }
