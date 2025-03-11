@@ -78,6 +78,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       overtimePrice.text = contract.overtimePrice.toString();
       contractStartDateController.text = contract.startDate;
       contractEndDateController.text = contract.endDate;
+      residenceController.text = emp.identityType;
+      identityNumberController.text = emp.identityNumber;
+      identityPicPath = emp.identityTypePicPath;
       emit(EmployeeDetailsDataLoaded());
     }
   }

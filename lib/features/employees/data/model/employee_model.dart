@@ -48,8 +48,8 @@ class EmployeeModel {
         salaryDate: json['salary_date'],
         workHours: json['working_hours'],
         workingDays: json['working_days'],
-        identityType: json['identity_type'] ?? '',
-        identityNumber: json['identity_number'] ?? '',
+          identityType: json['identity_type'],
+          identityNumber: json['identity_number'],
         identityTypePicPath: json['identity_type_pic_path'] ?? '',
           vacationCount: json['vacation_count'] ?? 21
       );
