@@ -70,5 +70,7 @@
   "New password": "كلمة المرور الجديده",
   "Confirm password": "تأكيد كلمة المرور الحاليه",
   "Confirm changes": "تأكيد البيانات",
-  "Birth date": "تاريخ الميلاد"
+  "Birth date": "تاريخ الميلاد",
+  "National ID": "بطاقة هويه",
+  "Iqama": "إقامه"
 }

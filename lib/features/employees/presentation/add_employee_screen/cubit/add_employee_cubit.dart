@@ -340,7 +340,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     return (emp.vacationCount - days).toString();
   }
 
-  List<String> identityTypes = ['National ID', 'Passport'];
+  List<String> identityTypes = ['National ID', 'Iqama'];
 
   void onIdentityTypeChanged(String? value) {
     if (value != null) {

@@ -78,7 +78,7 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
                         cubit.identityTypes.length,
                         (index) => DropdownMenuItem(
                           value: cubit.identityTypes[index],
-                          child: Text(cubit.identityTypes[index]),
+                          child: Text(cubit.identityTypes[index].tr(context)),
                         ),
                       ),
                       onChanged: cubit.onIdentityTypeChanged,
