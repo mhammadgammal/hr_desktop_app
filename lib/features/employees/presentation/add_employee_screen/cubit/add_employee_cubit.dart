@@ -54,6 +54,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
   final remainingVacationDays = TextEditingController();
 
+  String? selectedIdentityType;
+
   void loadEmployeeContract(EmployeeModel? emp) async {
     log('AddEmployeeCubit: loadEmployeeContract');
     log('AddEmployeeCubit: loadEmployeeContract emp != null: ${emp != null}');
@@ -186,6 +188,11 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   Future<int> _addEmployeeToDB() async {
+    try {
+      emp;
+    } catch (_) {
+      constructEmployee();
+    }
     final empId = await DbHelper.insertData(
       TableName.employeeTable,
       emp.toJson(),
@@ -276,7 +283,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   Future<void> constructEmployee() async {
-    emit(EmployeeCreateLoadingState());
     newEmpId = isEditMode ? emp.empId : newEmpId;
     emp = EmployeeModel(
       empId: newEmpId ?? -1,
@@ -299,7 +305,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
               ? int.parse(workingHoursController.text)
               : 0,
       workingDays: workingDaysController.text,
-      identityType: residenceController.text,
+      identityType: selectedIdentityType ?? '',
       identityNumber: identityNumberController.text,
       identityTypePicPath: identityPicPath,
       vacationCount: 21,
@@ -307,8 +313,6 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
     if (isEditMode) {
       _updateEmployeeWithContract();
-    } else {
-      emit(EmployeeCreateSuccessState());
     }
   }
 
@@ -334,5 +338,14 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     DateTime parsedDate2 = DateTime.parse(text2);
     final days = parsedDate2.difference(parsedDate1).inDays;
     return (emp.vacationCount - days).toString();
+  }
+
+  List<String> identityTypes = ['National ID', 'Passport'];
+
+  void onIdentityTypeChanged(String? value) {
+    if (value != null) {
+      selectedIdentityType = value;
+      emit(IdentityTypeChangedState());
+    }
   }
 }

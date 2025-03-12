@@ -31,7 +31,7 @@ class SalaryDetailsTab extends StatelessWidget {
             SizedBox(width: 10),
             Expanded(
               child: DatePicker(
-                datePickerController: cubit.birthdateController,
+                datePickerController: cubit.salaryDateController,
                 datePickerLabel: 'Salary Date'.tr(context),
                 iconColor: AppColors.gray,
                 dateColor: AppColors.white,

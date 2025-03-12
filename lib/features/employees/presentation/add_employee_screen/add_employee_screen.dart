@@ -128,6 +128,7 @@ class AddEmployeeScreen extends StatelessWidget {
                               : AppColors.white,
                       padding: EdgeInsetsDirectional.only(
                         start: 20.0.w,
+                        end: 20.0.w,
                         top: 20.0.w,
                       ),
                       margin: EdgeInsetsDirectional.only(

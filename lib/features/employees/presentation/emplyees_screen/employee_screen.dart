@@ -39,6 +39,7 @@ class EmployeeScreen extends StatelessWidget {
                       (ScreenUtil().screenHeight / 1.8),
                 ),
                 itemCount: cubit.employees!.length,
+                padding: EdgeInsetsDirectional.only(end: 10.0.w),
                 itemBuilder:
                     (context, index) =>
                         EmployeeCard(emp: cubit.employees![index]),

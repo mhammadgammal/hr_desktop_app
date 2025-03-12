@@ -12,18 +12,18 @@ class DatePicker extends StatelessWidget {
     required this.datePickerLabel,
     required this.validation,
     this.datePickerHint,
-    this.labelColor = Colors.white,
-    this.iconColor = Colors.black,
-    this.dateColor = Colors.white,
+    this.labelColor,
+    this.iconColor,
+    this.dateColor,
   });
 
   TextEditingController datePickerController;
   final String datePickerLabel;
   final String? validation;
   final String? datePickerHint;
-  final Color labelColor;
-  final Color iconColor;
-  final Color dateColor;
+  final Color? labelColor;
+  final Color? iconColor;
+  final Color? dateColor;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,6 @@ class DatePicker extends StatelessWidget {
         hintColor: dateColor,
         enabled: false,
         maxLines: 1,
-        textFieldTextColor: dateColor,
         suffixIcon: IconButton(
           onPressed: () {},
           icon: SvgPicture.asset(AppIcons.calenderIc),
