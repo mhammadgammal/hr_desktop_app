@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/assets/app_icons.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_filled_button.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
 import 'package:hr/core/widgets/date_picker.dart';
+import 'package:hr/core/widgets/drawer/cubit/navigation_drawer_cubit.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
 
 class ContractDetailsTab extends StatelessWidget {
@@ -26,7 +28,13 @@ class ContractDetailsTab extends StatelessWidget {
             Expanded(
               child: DatePicker(
                 datePickerController: cubit.contractStartDateController,
+                datePickerHint: 'Contract start date'.tr(context),
                 datePickerLabel: 'Contract start date'.tr(context),
+                dateColor: AppColors.gray,
+                labelColor:
+                    AppCubit.get(context).isDarkMode
+                        ? AppColors.white
+                        : AppColors.black,
                 validation: 'Contract start date is required'.tr(context),
               ),
             ),
@@ -34,7 +42,13 @@ class ContractDetailsTab extends StatelessWidget {
               child: DatePicker(
                 datePickerController: cubit.contractEndDateController,
                 datePickerLabel: 'Contract end date'.tr(context),
+                datePickerHint: 'Contract end date'.tr(context),
+                labelColor:
+                    AppCubit.get(context).isDarkMode
+                        ? AppColors.white
+                        : AppColors.black,
                 validation: 'Contract end date is required'.tr(context),
+                dateColor: AppColors.gray,
               ),
             ),
           ],
@@ -46,7 +60,9 @@ class ContractDetailsTab extends StatelessWidget {
         CustomOutlinedButtonWithBorder(
           width: 300.0.w,
           height: 60.0.h,
-          onPressed: () {},
+          onPressed: () {
+            cubit.pickContract();
+          },
           title: 'Download Contract'.tr(context),
           titleColor: AppColors.secondaryColor,
           icon: SvgPicture.asset(AppIcons.downloadIc),
@@ -56,7 +72,11 @@ class ContractDetailsTab extends StatelessWidget {
           width: 300.0.w,
           height: 60.0.h,
           title: 'Save changes'.tr(context),
-          onPressed: () => cubit.submitData(),
+          onPressed: () {
+            cubit.submitData();
+
+            NavigationDrawerCubit.get(context).onItemTapped(0);
+          },
         ),
       ],
     );

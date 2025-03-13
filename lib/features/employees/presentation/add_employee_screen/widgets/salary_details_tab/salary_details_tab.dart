@@ -31,7 +31,7 @@ class SalaryDetailsTab extends StatelessWidget {
             SizedBox(width: 10),
             Expanded(
               child: DatePicker(
-                datePickerController: cubit.birthdateController,
+                datePickerController: cubit.salaryDateController,
                 datePickerLabel: 'Salary Date'.tr(context),
                 iconColor: AppColors.gray,
                 dateColor: AppColors.white,
@@ -78,7 +78,7 @@ class SalaryDetailsTab extends StatelessWidget {
           width: 300.0.w,
           height: 60.0.h,
           title: 'Save changes'.tr(context),
-          onPressed: () => cubit.nextTab(),
+          onPressed: () => cubit.constructEmployee(),
         ),
       ],
     );

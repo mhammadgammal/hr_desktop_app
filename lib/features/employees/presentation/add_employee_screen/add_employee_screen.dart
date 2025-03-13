@@ -9,9 +9,11 @@ import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
 import 'package:hr/core/widgets/dialog_helper/dialog_helper.dart';
+import 'package:hr/core/widgets/drawer/cubit/navigation_drawer_cubit.dart';
 import 'package:hr/features/employees/data/model/employee_model.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/contract_details_tab/contract_details_tab.dart';
+import 'package:hr/features/employees/presentation/add_employee_screen/widgets/days_off_requests.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/personal_information_tab/personal_information_tab.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/widgets/salary_details_tab/salary_details_tab.dart';
 
@@ -28,34 +30,46 @@ class AddEmployeeScreen extends StatelessWidget {
       'Personal Information',
       'Salary Details',
       'Contract Details',
-      'Day off request\'s'
+      'Day off request\'s',
     ];
 
     return BlocProvider(
-      create: (context) =>
-      AddEmployeeCubit()
-        ..loadEmployeeContract(emp),
+      create: (context) => AddEmployeeCubit()..loadEmployeeContract(emp),
       child: BlocConsumer<AddEmployeeCubit, AddEmployeeState>(
         listener: (context, state) {
           if (state is AddEmployeeSuccessState) {
             DialogHelper.showSuccessDialog(
-              context,
-              'Employee added successfully'.tr(context),
+              context: context,
+              header: 'Saved Successfully',
+              message: 'Employee added successfully'.tr(context),
             );
+            NavigationDrawerCubit.get(context).onItemTapped(0);
           }
 
+          if (state is EmployeeCreateSuccessState) {
+            DialogHelper.showSuccessDialog(
+              context: context,
+              header: 'Saved Successfully',
+              message: 'Employee added successfully'.tr(context),
+            );
+          }
           if (state is UpdateEmployeeSuccessState) {
             DialogHelper.showSuccessDialog(
-              context,
-              'Employee updated successfully'.tr(context),
+              context: context,
+              header: 'Changed Successfully',
+              message: 'Employee updated successfully'.tr(context),
             );
+            NavigationDrawerCubit.get(context).onItemTapped(0);
           }
 
           if (state is EmployeeDeletedSuccessfully) {
+            // Navigator.pop(context);
             DialogHelper.showSuccessDialog(
-              context,
-              'Employee deleted successfully'.tr(context),
+              context: context,
+              header: "Employee Deleted Success",
+              message: 'Employee deleted successfully'.tr(context),
             );
+            NavigationDrawerCubit.get(context).onItemTapped(0);
           }
         },
         builder: (context, state) {
@@ -72,34 +86,31 @@ class AddEmployeeScreen extends StatelessWidget {
                   children: [
                     Container(
                       width: 231.w,
-                      height: 200.h,
+                      height: emp != null ? 300.h : 200.h,
                       color:
-                      AppCubit
-                          .get(context)
-                          .isDarkMode
-                          ? AppColors.gray2
-                          : AppColors.white,
+                          AppCubit.get(context).isDarkMode
+                              ? AppColors.gray2
+                              : AppColors.white,
                       margin: EdgeInsetsDirectional.only(top: 20.0.w),
                       child: ListView.builder(
                         padding: EdgeInsetsDirectional.only(start: 10.0.w),
-                        itemCount: emp == null ? tabsNames.length : (tabsNames
-                            .length - 1),
+                        itemCount:
+                            emp != null
+                                ? tabsNames.length
+                                : (tabsNames.length - 1),
                         itemBuilder:
-                            (context, index) =>
-                            ListTile(
+                            (context, index) => ListTile(
                               onTap: () => cubit.changeTab(index),
                               selected: cubit.selectedTabIndex == index,
                               title: Text(
                                 tabsNames[index].tr(context),
                                 style: GoogleFonts.cairo(
                                   color:
-                                  cubit.selectedTabIndex == index
-                                      ? AppColors.secondaryColor
-                                      : (AppCubit
-                                      .get(context)
-                                      .isDarkMode
-                                      ? AppColors.white
-                                      : AppColors.black),
+                                      cubit.selectedTabIndex == index
+                                          ? AppColors.secondaryColor
+                                          : (AppCubit.get(context).isDarkMode
+                                              ? AppColors.white
+                                              : AppColors.black),
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -112,13 +123,12 @@ class AddEmployeeScreen extends StatelessWidget {
                       width: 828.w,
                       height: 764.h,
                       color:
-                      AppCubit
-                          .get(context)
-                          .isDarkMode
-                          ? AppColors.gray2
-                          : AppColors.white,
+                          AppCubit.get(context).isDarkMode
+                              ? AppColors.gray2
+                              : AppColors.white,
                       padding: EdgeInsetsDirectional.only(
                         start: 20.0.w,
+                        end: 20.0.w,
                         top: 20.0.w,
                       ),
                       margin: EdgeInsetsDirectional.only(
@@ -143,43 +153,39 @@ class AddEmployeeScreen extends StatelessWidget {
     );
   }
 
-  _screenHeader(BuildContext context) =>
-      Row(
-        children: [
-          Text(
-            'Personal Information'.tr(context),
-            style: Theme
-                .of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(
-              fontSize: 32.sp,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          Spacer(),
-          Visibility(
-            visible: AddEmployeeCubit
-                .get(context)
-                .isEditMode,
-            child: CustomOutlinedButtonWithBorder(
-              width: 150.0.w,
-              onPressed: () {
-                DialogHelper.deleteDialog(context, () {
-                  AddEmployeeCubit
-                      .get(context).deleteEmp();
-                }, () {
-                  Navigator.of(context).pop();
-                });
+  _screenHeader(BuildContext context) => Row(
+    children: [
+      Text(
+        'Personal Information'.tr(context),
+        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          fontSize: 32.sp,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      Spacer(),
+      Visibility(
+        visible: AddEmployeeCubit.get(context).isEditMode,
+        child: CustomOutlinedButtonWithBorder(
+          width: 150.0.w,
+          onPressed: () {
+            DialogHelper.deleteDialog(
+              context,
+              () {
+                AddEmployeeCubit.get(context).deleteEmp();
               },
-              title: 'Delete file'.tr(context),
-              titleColor: AppColors.failure,
-              borderColor: AppColors.failure,
-              icon: SvgPicture.asset(AppIcons.deleteIc),
-            ),
-          ),
-        ],
-      );
+              () {
+                Navigator.of(context).pop();
+              },
+            );
+          },
+          title: 'Delete file'.tr(context),
+          titleColor: AppColors.failure,
+          borderColor: AppColors.failure,
+          icon: SvgPicture.asset(AppIcons.deleteIc),
+        ),
+      ),
+    ],
+  );
 
   _switchTabItem(BuildContext context, int selectedTabIndex) {
     switch (selectedTabIndex) {
@@ -189,6 +195,8 @@ class AddEmployeeScreen extends StatelessWidget {
         return SalaryDetailsTab();
       case 2:
         return ContractDetailsTab();
+      case 3:
+        return DaysOffRequests();
     }
   }
 }

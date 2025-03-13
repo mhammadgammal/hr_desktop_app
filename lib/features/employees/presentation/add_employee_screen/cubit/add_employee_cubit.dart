@@ -8,6 +8,7 @@ import 'package:hr/core/helpers/database/db_helper.dart';
 import 'package:hr/core/helpers/database/table_name.dart';
 import 'package:hr/features/employees/data/model/contract_model.dart';
 import 'package:hr/features/employees/data/model/employee_model.dart';
+import 'package:hr/features/vacations_alarms/data/vacation_model.dart';
 
 part 'add_employee_state.dart';
 
@@ -19,7 +20,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   bool isEditMode = false;
   late ContractModel contract;
   late EmployeeModel emp;
-
+  int? newEmpId;
   int selectedTabIndex = 0;
   String profilePicPath = '';
   String identityPicPath = '';
@@ -48,6 +49,13 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   final residenceController = TextEditingController();
   final identityNumberController = TextEditingController();
 
+  final dayOffStartDateController = TextEditingController();
+  final dayOffEndDateController = TextEditingController();
+
+  final remainingVacationDays = TextEditingController();
+
+  String? selectedIdentityType;
+
   void loadEmployeeContract(EmployeeModel? emp) async {
     log('AddEmployeeCubit: loadEmployeeContract');
     log('AddEmployeeCubit: loadEmployeeContract emp != null: ${emp != null}');
@@ -72,6 +80,10 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       overtimePrice.text = contract.overtimePrice.toString();
       contractStartDateController.text = contract.startDate;
       contractEndDateController.text = contract.endDate;
+      residenceController.text = emp.identityType;
+      identityNumberController.text = emp.identityNumber;
+      identityPicPath = emp.identityTypePicPath;
+      remainingVacationDays.text = emp.vacationCount.toString();
       emit(EmployeeDetailsDataLoaded());
     }
   }
@@ -139,6 +151,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       identityType: residenceController.text,
       identityNumber: identityNumberController.text,
       identityTypePicPath: identityPicPath,
+      vacationCount: int.tryParse(remainingVacationDays.text) ?? 21,
     );
     final result = await DbHelper.updateData(
       TableName.employeeTable,
@@ -175,6 +188,11 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   }
 
   Future<int> _addEmployeeToDB() async {
+    try {
+      emp;
+    } catch (_) {
+      constructEmployee();
+    }
     final empId = await DbHelper.insertData(
       TableName.employeeTable,
       emp.toJson(),
@@ -188,6 +206,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
       employeeId: empId,
       startDate: contractStartDateController.text,
       endDate: contractEndDateController.text,
+      contractPicturePath: contractPath,
       overtimeYearly: int.parse(overtimeHoursYearlyController.text),
       overtimeMonthly: int.parse(overtimeHoursMonthlyController.text),
       overtimePrice: int.parse(overtimePrice.text),
@@ -229,6 +248,24 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     }
   }
 
+  void pickIdentity() async {
+    final result = await _openPicker();
+    if (result != null) {
+      identityPicPath = result.files.single.path!;
+      log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
+      emit(AddEmployeeProfilePicPicked());
+    }
+  }
+
+  void pickContract() async {
+    final result = await _openPicker();
+    if (result != null) {
+      contractPath = result.files.single.path!;
+      log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
+      emit(AddEmployeeProfilePicPicked());
+    }
+  }
+
   _getEmployeeContract(int empId) async {
     final contract = await DbHelper.getRecordById(
       empId,
@@ -243,5 +280,72 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     await DbHelper.deleteData(TableName.employeeTable, 'id', [emp.empId]);
 
     emit(EmployeeDeletedSuccessfully());
+  }
+
+  Future<void> constructEmployee() async {
+    newEmpId = isEditMode ? emp.empId : newEmpId;
+    emp = EmployeeModel(
+      empId: newEmpId ?? -1,
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      imagePath: profilePicPath,
+      email: emailController.text,
+      job: jobDescriptionController.text,
+      phone: phoneController.text,
+      birthDate: birthdateController.text,
+      salary:
+          salaryController.text.isNotEmpty
+              ? salaryController.text.contains('.')
+                  ? double.parse(salaryController.text)
+                  : int.parse(salaryController.text).toDouble()
+              : 0.0,
+      salaryDate: salaryDateController.text,
+      workHours:
+          workingHoursController.text.isNotEmpty
+              ? int.parse(workingHoursController.text)
+              : 0,
+      workingDays: workingDaysController.text,
+      identityType: selectedIdentityType ?? '',
+      identityNumber: identityNumberController.text,
+      identityTypePicPath: identityPicPath,
+      vacationCount: 21,
+    );
+
+    if (isEditMode) {
+      _updateEmployeeWithContract();
+    }
+  }
+
+  void requestVacation() async {
+    var vacation = VacationModel(
+      empId: emp.empId,
+      id: -1,
+      empFirstName: emp.firstName,
+      empLastName: emp.lastName,
+      startDate: dayOffStartDateController.text,
+      empPicPath: emp.imagePath,
+      endDate: dayOffEndDateController.text,
+    );
+    remainingVacationDays.text = _getRemainingVacDays(
+      dayOffStartDateController.text,
+      dayOffEndDateController.text,
+    );
+    await DbHelper.insertData(TableName.vacationTable, vacation.toJson());
+  }
+
+  String _getRemainingVacDays(String text, String text2) {
+    DateTime parsedDate1 = DateTime.parse(text);
+    DateTime parsedDate2 = DateTime.parse(text2);
+    final days = parsedDate2.difference(parsedDate1).inDays;
+    return (emp.vacationCount - days).toString();
+  }
+
+  List<String> identityTypes = ['National ID', 'Iqama'];
+
+  void onIdentityTypeChanged(String? value) {
+    if (value != null) {
+      selectedIdentityType = value;
+      emit(IdentityTypeChangedState());
+    }
   }
 }

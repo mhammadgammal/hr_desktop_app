@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/assets/app_icons.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
+import 'package:hr/core/theme/app_theme.dart';
 import 'package:hr/core/widgets/buttons/custom_filled_button.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
 import 'package:hr/core/widgets/text_form_field/columned_text_form_field.dart';
@@ -24,16 +26,64 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: ColumnedTextFormField(
-                  title: 'Identity or residence'.tr(context),
-                  controller: cubit.residenceController,
-                  inputType: TextInputType.text,
-                  enabled: false,
-                  suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.keyboard_arrow_down),
-                  ),
-                  hint: 'Choose from your options'.tr(context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Identity or residence'.tr(context),
+                      style: TextStyle(
+                        color:
+                            AppCubit.get(context).isDarkMode
+                                ? AppColors.white
+                                : AppColors.black,
+                      ),
+                    ),
+                    DropdownButtonFormField<String?>(
+                      value: cubit.selectedIdentityType,
+                      hint: Text(
+                        'Identity or residence'.tr(context),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 15.0.sp,
+                          color: AppColors.gray,
+                        ),
+                      ),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            AppTheme.appRadius,
+                          ),
+                          borderSide: BorderSide(
+                            width: 2.w,
+                            color: AppColors.black,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(
+                            AppTheme.appRadius,
+                          ),
+                          borderSide: BorderSide(
+                            width: 2.w,
+                            color:
+                                AppColors
+                                    .gray, // Change focus border color here
+                          ),
+                        ),
+                      ),
+                      dropdownColor:
+                          AppCubit.get(context).isDarkMode
+                              ? AppColors.gray
+                              : AppColors.white,
+                      focusColor: AppColors.secondaryColor,
+                      items: List.generate(
+                        cubit.identityTypes.length,
+                        (index) => DropdownMenuItem(
+                          value: cubit.identityTypes[index],
+                          child: Text(cubit.identityTypes[index].tr(context)),
+                        ),
+                      ),
+                      onChanged: cubit.onIdentityTypeChanged,
+                    ),
+                  ],
                 ),
               ),
               SizedBox(width: 20.0.w),
@@ -51,13 +101,16 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
           Text(
             'Identity photo'.tr(context),
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              color: AppColors.black,
               fontSize: 18.0.sp,
             ),
           ),
           SizedBox(height: 2.0.h),
           CustomOutlinedButtonWithBorder(
-            onPressed: () {},
+            width: 300.0.w,
+            height: 60.0.h,
+            onPressed: () {
+              cubit.pickIdentity();
+            },
             title: 'Download Identity'.tr(context),
             titleColor: AppColors.secondaryColor,
             icon: SvgPicture.asset(AppIcons.downloadIc),
@@ -68,7 +121,7 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
             width: 300.0.w,
             height: 60.0.h,
             title: 'Save changes'.tr(context),
-            onPressed: () => cubit.nextTab(),
+            onPressed: () => cubit.constructEmployee(),
           ),
         ],
       ),

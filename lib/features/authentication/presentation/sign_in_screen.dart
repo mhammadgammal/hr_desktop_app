@@ -19,7 +19,7 @@ class SignInScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is SignInSuccessState) {
             'Navigate to home screen'.logg();
-            AppNavigator.navigateTo(context, RouterKeys.mainScreen);
+            AppNavigator.navigateAndFinishAll(context, RouterKeys.mainScreen);
           } else if (state is SignInFailureState) {
             DialogHelper.showFailureDialog(context, state.message);
           }

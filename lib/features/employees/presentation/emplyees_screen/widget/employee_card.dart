@@ -46,13 +46,13 @@ class EmployeeCard extends StatelessWidget {
                   text: '${'Working hours'.tr(context)}: ',
                   style: Theme.of(
                     context,
-                  ).textTheme.bodyMedium!.copyWith(fontSize: 13.sp),
+                  ).textTheme.bodyMedium!.copyWith(fontSize: 16.sp),
                   children: [
                     TextSpan(
                       text: '${emp.workHours}',
                       style: Theme.of(
                         context,
-                      ).textTheme.bodyMedium!.copyWith(fontSize: 13.sp),
+                      ).textTheme.bodyMedium!.copyWith(fontSize: 16.sp),
                     ),
                   ],
                 ),
@@ -62,13 +62,13 @@ class EmployeeCard extends StatelessWidget {
                   text: '${'Working days'.tr(context)}: ',
                   style: Theme.of(
                     context,
-                  ).textTheme.bodyMedium!.copyWith(fontSize: 13.sp),
+                  ).textTheme.bodyMedium!.copyWith(fontSize: 16.sp),
                   children: [
                     TextSpan(
                       text: emp.workingDays,
                       style: Theme.of(
                         context,
-                      ).textTheme.bodyMedium!.copyWith(fontSize: 13.sp),
+                      ).textTheme.bodyMedium!.copyWith(fontSize: 16.sp),
                     ),
                   ],
                 ),

@@ -14,7 +14,6 @@ class PasswordTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String label;
 
-
   @override
   State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
 }
@@ -27,6 +26,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
     super.initState();
     showPassword = false;
   }
+
   @override
   Widget build(BuildContext context) {
     return ColumnedTextFormField(
@@ -34,7 +34,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
       hint: widget.label,
       controller: widget.controller,
       inputType: TextInputType.visiblePassword,
-      isPassword: showPassword ? true : false,
+      isPassword: !showPassword,
       suffixIcon: IconButton(
         onPressed: () {
           setState(() {
@@ -42,7 +42,8 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
           });
         },
         icon: SvgPicture.asset(
-            showPassword ? AppIcons.hidePasswordIc : AppIcons.showPasswordIc),
+          showPassword ? AppIcons.showPasswordIc : AppIcons.hidePasswordIc,
+        ),
       ),
       validate: Validators.validatePassword,
     );

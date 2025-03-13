@@ -6,6 +6,7 @@ import 'package:hr/core/widgets/drawer/navigation_drawer.dart' as drawer;
 import 'package:hr/features/employees/presentation/add_edit_employee/employee_details/employee_details_screen.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/add_employee_screen.dart';
 import 'package:hr/features/employees/presentation/emplyees_screen/employee_screen.dart';
+import 'package:hr/features/vacations_alarms/presentation/vacations_alarm_screen.dart';
 
 import '../../features/settings/settings_screen.dart' show SettingsScreen;
 
@@ -42,7 +43,7 @@ class AppLayout extends StatelessWidget {
             ? EmployeeDetailsScreen(emp: state.emp)
             : EmployeeScreen();
       case 1:
-        return Container();
+        return VacationsAlarmScreen();
       case 2:
         return AddEmployeeScreen();
       case 3:

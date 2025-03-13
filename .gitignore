@@ -86,3 +86,5 @@ windows/flutter/generated_plugin_registrant.h
 /macos/RunnerTests/RunnerTests.swift
 /macos/Runner/Configs/Warnings.xcconfig
 /.metadata
+/windows/runner/RCa18552
+/installers/script.iss

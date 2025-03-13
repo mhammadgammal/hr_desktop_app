@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
@@ -32,7 +33,8 @@ class DbHelper {
           await db.execute("PRAGMA foreign_keys = ON");
         },
         onCreate: _onCreate,
-        version: 3,
+        onUpgrade: _onUpgrade,
+        version: 5,
       ),
     );
   }
@@ -43,6 +45,7 @@ class DbHelper {
     _createUserTable(db);
     _createEmployeeTable(db);
     _createContractTable(db);
+    _createVacationTable(db);
   }
 
   static void _createUserTable(Database db) async {
@@ -75,6 +78,7 @@ class DbHelper {
     identity_type VARCHAR(255) NOT NULL,
     identity_number VARCHAR(255) NOT NULL,
     identity_type_pic_path VARCHAR(255) NOT NULL,
+    vacation_count INTEGER NOT NULL
     );
     """);
   }
@@ -84,6 +88,7 @@ class DbHelper {
     CREATE TABLE IF NOT EXISTS ${TableName.contractTable} (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     emp_id INT UNIQUE,
+    contract_pic_path VARCHAR(255) NOT NULL,
     start_date VARCHAR(255) NOT NULL,
     end_date VARCHAR(255) NOT NULL,
     overtime_yearly Int NOT NULL,
@@ -91,6 +96,19 @@ class DbHelper {
     overtime_price DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (emp_id) REFERENCES ${TableName.employeeTable}(id) ON DELETE CASCADE ON UPDATE CASCADE
     );
+    """);
+  }
+
+  static void _createVacationTable(Database db) async {
+    db.execute("""
+  CREATE TABLE ${TableName.vacationTable} (
+	id	INTEGER NOT NULL,
+	emp_id	INTEGER NOT NULL,
+	start_date	INTEGER NOT NULL,
+	end_date	INTEGER NOT NULL,
+	PRIMARY KEY(id AUTOINCREMENT),
+	FOREIGN KEY(emp_id) REFERENCES ${TableName.employeeTable}(id) ON DELETE CASCADE ON UPDATE CASCADE
+  );
     """);
   }
 
@@ -159,7 +177,10 @@ class DbHelper {
   ) async {
     try {
       await sl<Database>().delete(
-          table, where: '$where = ?', whereArgs: whereArgs);
+        table,
+        where: '$where = ?',
+        whereArgs: whereArgs,
+      );
       return true;
     } catch (e) {
       log('Error deleting data: $e');
@@ -221,7 +242,39 @@ class DbHelper {
     }
   }
 
+  static Future<List<T>> getDataWhere<T>(
+    String tableName,
+    T Function(Map<String, dynamic>) fromJson, {
+    String? where,
+    List<dynamic>? whereArgs,
+  }) async {
+    try {
+      final List<Map<String, dynamic>> maps = await sl<Database>().query(
+        tableName,
+        where: where,
+        whereArgs: whereArgs,
+      );
+      final List<T> dataList = maps.map((map) => fromJson(map)).toList();
+      return dataList;
+    } catch (e) {
+      log('Error retrieving data: $e');
+      // return FailureDataResponse('Error retrieving data: $e');
+      return [];
+    }
+  }
+
   static Future<void> closeDb(Database db) async {
     await db.close();
+  }
+
+  static FutureOr<void> _onUpgrade(
+    Database db,
+    int oldVersion,
+    int newVersion,
+  ) async {
+    await db.execute('''
+        ALTER TABLE ${TableName.contractTable} 
+        ADD COLUMN contract_pic_path VARCHAR(255) DEFAULT ''
+      ''');
   }
 }

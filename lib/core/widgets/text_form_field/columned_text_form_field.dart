@@ -15,7 +15,6 @@ class ColumnedTextFormField extends StatelessWidget {
     this.hint,
     this.suffixIcon,
     this.maxLines = 1,
-    this.textFieldTextColor = Colors.white,
     this.hintColor,
     this.isPassword = false,
   });
@@ -30,7 +29,6 @@ class ColumnedTextFormField extends StatelessWidget {
   final String? Function(String?)? validate;
   final IconButton? suffixIcon;
   final int maxLines;
-  final Color textFieldTextColor;
   final bool isPassword;
   @override
   Widget build(BuildContext context) {

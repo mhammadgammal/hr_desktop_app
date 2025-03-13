@@ -22,7 +22,7 @@ class InfinityHrApp extends StatelessWidget {
             child: BlocBuilder<AppCubit, AppState>(
               builder: (context, state) {
                 return MaterialApp(
-                  title: 'hr',
+                  title: 'Infinity HR',
                   debugShowCheckedModeBanner: false,
                   theme: AppTheme.lightTheme,
                   darkTheme: AppTheme.darkTheme,

@@ -28,18 +28,36 @@ abstract class DialogHelper {
     );
   }
 
-  static void showSuccessDialog(BuildContext context, String message) {
+  static void showSuccessDialog({
+    required BuildContext context,
+    String header = 'Success',
+    String message = '',
+  }) {
     showDialog(
       context: context,
       builder:
           (context) => AlertDialog(
+            backgroundColor: AppColors.white,
             icon: SvgPicture.asset(AppIcons.successIc),
-            title: const Text('Success'),
-            content: Text(message),
+            title: Text(
+              header.tr(context),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: AppColors.black,
+                fontSize: 20.0.sp,
+              ),
+            ),
+            content: Text(
+              message,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                color: AppColors.black,
+                fontSize: 15.0.sp,
+              ),
+            ),
             actions: [
-              TextButton(
+              CustomFilledButton(
+                height: 50.0.h,
                 onPressed: () => Navigator.of(context).pop(),
-                child: const Text('OK'),
+                title: 'OK'.tr(context),
               ),
             ],
           ),
@@ -57,7 +75,7 @@ abstract class DialogHelper {
           (context) => Dialog(
             child: Container(
               width: 600.0.w,
-              height: 200.0.h,
+              height: 250.0.h,
               padding: EdgeInsets.all(20.0.w),
               decoration: BoxDecoration(
                 color:

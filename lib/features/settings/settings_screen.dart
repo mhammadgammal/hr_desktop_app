@@ -23,7 +23,8 @@ class SettingsScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is UserPasswordUpdateSuccess ||
               state is UserProfilePicSuccess) {
-            DialogHelper.showSuccessDialog(context, '');
+            DialogHelper.showSuccessDialog(
+                context: context, header: 'Changed Successfully');
           }
         },
         builder: (context, state) {
@@ -83,11 +84,7 @@ class SettingsScreen extends StatelessWidget {
                       start: 20.0.w,
                       top: 20.0.w,
                     ),
-                    child: Column(
-                      children: [
-                        _switchTabItem(context, cubit.selectedTabIndex),
-                      ],
-                    ),
+                    child: _switchTabItem(context, cubit.selectedTabIndex),
                   ),
                 ],
               ),

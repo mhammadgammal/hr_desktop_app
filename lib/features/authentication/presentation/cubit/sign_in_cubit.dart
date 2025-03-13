@@ -18,6 +18,8 @@ class SignInCubit extends Cubit<SignInState> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final formKey = GlobalKey<FormState>();
+
   Future<void> signIn() async {
     emit(SignInLoadingState());
     var userResponse = await DbHelper.getRecordByEmail(
@@ -38,13 +40,17 @@ class SignInCubit extends Cubit<SignInState> {
   }
 
   Future<void> createUser() async {
-    final user = UserModel(
-      id: -1,
-      name: 'hr',
-      email: 'hr@admin.com',
-      password: '123456789',
-      profilePicturePath: '',
-    );
-    DbHelper.insertData(TableName.userTable, user.toJson());
+    final usersMap = await DbHelper.getData(
+        TableName.userTable, UserModel.fromJson);
+    if (usersMap.isEmpty) {
+      final user = UserModel(
+        id: -1,
+        name: 'hr',
+        email: 'hr@admin.com',
+        password: '123456789',
+        profilePicturePath: '',
+      );
+      DbHelper.insertData(TableName.userTable, user.toJson());
+    }
   }
 }

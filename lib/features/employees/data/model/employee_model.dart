@@ -14,7 +14,7 @@ class EmployeeModel {
   final String identityType;
   final String identityNumber;
   final String identityTypePicPath;
-
+  final int vacationCount;
   const EmployeeModel({
     required this.empId,
     required this.firstName,
@@ -31,6 +31,7 @@ class EmployeeModel {
     required this.identityType,
     required this.identityNumber,
     required this.identityTypePicPath,
+    required this.vacationCount,
   });
 
   factory EmployeeModel.fromJson(Map<String, dynamic> json) =>
@@ -47,9 +48,10 @@ class EmployeeModel {
         salaryDate: json['salary_date'],
         workHours: json['working_hours'],
         workingDays: json['working_days'],
-        identityType: json['identity_type'] ?? '',
-        identityNumber: json['identity_number'] ?? '',
+          identityType: json['identity_type'],
+          identityNumber: json['identity_number'],
         identityTypePicPath: json['identity_type_pic_path'] ?? '',
+          vacationCount: json['vacation_count'] ?? 21
       );
 
   Map<String, dynamic> toJson() =>
@@ -68,6 +70,7 @@ class EmployeeModel {
         "identity_type": identityType,
         "identity_number": identityNumber,
         "identity_type_pic_path": identityTypePicPath,
+        'vacation_count': vacationCount
       };
 
   List<String> toUpdateStatement() =>
