@@ -42,6 +42,8 @@ class NavigationDrawer extends StatelessWidget {
                           item: NavigationDrawerEntityItem(
                             title: cubit.screens[index].title.tr(context),
                             iconPath: cubit.screens[index].iconPath,
+                            selectedIconPath:
+                                cubit.screens[index].selectedIconPath,
                             onTap: () {
                               cubit.onItemTapped(index);
                               cubit.screens[index].onTap();
@@ -56,6 +58,7 @@ class NavigationDrawer extends StatelessWidget {
                   item: NavigationDrawerEntityItem(
                     title: 'Sign out'.tr(context),
                     iconPath: AppIcons.logoutIc,
+                    selectedIconPath: '',
                     onTap: () {
                       sl<CacheHelper>().putBool(CacheKeys.isLogged, false);
                       Navigator.pushNamedAndRemoveUntil(

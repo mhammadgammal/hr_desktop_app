@@ -1,8 +1,13 @@
 abstract class AppIcons {
   static const String homeIc = 'assets/icons/home.svg';
+  static const String homeFilledIc = 'assets/icons_filled/home_filled.svg';
   static const String bellIc = 'assets/icons/bell.svg';
+  static const String bellFilledIc = 'assets/icons_filled/bell_filled.svg';
   static const String addDocumentIc = 'assets/icons/add_document.svg';
+  static const String addDocumentFilledIc =
+      'assets/icons_filled/add_document_filled.svg';
   static const String settingsIc = 'assets/icons/tooth.svg';
+  static const String settingsFilledIc = 'assets/icons_filled/tooth_filled.svg';
   static const String logoutIc = 'assets/icons/logout.svg';
   static const String calenderIc = 'assets/icons/calendar_days.svg';
   static const String downloadIc = 'assets/icons/printer.svg';

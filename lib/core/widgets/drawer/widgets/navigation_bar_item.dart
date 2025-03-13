@@ -25,7 +25,7 @@ class NavigationBarItem extends StatelessWidget {
         ),
       ),
       leading: SvgPicture.asset(
-        item.iconPath,
+        isSelected ? item.selectedIconPath : item.iconPath,
         color: isSelected ? AppColors.secondaryColor : null,
       ),
       onTap: item.onTap,

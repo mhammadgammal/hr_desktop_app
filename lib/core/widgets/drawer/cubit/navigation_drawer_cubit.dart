@@ -26,21 +26,25 @@ class NavigationDrawerCubit extends Cubit<NavigationDrawerState> {
     NavigationDrawerEntityItem(
       title: 'Home',
       iconPath: AppIcons.homeIc,
+      selectedIconPath: AppIcons.homeFilledIc,
       onTap: () {},
     ),
     NavigationDrawerEntityItem(
       title: 'Alarms',
       iconPath: AppIcons.bellIc,
+      selectedIconPath: AppIcons.bellFilledIc,
       onTap: () {},
     ),
     NavigationDrawerEntityItem(
       title: 'Add Employee',
       iconPath: AppIcons.addDocumentIc,
+      selectedIconPath: AppIcons.addDocumentFilledIc,
       onTap: () {},
     ),
     NavigationDrawerEntityItem(
       title: 'Settings',
       iconPath: AppIcons.settingsIc,
+      selectedIconPath: AppIcons.settingsFilledIc,
       onTap: () {},
     ),
   ];
