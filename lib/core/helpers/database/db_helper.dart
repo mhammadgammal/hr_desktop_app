@@ -147,7 +147,7 @@ class DbHelper {
     return maps.first;
   }
 
-  static Future<Map<String, dynamic>> getRecordByEmail(
+  static Future<Map<String, dynamic>?> getRecordByEmail(
     String email, {
     required String tableName,
   }) async {
@@ -157,7 +157,7 @@ class DbHelper {
       where: 'email = ?',
       whereArgs: [email],
     );
-    return maps.first;
+    return maps.firstOrNull;
   }
 
   static Future<bool> deleteUser(String email) async {
@@ -283,14 +283,14 @@ class DbHelper {
     await db.close();
   }
 
-  static FutureOr<void> _onUpgrade(
-    Database db,
-    int oldVersion,
-    int newVersion,
-  ) async {
-    await db.execute('''
-        ALTER TABLE ${TableName.contractTable} 
-        ADD COLUMN contract_pic_path VARCHAR(255) DEFAULT ''
-      ''');
-  }
+  // static FutureOr<void> _onUpgrade(
+  //   Database db,
+  //   int oldVersion,
+  //   int newVersion,
+  // ) async {
+  //   await db.execute('''
+  //       ALTER TABLE ${TableName.contractTable}
+  //       ADD COLUMN contract_pic_path VARCHAR(255) DEFAULT ''
+  //     ''');
+  // }
 }

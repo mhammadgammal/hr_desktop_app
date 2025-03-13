@@ -30,7 +30,7 @@ class SignInForm extends StatelessWidget {
         return SizedBox(
           width: 550.w,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40.0),
+            padding: const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
             child: Form(
               key: cubit.formKey,
               child: Column(
@@ -53,10 +53,13 @@ class SignInForm extends StatelessWidget {
                       AppCubit.get(context).locale.languageCode == 'en'
                           ? "العربيه"
                           : "English",
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 22.sp,
+                        fontWeight: FontWeight.w500
+                      ),
                     ),
-                    icon: Icon(Icons.public, color: AppColors.gray),
-                    iconAlignment: IconAlignment.end,
+                    icon: Icon(Icons.public, color: AppColors.gray, size: 28.dm),
+                    iconAlignment: AppCubit.get(context).locale.languageCode == 'en'? IconAlignment.start: IconAlignment.end,
                   ),
                   Center(
                     child: SvgPicture.asset(
@@ -77,6 +80,24 @@ class SignInForm extends StatelessWidget {
                   PasswordTextFormField(
                     controller: cubit.passwordController,
                     label: 'Password'.tr(context),
+                  ),
+                  SizedBox(height: 20.0.h),
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: cubit.rememberMe,
+                        activeColor: AppColors.secondaryColor,
+                        onChanged: (value) {
+                          cubit.changeRememberMe(value);
+                        },
+                      ),
+                      Text(
+                        'Save Data for next time'.tr(context),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 18.sp
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 20.0.h),
                   CustomFilledButton(

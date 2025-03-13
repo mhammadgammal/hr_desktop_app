@@ -20,16 +20,21 @@ class SignInCubit extends Cubit<SignInState> {
 
   final formKey = GlobalKey<FormState>();
 
+  var rememberMe = false;
+
   Future<void> signIn() async {
     emit(SignInLoadingState());
     var userResponse = await DbHelper.getRecordByEmail(
       emailController.text,
       tableName: TableName.userTable,
     );
-    final UserModel? user = UserModel.fromJson(userResponse);
-    if (user != null) {
+
+    if (userResponse != null) {
+      final UserModel user = UserModel.fromJson(userResponse);
       if (user.password == passwordController.text) {
-        sl<CacheHelper>().putBool(CacheKeys.isLogged, true);
+        if (rememberMe) {
+          sl<CacheHelper>().putBool(CacheKeys.isLogged, true);
+        }
         emit(SignInSuccessState());
       } else {
         emit(SignInFailureState('Password is incorrect'));
@@ -41,7 +46,9 @@ class SignInCubit extends Cubit<SignInState> {
 
   Future<void> createUser() async {
     final usersMap = await DbHelper.getData(
-        TableName.userTable, UserModel.fromJson);
+      TableName.userTable,
+      UserModel.fromJson,
+    );
     if (usersMap.isEmpty) {
       final user = UserModel(
         id: -1,
@@ -51,6 +58,13 @@ class SignInCubit extends Cubit<SignInState> {
         profilePicturePath: '',
       );
       DbHelper.insertData(TableName.userTable, user.toJson());
+    }
+  }
+
+  void changeRememberMe(bool? value) {
+    if (value != null) {
+      rememberMe = value;
+      emit(RememberMeStatusChangedState(rememberMe));
     }
   }
 }
