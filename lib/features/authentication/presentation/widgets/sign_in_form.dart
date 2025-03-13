@@ -58,14 +58,20 @@ class SignInForm extends StatelessWidget {
                     icon: Icon(Icons.public, color: AppColors.gray),
                     iconAlignment: IconAlignment.end,
                   ),
-                  SvgPicture.asset(
-                    AppCubit.get(context).isDarkMode
-                        ? AppImages.loginBackgroundDark
-                        : AppImages.loginBackground,
+                  Center(
+                    child: SvgPicture.asset(
+                      width: 550.0.w,
+                      height: 412.0.h,
+                      AppCubit.get(context).isDarkMode
+                          ? AppImages.loginBackgroundDark
+                          : AppImages.loginBackground,
+                    ),
                   ),
-                  EmailTextFormField(
-                    controller: cubit.emailController,
-                    label: 'Email'.tr(context),
+                  SizedBox(
+                    child: EmailTextFormField(
+                      controller: cubit.emailController,
+                      label: 'Email'.tr(context),
+                    ),
                   ),
                   SizedBox(height: 10.0.h),
                   PasswordTextFormField(
@@ -75,12 +81,14 @@ class SignInForm extends StatelessWidget {
                   SizedBox(height: 20.0.h),
                   CustomFilledButton(
                     width: double.infinity,
+                    height: 50.0.h,
                     onPressed: () {
                       if (cubit.formKey.currentState!.validate()) {
                         cubit.signIn();
                       }
                     },
                     title: 'Sign In'.tr(context),
+                    fontSize: 18,
                   ),
                 ],
               ),

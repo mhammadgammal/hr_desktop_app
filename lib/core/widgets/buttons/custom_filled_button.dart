@@ -13,6 +13,9 @@ class CustomFilledButton extends StatelessWidget {
     required this.onPressed,
     this.disabled = false,
     this.fillColor,
+    this.fontSize = 16,
+    this.padding,
+    this.margin,
   });
 
   final double? width;
@@ -21,12 +24,17 @@ class CustomFilledButton extends StatelessWidget {
   final void Function() onPressed;
   final bool disabled;
   final Color? fillColor;
+  final double fontSize;
+  final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: width ?? double.infinity,
       height: height ?? 50.h,
+      padding: padding,
+      margin: margin,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
@@ -41,7 +49,7 @@ class CustomFilledButton extends StatelessWidget {
         ),
         child: Text(
           title,
-          style: GoogleFonts.cairo(color: Colors.white, fontSize: 16.sp),
+          style: GoogleFonts.cairo(color: Colors.white, fontSize: fontSize.sp),
         ),
       ),
     );

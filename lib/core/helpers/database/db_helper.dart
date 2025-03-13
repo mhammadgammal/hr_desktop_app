@@ -14,16 +14,32 @@ class DbHelper {
 
   static Future<Database> initWinDB() async {
     sqfliteFfiInit();
-    String? userProfile = Platform.environment['USERPROFILE'];
+    String? userProfile =
+        Platform.isWindows
+            ? Platform.environment['USERPROFILE']
+            : Platform.isMacOS
+            ? Platform.environment['CFFIXED_USER_HOME']
+            : '';
     late String documentsPath;
     if (userProfile != null) {
-      documentsPath = '$userProfile\\Documents';
+      if (Platform.isWindows) {
+        documentsPath = '$userProfile\\Documents';
+      } else {
+        documentsPath = '$userProfile/Documents';
+      }
       log('Documents Directory: $documentsPath');
     } else {
       documentsPath = '';
       log('Could not determine Documents directory.');
     }
-    String dbPath = '$documentsPath\\hr.db';
+    late String dbPath;
+
+    if (Platform.isWindows) {
+      dbPath = '$documentsPath\\HR.db';
+    } else {
+      dbPath = '$documentsPath/HR.db';
+    }
+
     final databaseFactory = databaseFactoryFfi;
     return await databaseFactory.openDatabase(
       dbPath,
@@ -33,7 +49,7 @@ class DbHelper {
           await db.execute("PRAGMA foreign_keys = ON");
         },
         onCreate: _onCreate,
-        onUpgrade: _onUpgrade,
+        // onUpgrade: _onUpgrade,
         version: 5,
       ),
     );
