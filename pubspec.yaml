@@ -48,6 +48,8 @@ dependencies:
   flutter_svg: ^2.0.17
   file_picker: ^9.0.2
   dartz: ^0.10.1
+  path_provider: ^2.1.5
+  path: ^1.9.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
