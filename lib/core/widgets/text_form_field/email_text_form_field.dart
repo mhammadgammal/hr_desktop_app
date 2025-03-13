@@ -24,21 +24,8 @@ class _EmailTextFormFieldState extends State<EmailTextFormField> {
       hint: widget.label,
       controller: widget.controller,
       inputType: TextInputType.emailAddress,
-      validate: Validators.validateEmail,
+      validate: (value) => Validators.validateEmail(context, value),
     );
   }
 }
 
-//Column(
-//       mainAxisAlignment: MainAxisAlignment.start,
-//       crossAxisAlignment: CrossAxisAlignment.stretch,
-//       children: [
-//         Text('Email', style: GoogleFonts.cairo(color: AppColors.white)),
-//         AppTextFormField(
-//           controller: widget.controller,
-//           inputType: TextInputType.emailAddress,
-//           hintLabel: widget.label,
-//           validate: Validators.validateEmail,
-//         ),
-//       ],
-//     )

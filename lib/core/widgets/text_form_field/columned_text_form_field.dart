@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/text_form_field/app_text_form_field.dart';
@@ -33,16 +34,13 @@ class ColumnedTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 10.0.h,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style: TextStyle(
-            color:
-                titleColor ??
-                (AppCubit.get(context).isDarkMode
-                    ? AppColors.white
-                    : AppColors.black),
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            fontSize: 20.sp
           ),
         ),
         AppTextFormField(

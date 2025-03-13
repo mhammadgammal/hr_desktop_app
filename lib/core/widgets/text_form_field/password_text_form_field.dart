@@ -45,7 +45,7 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
           showPassword ? AppIcons.showPasswordIc : AppIcons.hidePasswordIc,
         ),
       ),
-      validate: Validators.validatePassword,
+      validate: (value) => Validators.validatePassword(context, value),
     );
   }
 }

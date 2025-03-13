@@ -73,5 +73,8 @@
   "Birth date": "تاريخ الميلاد",
   "National ID": "بطاقة هويه",
   "Iqama": "إقامه",
-  "Save Data for next time": "حفظ البيانات للمره القادمه"
+  "Save Data for next time": "حفظ البيانات للمره القادمه",
+  "Email is required": "الرجاء إدخال البريد الإلكتروني",
+  "Password is required": "الرجاء إدخال كلمة المرور",
+  "Password must be at least 8 characters": "كلمة المرور يجب أن تكون على الأقل 8 أحرف"
 }
