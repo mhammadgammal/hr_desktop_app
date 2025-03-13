@@ -13,23 +13,19 @@ class FirstPagePersonalInformationTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final cubit = AddEmployeeCubit.get(context);
 
-    return Flexible(
-      fit: FlexFit.loose,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        spacing: 30.0.h,
-        children: [
-          FirstLastNameFields(
-            firstNameController: cubit.firstNameController,
-            lastNameController: cubit.lastNameController,
-          ),
-          EmailAndJobDescriptionFields(),
-          BirthdateAndPhoneFields(),
-          WorkingHoursAndDaysFields(),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
+      spacing: 30.0.h,
+      children: [
+        FirstLastNameFields(
+          firstNameController: cubit.firstNameController,
+          lastNameController: cubit.lastNameController,
+        ),
+        EmailAndJobDescriptionFields(),
+        BirthdateAndPhoneFields(),
+        WorkingHoursAndDaysFields(),
+      ],
     );
   }
 }

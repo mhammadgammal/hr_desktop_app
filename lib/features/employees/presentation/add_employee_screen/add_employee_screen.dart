@@ -136,6 +136,7 @@ class AddEmployeeScreen extends StatelessWidget {
                         top: 20.0.w,
                       ),
                       child: Column(
+                        // mainAxisSize: MainAxisSize.max,
                         children: [
                           AttachProfilePicture(),
                           SizedBox(height: 20.0.h),
