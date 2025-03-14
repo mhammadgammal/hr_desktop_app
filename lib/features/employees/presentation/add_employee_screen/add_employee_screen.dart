@@ -86,7 +86,7 @@ class AddEmployeeScreen extends StatelessWidget {
                   children: [
                     Container(
                       width: 231.w,
-                      height: emp != null ? 300.h : 200.h,
+                      height: emp != null ? 300.h : 160.h,
                       color:
                           AppCubit.get(context).isDarkMode
                               ? AppColors.gray2
