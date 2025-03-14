@@ -28,6 +28,10 @@ abstract class DialogHelper {
     );
   }
 
+  /// shows a dialog indicates success state or action happens
+  /// \param context  context The BuildContext to show the dialog in.
+  /// \param header The header text to display in the dialog. Defaults to 'Success'. It's translated
+  /// \param message  The message text to display in the dialog. Defaults to an empty string. Not translated
   static void showSuccessDialog({
     required BuildContext context,
     String header = 'Success',
