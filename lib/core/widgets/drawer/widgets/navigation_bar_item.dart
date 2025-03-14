@@ -7,10 +7,12 @@ class NavigationBarItem extends StatelessWidget {
   const NavigationBarItem({
     super.key,
     required this.item,
+    required this.index,
     required this.isSelected,
   });
 
   final NavigationDrawerEntityItem item;
+  final int index;
   final bool isSelected;
 
   @override
@@ -25,10 +27,15 @@ class NavigationBarItem extends StatelessWidget {
         ),
       ),
       leading: SvgPicture.asset(
+        width: 56.0,
+        height: 56.0,
         isSelected ? item.selectedIconPath : item.iconPath,
-        color: isSelected ? AppColors.secondaryColor : null,
+        colorFilter: ColorFilter.mode(
+          isSelected ? AppColors.secondaryColor : Colors.white,
+          BlendMode.srcATop,
+        ),
       ),
-      onTap: item.onTap,
+      onTap: () => item.onTap(index),
     );
   }
 }

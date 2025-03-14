@@ -22,30 +22,46 @@ class NavigationDrawerCubit extends Cubit<NavigationDrawerState> {
     emit(NavigationDrawerItemTapped(index: index));
   }
 
-  List<NavigationDrawerEntityItem> screens = [
+  List<NavigationDrawerEntityItem> get screens => [
     NavigationDrawerEntityItem(
       title: 'Home',
       iconPath: AppIcons.homeIc,
       selectedIconPath: AppIcons.homeFilledIc,
-      onTap: () {},
+      onTap: (index) {
+        if (index != null) {
+          onItemTapped(index);
+        }
+      },
     ),
     NavigationDrawerEntityItem(
       title: 'Alarms',
       iconPath: AppIcons.bellIc,
       selectedIconPath: AppIcons.bellFilledIc,
-      onTap: () {},
+      onTap: (index) {
+        if (index != null) {
+          onItemTapped(index);
+        }
+      },
     ),
     NavigationDrawerEntityItem(
       title: 'Add Employee',
       iconPath: AppIcons.addDocumentIc,
       selectedIconPath: AppIcons.addDocumentFilledIc,
-      onTap: () {},
+      onTap: (index) {
+        if (index != null) {
+          onItemTapped(index);
+        }
+      },
     ),
     NavigationDrawerEntityItem(
       title: 'Settings',
       iconPath: AppIcons.settingsIc,
       selectedIconPath: AppIcons.settingsFilledIc,
-      onTap: () {},
+      onTap: (index) {
+        if (index != null) {
+          onItemTapped(index);
+        }
+      },
     ),
   ];
 

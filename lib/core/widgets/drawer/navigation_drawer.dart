@@ -35,21 +35,17 @@ class NavigationDrawer extends StatelessWidget {
               children: [
                 HeaderSection(),
                 Expanded(
-                  child: ListView.builder(
+                  child: ListView.separated(
                     itemCount: 4,
                     itemBuilder:
                         (context, index) => NavigationBarItem(
-                          item: NavigationDrawerEntityItem(
-                            title: cubit.screens[index].title.tr(context),
-                            iconPath: cubit.screens[index].iconPath,
-                            selectedIconPath:
-                                cubit.screens[index].selectedIconPath,
-                            onTap: () {
-                              cubit.onItemTapped(index);
-                              cubit.screens[index].onTap();
-                            },
-                          ),
+                          item: cubit.screens[index],
+                          index: index,
                           isSelected: index == state.index,
+                        ),
+                    separatorBuilder: (context, index) =>
+                        SizedBox(
+                          height: 30.0.h,
                         ),
                   ),
                 ),
@@ -59,7 +55,7 @@ class NavigationDrawer extends StatelessWidget {
                     title: 'Sign out'.tr(context),
                     iconPath: AppIcons.logoutIc,
                     selectedIconPath: '',
-                    onTap: () {
+                    onTap: (_) {
                       sl<CacheHelper>().putBool(CacheKeys.isLogged, false);
                       Navigator.pushNamedAndRemoveUntil(
                         context,
@@ -68,6 +64,7 @@ class NavigationDrawer extends StatelessWidget {
                       );
                     },
                   ),
+                  index: -1,
                   isSelected: false,
                 ),
               ],
@@ -93,7 +90,8 @@ class HeaderSection extends StatelessWidget {
           SizedBox(
             width: 56.w,
             height: 56.h,
-            child: SvgPicture.asset(AppImages.logo, color: AppColors.white),
+            child: SvgPicture.asset(AppImages.logo,
+              colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcATop),),
           ),
           Text(
             'Quick Access',

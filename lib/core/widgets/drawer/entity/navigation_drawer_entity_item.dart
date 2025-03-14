@@ -2,7 +2,7 @@ class NavigationDrawerEntityItem {
   late final String title;
   late final String iconPath;
   late final String selectedIconPath;
-  late final void Function() onTap;
+  late final void Function(int?) onTap;
 
   NavigationDrawerEntityItem({
     required this.title,
