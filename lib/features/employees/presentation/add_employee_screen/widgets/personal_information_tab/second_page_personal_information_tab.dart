@@ -28,15 +28,13 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 10.0.h,
                   children: [
                     Text(
                       'Identity or residence'.tr(context),
-                      style: TextStyle(
-                        color:
-                            AppCubit.get(context).isDarkMode
-                                ? AppColors.white
-                                : AppColors.black,
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(fontSize: 20.sp),
                     ),
                     DropdownButtonFormField<String?>(
                       value: cubit.selectedIdentityType,
@@ -100,26 +98,27 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
           SizedBox(height: 20.0.h),
           Text(
             'Identity photo'.tr(context),
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              fontSize: 18.0.sp,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp),
           ),
           SizedBox(height: 2.0.h),
           CustomOutlinedButtonWithBorder(
-            width: 300.0.w,
-            height: 60.0.h,
+            width: 250.0.w,
+            height: 50.0.h,
             onPressed: () {
               cubit.pickIdentity();
             },
             title: 'Download Identity'.tr(context),
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
             titleColor: AppColors.secondaryColor,
             icon: SvgPicture.asset(AppIcons.downloadIc),
           ),
           SizedBox(height: 20.0.h),
-
           CustomFilledButton(
             width: 300.0.w,
-            height: 60.0.h,
+            height: 50.0.h,
             title: 'Save changes'.tr(context),
             onPressed: () => cubit.constructEmployee(),
           ),

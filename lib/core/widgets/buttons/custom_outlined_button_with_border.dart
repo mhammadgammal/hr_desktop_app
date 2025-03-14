@@ -11,6 +11,8 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
     this.width,
     this.height,
     this.titleColor,
+    this.fontSize = 14,
+    this.fontWeight = FontWeight.normal,
     this.borderColor,
     this.borderWidth = 2.0,
     this.icon,
@@ -21,6 +23,8 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
   final double? height;
   final String title;
   final Color? titleColor;
+  final double fontSize;
+  final FontWeight fontWeight;
   final Color? borderColor;
   final double borderWidth;
   final Widget? icon;
@@ -48,9 +52,11 @@ class CustomOutlinedButtonWithBorder extends StatelessWidget {
         ),
         label: Text(
           title,
-          style: Theme.of(
-            context,
-          ).textTheme.bodyMedium!.copyWith(fontSize: 14.sp, color: titleColor),
+          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontSize: fontSize.sp,
+            fontWeight: fontWeight,
+            color: titleColor,
+          ),
         ),
         icon: icon,
       ),
