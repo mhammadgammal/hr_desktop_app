@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/features/employees/presentation/emplyees_screen/cubit/employees_cubit.dart';
-import 'package:hr/features/employees/presentation/emplyees_screen/widget/employee_card.dart'
-    show EmployeeCard;
+import 'package:hr/features/employees/presentation/emplyees_screen/widget/employee_card.dart';
 
 class EmployeeScreen extends StatelessWidget {
   const EmployeeScreen({super.key});
@@ -34,15 +33,20 @@ class EmployeeScreen extends StatelessWidget {
               : GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
+                  crossAxisSpacing: 40.0.w,
+                  mainAxisSpacing: 25.0.h,
                   childAspectRatio:
-                      (ScreenUtil().screenWidth / 4) /
-                      (ScreenUtil().screenHeight / 1.8),
+                  (ScreenUtil().screenWidth / 4.595) /
+                      (ScreenUtil().screenHeight / 1.9),
                 ),
-                itemCount: cubit.employees!.length,
-                padding: EdgeInsetsDirectional.only(end: 10.0.w),
+            itemCount: 6,
+            padding: EdgeInsetsDirectional.only(
+              top: 10.0.h,
+              end: 10.0.w,
+            ),
                 itemBuilder:
                     (context, index) =>
-                        EmployeeCard(emp: cubit.employees![index]),
+                        EmployeeCard(emp: cubit.employees![0]),
               );
         },
       ),
