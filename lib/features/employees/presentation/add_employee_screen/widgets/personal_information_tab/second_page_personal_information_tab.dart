@@ -43,6 +43,9 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
                           color: AppColors.gray,
                         ),
                       ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium!.copyWith(fontSize: 18.sp),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(
@@ -102,8 +105,10 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
           ),
           SizedBox(height: 2.0.h),
           AttachFileButton(
-              height: 50.0,
-              title: 'Download Identity', pickCallback: cubit.pickIdentity),
+            height: 50.0,
+            title: 'Download Identity',
+            pickCallback: cubit.pickIdentity,
+          ),
           SizedBox(height: 20.0.h),
           CustomFilledButton(
             width: 300.0.w,
