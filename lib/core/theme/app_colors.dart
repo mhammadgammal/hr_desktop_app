@@ -8,6 +8,7 @@ abstract class AppColors {
   static Color secondaryColor = ColorHex.fromHex('#006894');
   static Color gray = ColorHex.fromHex('#8E8E8E');
   static Color gray2 = ColorHex.fromHex('#393939');
+  static Color gray3 = ColorHex.fromHex('#CDCDCD');
   static Color white = ColorHex.fromHex('#FFFFFF');
   static Color whiteBackground = ColorHex.fromHex('#E4E4E4');
   static Color black = ColorHex.fromHex('#262626');
