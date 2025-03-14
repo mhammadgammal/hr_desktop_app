@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/features/vacations_alarms/presentation/cubit/vacation_cubit.dart';
 import 'package:hr/features/vacations_alarms/presentation/widgets/vacation_item.dart';
 
@@ -27,7 +26,6 @@ class VacationsAlarmScreen extends StatelessWidget {
                     child: Text(
                       'No finished vacations',
                       style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        color: AppColors.black,
                         fontSize: 20.0.sp,
                       ),
                     ),
