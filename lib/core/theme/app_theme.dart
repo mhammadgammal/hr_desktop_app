@@ -56,7 +56,7 @@ abstract class AppTheme {
       elevation: 0.0,
       toolbarHeight: 96.h,
     ),
-    cardTheme: CardThemeData(color: AppColors.gray),
+    cardTheme: CardThemeData(color: AppColors.gray2),
     textTheme: TextTheme(
       bodyMedium: GoogleFonts.cairo(
         fontSize: 13.0.sp,
