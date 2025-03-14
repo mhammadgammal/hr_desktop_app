@@ -17,7 +17,7 @@ final class UpdateEmployeeSuccessState extends AddEmployeeState {}
 
 final class EmployeeCreateLoadingState extends AddEmployeeState {}
 
-final class EmployeeCreateSuccessState extends AddEmployeeState {}
+final class ConstructEmployeeState extends AddEmployeeState {}
 
 final class IdentityTypeChangedState extends AddEmployeeState {}
 
@@ -34,12 +34,6 @@ final class AddEmployeeFailureState extends AddEmployeeState {
   final String message;
 
   const AddEmployeeFailureState(this.message);
-}
-
-final class EmployeeCreateFailureState extends AddEmployeeState {
-  final String message;
-
-  const EmployeeCreateFailureState(this.message);
 }
 
 final class AddEmployeeTabChanged extends AddEmployeeState {

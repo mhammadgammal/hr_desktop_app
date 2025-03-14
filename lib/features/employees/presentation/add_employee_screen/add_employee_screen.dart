@@ -46,7 +46,7 @@ class AddEmployeeScreen extends StatelessWidget {
             NavigationDrawerCubit.get(context).onItemTapped(0);
           }
 
-          if (state is EmployeeCreateSuccessState) {
+          if (state is ConstructEmployeeState) {
             DialogHelper.showSuccessDialog(
               context: context,
               header: 'Saved Successfully',

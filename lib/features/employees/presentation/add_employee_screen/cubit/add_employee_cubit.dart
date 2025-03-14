@@ -313,6 +313,8 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
 
     if (isEditMode) {
       _updateEmployeeWithContract();
+    } else {
+      emit(ConstructEmployeeState());
     }
   }
 
@@ -340,7 +342,7 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     return (emp.vacationCount - days).toString();
   }
 
-  List<String> identityTypes = ['National ID', 'Iqama'];
+  List<String> identityTypes = ['Saudi', 'Iqama'];
 
   void onIdentityTypeChanged(String? value) {
     if (value != null) {
