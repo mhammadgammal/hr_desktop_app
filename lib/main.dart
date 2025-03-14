@@ -17,7 +17,7 @@ void main() async {
 
   var isLogged = sl<CacheHelper>().getBool(key: CacheKeys.isLogged);
   if (Platform.isWindows) {
-    setWindowMinSize(const Size(1200, 1000)); // Minimum width and height
+    setWindowMinSize(const Size(1440, 1024)); // Minimum width and height
   }
 
   try {
