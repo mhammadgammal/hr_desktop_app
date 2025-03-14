@@ -16,6 +16,7 @@ class ContractDetailsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var cubit = AddEmployeeCubit.get(context);
+    final navCubit = NavigationDrawerCubit.get(context);
     return Column(
       spacing: 10.0.h,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,17 +60,15 @@ class ContractDetailsTab extends StatelessWidget {
           title: 'Download Contract',
           pickCallback: cubit.pickContract,
         ),
-        SizedBox(
-          height: 20.0.h,
-        ),
+        SizedBox(height: 20.0.h),
         CustomFilledButton(
           width: 300.0.w,
           height: 60.0.h,
           title: 'Save changes'.tr(context),
-          onPressed: () {
-            cubit.submitData();
+          onPressed: () async {
+            await cubit.submitData();
 
-            NavigationDrawerCubit.get(context).onItemTapped(0);
+            navCubit.onItemTapped(0);
           },
         ),
       ],
