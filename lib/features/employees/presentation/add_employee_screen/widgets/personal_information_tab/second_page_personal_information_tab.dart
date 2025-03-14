@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hr/core/app/cubit/app_cubit.dart';
-import 'package:hr/core/assets/app_icons.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/theme/app_theme.dart';
 import 'package:hr/core/widgets/buttons/custom_filled_button.dart';
-import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
 import 'package:hr/core/widgets/text_form_field/columned_text_form_field.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
+import 'package:hr/features/employees/presentation/add_employee_screen/widgets/attach_file_button.dart';
 
 class SecondPagePersonalInformationTab extends StatelessWidget {
   const SecondPagePersonalInformationTab({super.key});
@@ -103,18 +101,9 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
             ).textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp),
           ),
           SizedBox(height: 2.0.h),
-          CustomOutlinedButtonWithBorder(
-            width: 250.0.w,
-            height: 50.0.h,
-            onPressed: () {
-              cubit.pickIdentity();
-            },
-            title: 'Download Identity'.tr(context),
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            titleColor: AppColors.secondaryColor,
-            icon: SvgPicture.asset(AppIcons.downloadIc),
-          ),
+          AttachFileButton(
+              height: 50.0,
+              title: 'Download Identity', pickCallback: cubit.pickIdentity),
           SizedBox(height: 20.0.h),
           CustomFilledButton(
             width: 300.0.w,
