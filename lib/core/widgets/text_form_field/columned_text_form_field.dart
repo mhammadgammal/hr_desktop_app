@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/text_form_field/app_text_form_field.dart';
 

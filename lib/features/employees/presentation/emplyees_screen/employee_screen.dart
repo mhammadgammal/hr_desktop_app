@@ -41,8 +41,9 @@ class EmployeeScreen extends StatelessWidget {
                 ),
             itemCount: cubit.employees!.length,
             padding: EdgeInsetsDirectional.only(
-              top: 10.0.h,
-              end: 10.0.w,
+                  start: 20.0.w,
+                  top: 30.0.h,
+                  end: 10.0.w,
             ),
                 itemBuilder:
                     (context, index) =>
