@@ -17,4 +17,6 @@ abstract class AppIcons {
   static const String failureIc = 'assets/icons/failure.svg';
   static const String deleteIc = 'assets/icons/delete.svg';
   static const String xIc = 'assets/icons/x.svg';
+  static const String searchIc = 'assets/icons/search.svg';
+  static const String filterIc = 'assets/icons/adjustments.svg';
 }

@@ -33,7 +33,7 @@ class AppTextFormField extends StatefulWidget {
   final FocusNode? focusNode;
   final String? fieldLabel;
   final String? hintLabel;
-  final Icon? icon;
+  final Widget? icon;
   final String? Function(String?)? validate;
   final Function(String)? onChanged;
   final bool obSecure;
@@ -84,7 +84,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         obscureText: widget.obSecure,
         onChanged: widget.onChanged,
         validator: widget.validate,
-        onSaved: widget.onSubmit,
+        onFieldSubmitted: widget.onSubmit,
       ),
     );
   }

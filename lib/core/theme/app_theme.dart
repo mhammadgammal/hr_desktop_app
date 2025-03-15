@@ -74,7 +74,7 @@ abstract class AppTheme {
 
   static InputDecoration getTextFieldDecoration({
     String? hintLabel,
-    Icon? icon,
+    Widget? icon,
     IconButton? suffixIcon,
     Color? hintColor,
     Color? iconColor,

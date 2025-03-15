@@ -23,3 +23,12 @@ final class NavigationDrawerItemTapped extends NavigationDrawerState {
   @override
   List<Object> get props => [index];
 }
+
+final class IsFilteredState extends NavigationDrawerState {
+  final bool isFilter;
+
+  const IsFilteredState(this.isFilter);
+
+  @override
+  List<Object> get props => [isFilter];
+}

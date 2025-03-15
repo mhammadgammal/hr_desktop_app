@@ -8,6 +8,7 @@ import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/theme/app_theme.dart';
 import 'package:hr/core/widgets/buttons/custom_filled_button.dart';
 import 'package:hr/core/widgets/buttons/custom_outlined_button_with_border.dart';
+import 'package:hr/core/widgets/text_form_field/columned_text_form_field.dart';
 
 abstract class DialogHelper {
   static void showFailureDialog(BuildContext context, String message) {
@@ -128,6 +129,87 @@ abstract class DialogHelper {
                         ),
                       ),
                     ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+    );
+  }
+
+  static void showFilterEmployeeDialog(
+    context, {
+    required TextEditingController nameFilter,
+    required TextEditingController jobFilter,
+    required TextEditingController workingDays,
+    required TextEditingController workingHours,
+    required TextEditingController identity,
+    required Future<void> Function() onFilterPressed,
+  }) {
+    showDialog(
+      context: context,
+      builder:
+          (context) => Dialog(
+            child: Container(
+              width: 600.w,
+              height: 450.h,
+              padding: EdgeInsets.symmetric(
+                horizontal: 30.0.w,
+                vertical: 30.0.h,
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).cardTheme.color,
+                borderRadius: BorderRadius.circular(AppTheme.appRadius),
+              ),
+              child: Row(
+                spacing: 10.0.h,
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        ColumnedTextFormField(
+                          title: 'Employee Name'.tr(context),
+                          controller: nameFilter,
+                          inputType: TextInputType.text,
+                        ),
+                        ColumnedTextFormField(
+                          title: 'Working days'.tr(context),
+                          controller: workingDays,
+                          inputType: TextInputType.text,
+                        ),
+                        ColumnedTextFormField(
+                          title: 'Identity'.tr(context),
+                          controller: identity,
+                          inputType: TextInputType.text,
+                        ),
+                        Spacer(),
+                        CustomFilledButton(
+                          onPressed: () => onFilterPressed(),
+                          title: 'Search'.tr(context),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        ColumnedTextFormField(
+                          title: 'job title'.tr(context),
+                          controller: jobFilter,
+                          inputType: TextInputType.text,
+                        ),
+                        ColumnedTextFormField(
+                          title: 'Working days'.tr(context),
+                          controller: workingDays,
+                          inputType: TextInputType.text,
+                        ),
+                        Spacer(),
+                        CustomOutlinedButtonWithBorder(
+                          onPressed: () => Navigator.pop(context),
+                          title: 'Cancel'.tr(context),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

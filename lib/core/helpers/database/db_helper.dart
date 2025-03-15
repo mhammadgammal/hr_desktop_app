@@ -235,10 +235,6 @@ class DbHelper {
       'update $tableName set $values where id = ?${parameters.last}',
       parameters,
     );
-    // await sl<Database>().rawUpdate(
-    //   "update $tableName SET $values WHERE id = ?",
-    //   parameters,
-    // );
   }
 
   static Future<List<T>> getData<T>(
@@ -277,6 +273,59 @@ class DbHelper {
       // return FailureDataResponse('Error retrieving data: $e');
       return [];
     }
+  }
+
+  static Future<List<Map<String, dynamic>>> searchRecords(
+    String tableName, {
+    String? nameOrJobSearch,
+    String? name,
+    String? job,
+    String? workingHours,
+    String? workingDays,
+    String? identityNumber,
+  }) async {
+    List<String> conditions = [];
+    List<dynamic> args = [];
+    if (nameOrJobSearch != null && nameOrJobSearch.isNotEmpty) {
+      conditions.add("(first_name LIKE ? OR last_name LIKE ? OR job like ?)");
+      args.add('%$nameOrJobSearch%');
+      args.add('%$nameOrJobSearch%');
+      args.add('%$nameOrJobSearch%');
+    } else {
+      if (name != null && name.isNotEmpty) {
+        conditions.add("(first_name LIKE ? OR last_name LIKE ?)");
+        args.add('%$name%');
+        args.add('%$name%');
+      }
+
+      if (job != null && job.isNotEmpty) {
+        conditions.add('job LIKE ?');
+        args.add('%$job%');
+      }
+
+      if (workingHours != null && workingHours.isNotEmpty) {
+        conditions.add('working_hours LIKE ?');
+        args.add('%$workingHours%');
+      }
+
+      if (workingDays != null && workingDays.isNotEmpty) {
+        conditions.add('working_days LIKE ?');
+        args.add('%$workingDays%');
+      }
+
+      if (identityNumber != null && identityNumber.isNotEmpty) {
+        conditions.add('identity_number LIKE ?');
+        args.add('%$identityNumber%');
+      }
+    }
+
+    String whereClause = conditions.isNotEmpty ? conditions.join(" AND ") : "";
+
+    return await sl<Database>().query(
+      tableName,
+      where: whereClause.isNotEmpty ? whereClause : null,
+      whereArgs: whereClause.isNotEmpty ? args : null,
+    );
   }
 
   static Future<void> closeDb(Database db) async {

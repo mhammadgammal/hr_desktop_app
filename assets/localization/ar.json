@@ -77,5 +77,9 @@
   "Email is required": "الرجاء إدخال البريد الإلكتروني",
   "Password is required": "الرجاء إدخال كلمة المرور",
   "Password must be at least 8 characters": "كلمة المرور يجب أن تكون على الأقل 8 أحرف",
-  "Saudi": "سعودي"
+  "Saudi": "سعودي",
+  "Search here by the name of the employee or the job": "أبحث هنا بإسم الموظف أو الوظيفه...",
+  "Employee Name": "إسم الموظف",
+  "Identity": "الهويه أو الإقامه"
+
 }
