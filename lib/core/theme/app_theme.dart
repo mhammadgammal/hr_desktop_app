@@ -72,7 +72,8 @@ abstract class AppTheme {
             textFieldTextColor ?? (isDark ? AppColors.white : AppColors.black),
       );
 
-  static InputDecoration getTextFieldDecoration({
+  static InputDecoration getTextFieldDecoration(
+    context, {
     String? hintLabel,
     Widget? icon,
     IconButton? suffixIcon,
@@ -83,7 +84,7 @@ abstract class AppTheme {
     labelStyle: getTextFormFieldTextStyle(),
     hintText: hintLabel,
     hintStyle: TextStyle(
-      color: hintColor ?? (isDark ? AppColors.gray : AppColors.black),
+      color: hintColor ?? Theme.of(context).textTheme.bodyMedium!.color,
     ),
     prefixIcon: icon,
     suffixIcon: suffixIcon,

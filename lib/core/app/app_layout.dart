@@ -44,9 +44,10 @@ class AppLayout extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          SizedBox(
+                          Container(
                             width: 530.w,
                             height: 50.h,
+                            margin: EdgeInsetsDirectional.only(start: 150.0.w),
                             child: AppTextFormField(
                               hintLabel:
                                   'Search here by the name of the employee or the job'

@@ -67,6 +67,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
         keyboardType: widget.inputType,
         style: AppTheme.getTextFormFieldTextStyle(),
         decoration: AppTheme.getTextFieldDecoration(
+          context,
           hintLabel: widget.hintLabel,
           hintColor: widget.hintColor,
           icon: widget.icon,

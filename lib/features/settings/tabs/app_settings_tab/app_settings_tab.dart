@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
-import 'package:hr/core/theme/app_theme.dart';
-import 'package:hr/core/utils/localization/localize_constants.dart';
 
 class AppSettingsTab extends StatelessWidget {
   const AppSettingsTab({super.key});
@@ -45,9 +43,7 @@ class AppSettingsTab extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 10.0.h,
-            ),
+            SizedBox(height: 10.0.h),
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +64,10 @@ class AppSettingsTab extends StatelessWidget {
                     shrinkWrap: true,
                     itemBuilder:
                         (context, index) => RadioListTile(
-                          title: Text(cubit.supportedLanguages[index].$2),
+                          title: Text(
+                            cubit.supportedLanguages[index].$2,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                           value: cubit.supportedLanguages[index].$1,
                           activeColor: AppColors.secondaryColor,
                           groupValue: cubit.selectedLanguage,
