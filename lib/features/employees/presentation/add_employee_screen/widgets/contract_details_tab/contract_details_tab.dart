@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hr/core/app/cubit/app_cubit.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
@@ -54,7 +53,9 @@ class ContractDetailsTab extends StatelessWidget {
         ),
         Text(
           'Contract Details'.tr(context),
-          style: GoogleFonts.cairo(fontSize: 18.0.sp, color: AppColors.white),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium!.copyWith(fontSize: 18.sp),
         ),
         AttachFileButton(
           title: 'Download Contract',
