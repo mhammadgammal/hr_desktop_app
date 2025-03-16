@@ -85,6 +85,7 @@ class NavigationDrawerCubit extends Cubit<NavigationDrawerState> {
   }
 
   set isFiltered(bool isNotEmpty) {
+    onItemTapped(0);
     emit(IsFilteredState(isNotEmpty));
   }
 }

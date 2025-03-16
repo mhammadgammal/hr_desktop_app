@@ -98,11 +98,14 @@ class AppLayout extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 10.0.h),
-                          ClipRRect(
-                            child: SvgPicture.asset(
-                              width: 50.0.w,
-                              height: 50.0.h,
-                              AppImages.profilePlaceholder,
+                          GestureDetector(
+                            onTap: () => navCubit.onItemTapped(3),
+                            child: ClipRRect(
+                              child: SvgPicture.asset(
+                                width: 50.0.w,
+                                height: 50.0.h,
+                                AppImages.profilePlaceholder,
+                              ),
                             ),
                           ),
                         ],

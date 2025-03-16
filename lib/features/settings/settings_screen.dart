@@ -24,71 +24,80 @@ class SettingsScreen extends StatelessWidget {
           if (state is UserPasswordUpdateSuccess ||
               state is UserProfilePicSuccess) {
             DialogHelper.showSuccessDialog(
-                context: context, header: 'Changed Successfully');
+              context: context,
+              header: 'Changed Successfully',
+            );
           }
         },
         builder: (context, state) {
           final cubit = SettingsCubit.get(context);
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _screenHeader(context),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 231.w,
-                    height: 200.h,
-                    color:
-                        AppCubit.get(context).isDarkMode
-                            ? AppColors.gray2
-                            : AppColors.white,
-                    margin: EdgeInsetsDirectional.only(top: 20.0.w),
-                    child: ListView.builder(
-                      padding: EdgeInsetsDirectional.only(start: 10.0.w),
-                      itemCount: tabsNames.length,
-                      itemBuilder:
-                          (context, index) => ListTile(
-                            onTap: () => cubit.changeTab(index),
-                            selected: cubit.selectedTabIndex == index,
-                            title: Text(
-                              tabsNames[index].tr(context),
-                              style: GoogleFonts.cairo(
-                                color:
-                                    cubit.selectedTabIndex == index
-                                        ? AppColors.secondaryColor
-                                        : AppCubit.get(context).isDarkMode
-                                        ? AppColors.white
-                                        : AppColors.black,
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.w500,
+          return Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: 20.0.w,
+            vertical: 20.0.h),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _screenHeader(context),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 231.w,
+                      height: 200.h,
+                      color:
+                          AppCubit.get(context).isDarkMode
+                              ? AppColors.gray2
+                              : AppColors.white,
+                      margin: EdgeInsetsDirectional.only(top: 20.0.w),
+                      child: ListView.builder(
+                        padding: EdgeInsetsDirectional.only(start: 10.0.w),
+                        itemCount: tabsNames.length,
+                        itemBuilder:
+                            (context, index) => ListTile(
+                              onTap: () => cubit.changeTab(index),
+                              selected: cubit.selectedTabIndex == index,
+                              title: Text(
+                                tabsNames[index].tr(context),
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.bodyMedium!.copyWith(
+                                  color:
+                                      cubit.selectedTabIndex == index
+                                          ? AppColors.secondaryColor
+                                          : Theme.of(
+                                            context,
+                                          ).textTheme.bodyMedium!.color,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
+                              contentPadding: EdgeInsets.zero,
                             ),
-                            contentPadding: EdgeInsets.zero,
-                          ),
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 828.w,
-                    height: 764.h,
-                    color:
-                        AppCubit.get(context).isDarkMode
-                            ? AppColors.gray2
-                            : AppColors.white,
-                    padding: EdgeInsetsDirectional.only(
-                      start: 20.0.w,
-                      top: 20.0.w,
+                    Container(
+                      width: 828.w,
+                      height: 764.h,
+                      color:
+                          AppCubit.get(context).isDarkMode
+                              ? AppColors.gray2
+                              : AppColors.white,
+                      padding: EdgeInsetsDirectional.only(
+                        start: 20.0.w,
+                        top: 20.0.w,
+                      ),
+                      margin: EdgeInsetsDirectional.only(
+                        start: 20.0.w,
+                        top: 20.0.w,
+                      ),
+                      child: _switchTabItem(context, cubit.selectedTabIndex),
                     ),
-                    margin: EdgeInsetsDirectional.only(
-                      start: 20.0.w,
-                      top: 20.0.w,
-                    ),
-                    child: _switchTabItem(context, cubit.selectedTabIndex),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           );
         },
       ),
@@ -97,7 +106,7 @@ class SettingsScreen extends StatelessWidget {
 
   _screenHeader(context) => Text(
     'App Settings'.tr(context),
-    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 20.0.sp),
+    style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontSize: 33.0.sp, fontWeight: FontWeight.w500),
   );
 
   _switchTabItem(BuildContext context, int selectedTabIndex) {

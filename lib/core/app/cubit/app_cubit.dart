@@ -15,10 +15,17 @@ class AppCubit extends Cubit<AppState> {
   late AppLanguage _appLanguage;
   bool isDarkMode = sl<CacheHelper>().getBool(key: CacheKeys.isDark) ?? false;
 
+  List<(String, String)> supportedLanguages = [
+    ("en", "English (USA)"),
+    ("ar", "العربيه (السعوديه)"),
+  ];
+
   Locale get locale => sl.get<AppLanguage>().appLocal;
 
   ThemeMode get currentThemeMode =>
       isDarkMode ? ThemeMode.dark : ThemeMode.light;
+
+  String selectedLanguage = sl.get<AppLanguage>().appLocal.languageCode;
 
   void getCurrentLocale() async {
     _appLanguage = sl.get<AppLanguage>();
@@ -52,4 +59,12 @@ class AppCubit extends Cubit<AppState> {
   //     value: languageCode,
   //   );
   // }
+
+  void onLanguageChanged(String? value) {
+    log('AppCubit: onLanguageChanged: $value');
+    if (value != null) {
+      selectedLanguage = value;
+      changeLanguage(Locale(selectedLanguage));
+    }
+  }
 }

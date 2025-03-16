@@ -20,31 +20,43 @@ class MyAccountTab extends StatelessWidget {
             : Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProfilePictureWithPicker(),
-                  PasswordTextFormField(
-                    label: 'Current password'.tr(context),
-                    controller: cubit.currentPasswordController,
-                  ),
-                  PasswordTextFormField(
-                    label: 'New password'.tr(context),
-                    controller: cubit.newPasswordController,
-                  ),
-                  PasswordTextFormField(
-                    label: 'Confirm password'.tr(context),
-                    controller: cubit.confirmPasswordController,
-                  ),
-                  SizedBox(height: 10.0.h),
-                  CustomFilledButton(
-                    title: 'Confirm changes'.tr(context),
-                    onPressed: () {
-                      if (cubit.currentPasswordController.text.isNotEmpty) {
-                        cubit.updatePassword();
-                      } else if (cubit.profilePicPath !=
-                          cubit.user?.profilePicturePath) {
-                        cubit.updateProfilePic();
-                      }
-                    },
+                  Center(child: ProfilePictureWithPicker(
+                     height: 280,
+                    width: 280,
+                  )),
+                  SizedBox(
+                    width: 400.0.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PasswordTextFormField(
+                          label: 'Current password'.tr(context),
+                          controller: cubit.currentPasswordController,
+                        ),
+                        PasswordTextFormField(
+                          label: 'New password'.tr(context),
+                          controller: cubit.newPasswordController,
+                        ),
+                        PasswordTextFormField(
+                          label: 'Confirm password'.tr(context),
+                          controller: cubit.confirmPasswordController,
+                        ),
+                        SizedBox(height: 10.0.h),
+                        CustomFilledButton(
+                          title: 'Confirm changes'.tr(context),
+                          onPressed: () {
+                            if (cubit.currentPasswordController.text.isNotEmpty) {
+                              cubit.updatePassword();
+                            } else if (cubit.profilePicPath !=
+                                cubit.user?.profilePicturePath) {
+                              cubit.updateProfilePic();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
