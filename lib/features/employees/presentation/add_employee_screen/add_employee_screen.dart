@@ -78,45 +78,47 @@ class AddEmployeeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 20.0.h,
               children: [
                 _screenHeader(context),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: 231.w,
-                      height: emp != null ? 300.h : 160.h,
-                      color:
-                          AppCubit.get(context).isDarkMode
-                              ? AppColors.gray2
-                              : AppColors.white,
-                      margin: EdgeInsetsDirectional.only(top: 20.0.w),
-                      child: ListView.builder(
-                        padding: EdgeInsetsDirectional.only(start: 10.0.w),
-                        itemCount:
-                            emp != null
-                                ? tabsNames.length
-                                : (tabsNames.length - 1),
-                        itemBuilder:
-                            (context, index) => ListTile(
-                              onTap: () => cubit.changeTab(index),
-                              selected: cubit.selectedTabIndex == index,
-                              title: Text(
-                                tabsNames[index].tr(context),
-                                style: GoogleFonts.cairo(
-                                  color:
-                                      cubit.selectedTabIndex == index
-                                          ? AppColors.secondaryColor
-                                          : (AppCubit.get(context).isDarkMode
-                                              ? AppColors.white
-                                              : AppColors.black),
-                                  fontSize: 20.sp,
-                                  fontWeight: FontWeight.w500,
+                    Expanded(
+                      child: Container(
+                        color:
+                            AppCubit.get(context).isDarkMode
+                                ? AppColors.gray2
+                                : AppColors.white,
+                        child: ListView.builder(
+                          padding: EdgeInsetsDirectional.only(start: 10.0.w),
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount:
+                              emp != null
+                                  ? tabsNames.length
+                                  : (tabsNames.length - 1),
+                          itemBuilder:
+                              (context, index) => ListTile(
+                                onTap: () => cubit.changeTab(index),
+                                selected: cubit.selectedTabIndex == index,
+                                title: Text(
+                                  tabsNames[index].tr(context),
+                                  style: GoogleFonts.cairo(
+                                    color:
+                                        cubit.selectedTabIndex == index
+                                            ? AppColors.secondaryColor
+                                            : (AppCubit.get(context).isDarkMode
+                                                ? AppColors.white
+                                                : AppColors.black),
+                                    fontSize: 20.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
+                                contentPadding: EdgeInsets.zero,
                               ),
-                              contentPadding: EdgeInsets.zero,
-                            ),
+                        ),
                       ),
                     ),
                     Container(
@@ -130,11 +132,11 @@ class AddEmployeeScreen extends StatelessWidget {
                         start: 20.0.w,
                         end: 20.0.w,
                         top: 20.0.w,
-                          bottom: 20.0.w
+                        bottom: 20.0.w,
                       ),
                       margin: EdgeInsetsDirectional.only(
                         start: 20.0.w,
-                        top: 20.0.w,
+                        // top: 20.0.w,
                       ),
                       child: Column(
                         // mainAxisSize: MainAxisSize.max,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/widgets/drawer/entity/navigation_drawer_entity_item.dart';
 
@@ -21,7 +22,7 @@ class NavigationBarItem extends StatelessWidget {
       selected: isSelected,
       selectedTileColor: AppColors.white,
       title: Text(
-        item.title,
+        item.title.tr(context),
         style: TextStyle(
           color: isSelected ? AppColors.secondaryColor : AppColors.white,
         ),

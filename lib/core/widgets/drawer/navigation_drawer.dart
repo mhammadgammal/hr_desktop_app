@@ -94,7 +94,7 @@ class HeaderSection extends StatelessWidget {
               colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcATop),),
           ),
           Text(
-            'Quick Access',
+            'Quick Access'.tr(context),
             style: GoogleFonts.cairo(
               color: AppColors.white,
               fontSize: 24.sp,
