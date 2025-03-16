@@ -45,6 +45,13 @@ final class AddEmployeeTabChanged extends AddEmployeeState {
   List<Object> get props => [index];
 }
 
-final class AddEmployeeProfilePicPicked extends AddEmployeeState {}
+final class AddEmployeeProfilePicPicked extends AddEmployeeState {
+  final String fileName;
+
+  const AddEmployeeProfilePicPicked(this.fileName);
+
+  @override
+  List<Object> get props => [fileName];
+}
 
 final class EmployeeDeletedSuccessfully extends AddEmployeeState {}

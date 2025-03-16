@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hr/core/app/cubit/app_cubit.dart';
+import 'package:hr/core/di/di.dart';
 import 'package:hr/core/extensions/extensions.dart';
 import 'package:hr/core/theme/app_colors.dart';
 import 'package:hr/core/theme/app_theme.dart';
+import 'package:hr/core/utils/localization/app_localization.dart';
 import 'package:hr/core/widgets/buttons/custom_filled_button.dart';
 import 'package:hr/core/widgets/text_form_field/columned_text_form_field.dart';
 import 'package:hr/features/employees/presentation/add_employee_screen/cubit/add_employee_cubit.dart';
@@ -98,7 +100,7 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
           ),
           SizedBox(height: 20.0.h),
           Text(
-            'Identity photo'.tr(context),
+            _getIdentityTitle(cubit.selectedIdentityType).tr(context),
             style: Theme.of(
               context,
             ).textTheme.bodyMedium!.copyWith(fontSize: 18.0.sp),
@@ -106,7 +108,10 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
           SizedBox(height: 2.0.h),
           AttachFileButton(
             height: 50.0,
-            title: 'Download Identity',
+            title:
+                cubit.identityPicFileName.isEmpty
+                    ? 'Download Identity'
+                    : cubit.identityPicFileName,
             pickCallback: cubit.pickIdentity,
           ),
           SizedBox(height: 20.0.h),
@@ -120,4 +125,10 @@ class SecondPagePersonalInformationTab extends StatelessWidget {
       ),
     );
   }
+
+  String _getIdentityTitle(String? identityType) =>
+      sl<AppLanguage>().appLocal.languageCode == 'en' ||
+              (identityType != null && identityType == 'Saudi')
+          ? 'Identity photo'
+          : 'Iqama Number';
 }

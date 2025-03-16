@@ -23,8 +23,11 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
   int? newEmpId;
   int selectedTabIndex = 0;
   String profilePicPath = '';
+  String profilePicFileName = '';
   String identityPicPath = '';
+  String identityPicFileName = '';
   String contractPath = '';
+  String contractFileName = '';
   bool firstPagePersonalTab = true;
 
   // personal information tab controllers
@@ -243,8 +246,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     final result = await _openPicker();
     if (result != null) {
       profilePicPath = result.files.single.path!;
+      profilePicFileName = result.files.single.name;
       log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
-      emit(AddEmployeeProfilePicPicked());
+      emit(AddEmployeeProfilePicPicked(profilePicPath));
     }
   }
 
@@ -252,8 +256,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     final result = await _openPicker();
     if (result != null) {
       identityPicPath = result.files.single.path!;
+      identityPicFileName = result.files.single.name;
       log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
-      emit(AddEmployeeProfilePicPicked());
+      emit(AddEmployeeProfilePicPicked(identityPicFileName));
     }
   }
 
@@ -261,8 +266,9 @@ class AddEmployeeCubit extends Cubit<AddEmployeeState> {
     final result = await _openPicker();
     if (result != null) {
       contractPath = result.files.single.path!;
+      contractFileName = result.files.single.name;
       log('AddEmployeeCubit: pickProfilePic: $profilePicPath');
-      emit(AddEmployeeProfilePicPicked());
+      emit(AddEmployeeProfilePicPicked(contractFileName));
     }
   }
 

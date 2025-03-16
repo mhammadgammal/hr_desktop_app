@@ -47,6 +47,7 @@
   "Add Employee": "إضافة موظف",
   "Settings": "الإعدادات",
   "My Account": "حسابي",
+  "Day off request's": "طلبات الإجازه",
   "App Settings": "إعدادات التطبيق",
   "Employee updated successfully": "تم تعديل بيانات الموظف بنجاح",
   "Employee added successfully": "تم إضافة الموظف بنجاح",
@@ -81,5 +82,7 @@
   "Search here by the name of the employee or the job": "أبحث هنا بإسم الموظف أو الوظيفه...",
   "Employee Name": "إسم الموظف",
   "Identity": "الهويه أو الإقامه",
-  "Quick Access": "الوصول السريع"
+  "Quick Access": "الوصول السريع",
+  "Search": "إبحث",
+  "Iqama Number": "صورة الإقامه"
 }
